@@ -1,7 +1,6 @@
 # UberBarber
 Student project - Create simple application with database connection
 
-Master branch in only for the realeses. 
 Main functionality should be merged into develop branch.
 Every feature added $Must$ be accepted by all team members
 
