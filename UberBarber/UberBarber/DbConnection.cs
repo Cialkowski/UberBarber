@@ -19,11 +19,13 @@ namespace UberBarber
 
         public DbConnection()
         {
+            //initialize constructor
             initialize();
         }
 
         private void initialize()
         {
+            //declare constructor
             _server = "sql88.lh.pl";
             _database = "serwer165956_projektstudia";
             _uid = "serwer165956_projektstudia";
@@ -35,6 +37,8 @@ namespace UberBarber
         }
 
         private bool open_connection()
+        /// <summary> This function opens connection to server and databse. </summary>>
+        /// <returns> True if authentication is successful, otherwise False. </returns>
         {
             try
             {
@@ -60,6 +64,8 @@ namespace UberBarber
         }
 
         private bool close_connection()
+        /// <summary> This function closes connection to server and databse. </summary>>
+        /// <returns> True if is successful, otherwise False with message for the user. </returns>
         {
             try
             {
