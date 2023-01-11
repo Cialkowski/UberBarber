@@ -49,6 +49,7 @@ namespace UberBarber
                         MessageBox.Show("Cannot connect to server.  Contact administrator");
                         break;
 
+                    // mysql connection error number
                     case 1045:
                         MessageBox.Show("Invalid username/password, please try again");
                         break;
