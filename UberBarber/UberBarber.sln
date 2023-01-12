@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UberBarber", "UberBarber\UberBarber.csproj", "{D3214CCE-EABF-4E4C-AFB1-4D38AB8D10AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UberBarber", "UberBarber\UberBarber.csproj", "{D3214CCE-EABF-4E4C-AFB1-4D38AB8D10AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "classes", "classes", "{E27C5D63-96DB-4DF0-B636-AF1C7182E723}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -23,6 +23,8 @@ namespace UberBarber
         public MainWindow()
         {
             InitializeComponent();
+            DbConnection connection = new DbConnection();
+            connection.given_query();
         }
     }
 }
