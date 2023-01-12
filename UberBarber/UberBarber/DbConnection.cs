@@ -13,6 +13,7 @@ namespace UberBarber
     {
         private MySqlConnection _connection;
         private string _server;
+        private string _port;
         private string _database;
         private string _uid;
         private string _password;
@@ -27,10 +28,11 @@ namespace UberBarber
         {
             //declare constructor
             _server = "sql88.lh.pl";
+            _port = "3306";
             _database = "serwer165956_projektstudia";
             _uid = "serwer165956_projektstudia";
             _password = "Abc1234!";
-            string connection_string = "server=" + _server + ";" + "uid=" +
+            string connection_string = "server=" + _server + ";" + "port=" + _port + ";" + "uid=" +
                                        _uid + ";" + "pwd=" + _password + ";" + "database=" + _database + ";";
 
             _connection = new MySqlConnection(connection_string);
@@ -50,7 +52,7 @@ namespace UberBarber
                 switch (ex.Number)
                 {
                     case 0:
-                        MessageBox.Show("Cannot connect to server.  Contact administrator" + ex);
+                        MessageBox.Show("Cannot connect to server.  Contact administrator");
                         break;
 
                     // mysql connection error number
@@ -81,7 +83,7 @@ namespace UberBarber
 
         public void given_query()
         {
-            _connection.Open();
+            //TODO
         }
     }
 }
