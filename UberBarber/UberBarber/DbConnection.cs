@@ -30,8 +30,8 @@ namespace UberBarber
             _database = "serwer165956_projektstudia";
             _uid = "serwer165956_projektstudia";
             _password = "Abc1234!";
-            string connection_string = "SERVER=" + _server + ";" + "DATABASE=" +
-                                       _database + ";" + "UID=" + _uid + ";" + "PASSWORD=" + _password + ";";
+            string connection_string = "server=" + _server + ";" + "uid=" +
+                                       _uid + ";" + "pwd=" + _password + ";" + "database=" + _database + ";";
 
             _connection = new MySqlConnection(connection_string);
         }
@@ -50,7 +50,7 @@ namespace UberBarber
                 switch (ex.Number)
                 {
                     case 0:
-                        MessageBox.Show("Cannot connect to server.  Contact administrator");
+                        MessageBox.Show("Cannot connect to server.  Contact administrator" + ex);
                         break;
 
                     // mysql connection error number
