@@ -81,7 +81,7 @@ namespace UberBarber
 
         public void given_query()
         {
-            //TODO
+            _connection.Open();
         }
     }
 }
