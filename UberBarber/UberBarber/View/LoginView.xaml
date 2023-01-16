@@ -12,13 +12,13 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True">
-    <Border CornerRadius="50">
+    <Border CornerRadius="12">
         <Border.Background>
             <ImageBrush ImageSource="/Images/back-images.jpg"/>
         </Border.Background>
             
             
-        <Border CornerRadius="50"
+        <Border CornerRadius="10"
             BorderThickness="5"
                 Opacity="0.60"
             >
@@ -36,8 +36,58 @@
                     <GradientStop Color="#979897" Offset="0.75"/>
             </LinearGradientBrush>
         </Border.Background>
-
-    </Border>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="LOG IN"
+                               Foreground="AntiqueWhite"
+                               FontSize="13"
+                               FontFamily="Montserrat"
+                               Grid.Column="0"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0"/>
+                    <Button x:Name="btnMinimize"                           
+                            BorderThickness="0"
+                            Content="-"
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="btnMinimize_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="DarkGray"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="AntiqueWhite"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
     </Border>
 
 </Window>
