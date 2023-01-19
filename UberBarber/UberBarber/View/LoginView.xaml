@@ -20,7 +20,7 @@
             
         <Border CornerRadius="10"
             BorderThickness="5"
-                Opacity="0.60"
+                Opacity="0.65"
             >
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -33,7 +33,7 @@
         <Border.Background>
             <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
                     <GradientStop Color="#3d2b1f" Offset="0"/>
-                    <GradientStop Color="#979897" Offset="0.75"/>
+                    <GradientStop Color="#36454F" Offset="0.75"/>
             </LinearGradientBrush>
         </Border.Background>
             <Grid>
@@ -54,7 +54,8 @@
                                FontFamily="Montserrat"
                                Grid.Column="0"
                                VerticalAlignment="Center"
-                               Margin="10,0,0,0"/>
+                               Margin="10,0,0,0"
+                               FontWeight="Medium"/>
                     <Button x:Name="btnMinimize"                           
                             BorderThickness="0"
                             Content="-"
@@ -69,7 +70,7 @@
                                 <Setter Property="Background" Value="DarkGray"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="AntiqueWhite"/>
+                                        <Setter Property="Background" Value="#D3D3D3"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -96,10 +97,10 @@
                             Click="btnClose_Click">
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="#D3D3D3"/>
+                                <Setter Property="Background" Value="#808080"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="AntiqueWhite"/>
+                                        <Setter Property="Background" Value="#D3D3D3"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -116,6 +117,130 @@
                         </Button.Template>
                     </Button>
                 </Grid>
+
+                <StackPanel Width="250"
+                            Grid.Row="2"
+                            Orientation="Vertical"
+                            Margin="0,35,0,0">
+
+                    <Image Source="/Images/logoo.png"
+                           Width="100"
+                           Height="100">
+                        
+                    </Image>
+                    <TextBlock Text="UberBarber"
+                               Foreground="White"
+                               FontSize="25"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               HorizontalAlignment="Center"
+                               TextWrapping="Wrap"
+                               Margin="0,5,0,0">
+                        
+                    </TextBlock>
+                    <TextBlock Text="We just cut hair"
+                               Foreground="LightGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Center"
+                               Margin="0,5,0,0">
+
+                    </TextBlock>
+                    <TextBlock Text="Username"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               Margin="0,35,0,0">
+
+                    </TextBlock>
+                    <TextBox x:Name="txtUser"
+                             FontSize="13"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"
+                             Foreground="White"
+                             CaretBrush="White"
+                             BorderThickness="0,0,0,1"
+                             Height="28"
+                             VerticalContentAlignment="Center"
+                             Margin="0,3,0,0"
+                             Padding="20,0,0,0">
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="/Images/user-icon.png"
+                                        Stretch="None"
+                                        AlignmentX="Left"
+                                        
+                                        >
+                                
+                            </ImageBrush>
+                        </TextBox.Background>
+                    </TextBox>
+                    
+                    <TextBlock Text="Password"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               Margin="0,15,0,0">
+
+                    </TextBlock>
+                    <PasswordBox x:Name="txtPassword"
+                             FontSize="13"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"
+                             Foreground="White"
+                             CaretBrush="White"
+                             BorderThickness="0,0,0,1"
+                             Height="28"
+                             VerticalContentAlignment="Center"
+                             Margin="0,3,0,0"
+                             Padding="20,0,0,0">
+                        <PasswordBox.Background>
+                            <ImageBrush ImageSource="/Images/key-icon.png"
+                                        Stretch="None"
+                                        AlignmentX="Left"
+                                        
+                                        >
+
+                            </ImageBrush>
+                        </PasswordBox.Background>
+                    </PasswordBox>
+
+                    <Button x:Name="btnLogin"                          
+                            BorderThickness="0"
+                            Content="Log in"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Margin="15"
+                            Click="btnLogin_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#808080"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#D3D3D3"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+                
             </Grid>
         </Border>
     </Border>
