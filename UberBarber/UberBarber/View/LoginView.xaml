@@ -20,8 +20,7 @@
             
         <Border CornerRadius="10"
             BorderThickness="5"
-                Opacity="0.65"
-            >
+                Opacity="0.65">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#a0a0a0" Offset="0"/>
@@ -170,9 +169,7 @@
                         <TextBox.Background>
                             <ImageBrush ImageSource="/Images/user-icon.png"
                                         Stretch="None"
-                                        AlignmentX="Left"
-                                        
-                                        >
+                                        AlignmentX="Left" >
                                 
                             </ImageBrush>
                         </TextBox.Background>
@@ -200,9 +197,7 @@
                         <PasswordBox.Background>
                             <ImageBrush ImageSource="/Images/key-icon.png"
                                         Stretch="None"
-                                        AlignmentX="Left"
-                                        
-                                        >
+                                        AlignmentX="Left">
 
                             </ImageBrush>
                         </PasswordBox.Background>

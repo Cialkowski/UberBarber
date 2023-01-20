@@ -28,12 +28,12 @@ namespace UberBarber.View
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-
+        //Minimize the window
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
-
+        //Close the window
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -41,7 +41,7 @@ namespace UberBarber.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
     }
 }
