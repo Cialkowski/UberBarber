@@ -23,6 +23,7 @@ namespace UberBarber.View
         {
             InitializeComponent();
         }
+        //This functionality allows you to drag the window to any place
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
