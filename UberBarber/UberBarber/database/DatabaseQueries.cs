@@ -23,7 +23,7 @@ namespace UberBarber.database
             {
                 database._connection.Open();
             }
-            catch (MySqlException ex)
+            catch (MySqlException)
             {
       
                 MessageBox.Show("Cannot connect to server. Contact administrator");
