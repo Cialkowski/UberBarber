@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace UberBarber
             _connection = new MySqlConnection(connection_string);
         }
 
-        private bool open_connection()
+        internal bool open_connection()
         /// <summary> This function opens connection to server and databse. </summary>>
         /// <returns> True if authentication is successful, otherwise False. </returns>
         {
@@ -65,7 +66,7 @@ namespace UberBarber
             }
         }
 
-        private bool close_connection()
+        internal bool close_connection()
         /// <summary> This function closes connection to server and databse. </summary>>
         /// <returns> True if is successful, otherwise False with message for the user. </returns>
         {
@@ -81,9 +82,5 @@ namespace UberBarber
             }
         }
 
-        public void given_query()
-        {
-            //TODO
-        }
     }
 }

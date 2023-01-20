@@ -42,7 +42,8 @@ namespace UberBarber.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            new MainWindow().Show();
+            this.Close();
         }
     }
 }
