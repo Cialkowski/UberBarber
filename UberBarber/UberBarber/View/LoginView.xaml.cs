@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UberBarber.database;
+using static UberBarber.database.DatabaseQueries;
 
 namespace UberBarber.View
 {
@@ -42,7 +44,12 @@ namespace UberBarber.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            //open new window if given credentials are correct
+            DatabaseQueries query = new DatabaseQueries();
+
+            if (!query.logging(txtUser.Text, txtPassword.Password)) return;
+            new MainWindow().Show();
+            this.Close();
         }
     }
 }
