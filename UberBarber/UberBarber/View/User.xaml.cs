@@ -23,6 +23,7 @@ namespace UberBarber
         {
             InitializeComponent();
         }
+        //This functionality allows you to drag the window to any place
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -32,12 +33,12 @@ namespace UberBarber
         {
 
         }
-
+        //Minimize the window
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
-
+        //Close this window
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
