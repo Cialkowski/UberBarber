@@ -14,12 +14,10 @@
         MouseDown="Window_MouseDown">
 
     <Border CornerRadius="12">
-        <Border.Background>
-            <ImageBrush ImageSource="/Images/back-images.jpg"/>
-        </Border.Background>
+      
         <Border CornerRadius="10"
             BorderThickness="5"
-                Opacity="0.65">
+                Opacity="0.96">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#a0a0a0" Offset="0"/>
