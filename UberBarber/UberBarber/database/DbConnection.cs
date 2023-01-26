@@ -12,31 +12,38 @@ namespace UberBarber
 {
     class DbConnection
     {
-        internal MySqlConnection _connection;
-        private string _server;
-        private string _port;
-        private string _database;
-        private string _uid;
-        private string _password;
+        internal MySqlConnection _connection = connection();
 
         public DbConnection()
         {
             //initialize constructor
-            initialize();
         }
 
-        private void initialize()
+        public static MySqlConnection connection()
         {
-            //declare constructor
-            _server = "sql88.lh.pl";
-            _port = "3306";
-            _database = "serwer165956_projektstudia";
-            _uid = "serwer165956_projektstudia";
-            _password = "Abcd123!";
+            //create connection
+            string _server = "sql88.lh.pl";
+            string _port = "3306";
+            string _database = "serwer165956_projektstudia";
+            string _uid = "serwer165956_projektstudia";
+            string _password = "Abcd123!";
             string connection_string = "server=" + _server + ";" + "port=" + _port + ";" + "uid=" +
                                        _uid + ";" + "pwd=" + _password + ";" + "database=" + _database + ";";
 
-            _connection = new MySqlConnection(connection_string);
+            MySqlConnection connection = new(connection_string);
+            return connection;
+        }
+
+        public void open_connection()
+        {
+            try
+            {
+                _connection.Open();
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Cannot connect to server. Contact administrator");
+            }
         }
     }
 }

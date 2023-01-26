@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UberBarber.database;
+using static UberBarber.database.DatabaseQueries;
 
 namespace UberBarber
 {
@@ -31,7 +33,21 @@ namespace UberBarber
         }
         private void button_confirm_Click(object sender, RoutedEventArgs e)
         {
+            string username = text_username.Text;
+            string password = pswd_box.Password;
+            string confirm_password = pswd_box_confirm.Password;
+            string email = text_email.Text;
 
+            if (confirm_password == password)
+            {
+                DatabaseQueries query = new DatabaseQueries();
+                query.Add_user(username, password, email);
+            }
+            else
+            {
+                MessageBox.Show("Password doesn't match!");
+            }
+            
         }
         //Minimize the window
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
