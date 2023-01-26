@@ -24,5 +24,10 @@ namespace UberBarber
         {
             InitializeComponent();
         }
+
+        private void button_user_Click(object sender, RoutedEventArgs e)
+        {
+            new User().Show();
+        }
     }
 }
