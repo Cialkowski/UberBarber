@@ -27,7 +27,7 @@ namespace UberBarber
 
         private void button_user_Click(object sender, RoutedEventArgs e)
         {
-            new User().Show();
+            // TODO: users handling
         }
     }
 }

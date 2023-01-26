@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace UberBarber
 {
     /// <summary>
-    /// Logika interakcji dla klasy User.xaml
+    /// Logika interakcji dla klasy UserRegistration.xaml
     /// </summary>
-    public partial class User : Window
+    public partial class UserRegistration : Window
     {
-        public User()
+        public UserRegistration()
         {
             InitializeComponent();
         }

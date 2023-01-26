@@ -51,5 +51,10 @@ namespace UberBarber.View
             new MainWindow().Show();
             this.Close();
         }
+
+        private void btnSignup_Click(object sender, RoutedEventArgs e)
+        {
+            new UserRegistration().Show();
+        }
     }
 }
