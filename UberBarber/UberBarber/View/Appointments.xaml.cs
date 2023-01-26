@@ -10,29 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace UberBarber
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Appointments.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Appointments : Window
     {
-        public MainWindow()
+        public Appointments()
         {
             InitializeComponent();
-        }
-
-        private void button_user_Click(object sender, RoutedEventArgs e)
-        {
-            new User().Show();
-        }
-
-        private void appointments_button_Click(object sender, RoutedEventArgs e)
-        {
-            new Appointments().Show();
         }
     }
 }
