@@ -47,9 +47,16 @@ namespace UberBarber.View
             //open new window if given credentials are correct
             DatabaseQueries query = new DatabaseQueries();
 
-            if (!query.Logging(txtUser.Text, txtPassword.Password)) return;
-            new MainWindow().Show();
-            this.Close();
+            try
+            {
+                query.Logging(txtUser.Text, txtPassword.Password);
+                new MainWindow().Show();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnSignup_Click(object sender, RoutedEventArgs e)

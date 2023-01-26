@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,11 +15,7 @@ namespace UberBarber
     class DbConnection
     {
         internal MySqlConnection _connection = connection();
-
-        public DbConnection()
-        {
-            //initialize constructor
-        }
+        private MySqlDataReader? _reader;
 
         public static MySqlConnection connection()
         {
@@ -34,7 +32,7 @@ namespace UberBarber
             return connection;
         }
 
-        public void open_connection()
+        public void Open_connection()
         {
             try
             {
@@ -45,5 +43,50 @@ namespace UberBarber
                 MessageBox.Show("Cannot connect to server. Contact administrator");
             }
         }
+
+        public void Close_connection()
+        {
+            _connection.Close();
+        }
+
+        public void Read_simple(MySqlCommand query, string message)
+        {
+            try
+            {
+                _reader = query.ExecuteReader();
+
+                if (_reader.Read())
+                {
+                    _connection.Close();
+                }
+                else
+                {
+                    MessageBox.Show(message);
+                }
+
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.ToString());
+                _connection.Close();
+            }
+        }
+
+        public void Read_simple(MySqlCommand query, string good_message, string wrong_message)
+        {
+            try
+            {
+                _reader = query.ExecuteReader();
+                MessageBox.Show(good_message);
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(wrong_message);
+                MessageBox.Show(e.ToString());
+                _connection.Close();
+            }
+        }
+
+
     }
 }
