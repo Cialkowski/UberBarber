@@ -44,6 +44,7 @@ namespace UberBarber.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            //open new window if given credentials are correct
             DatabaseQueries query = new DatabaseQueries();
 
             if (!query.logging(txtUser.Text, txtPassword.Password)) return;

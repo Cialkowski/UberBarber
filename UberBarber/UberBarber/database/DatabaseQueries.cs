@@ -11,7 +11,7 @@ namespace UberBarber.database
 {
     class DatabaseQueries : DbConnection
     {
-        private DbConnection database = new();
+        private DbConnection _database = new();
         private MySqlDataReader _reader;
 
         internal bool logging(string user_name, string user_password)
@@ -21,34 +21,32 @@ namespace UberBarber.database
 
             try
             {
-                database._connection.Open();
+                _database._connection.Open();
             }
             catch (MySqlException)
             {
-      
                 MessageBox.Show("Cannot connect to server. Contact administrator");
-
             }
 
-            MySqlCommand query = new MySqlCommand("SELECT username, password FROM serwer165956_projektstudia.user WHERE username = '"+user_name+"' AND password = md5('"+user_password+"');", database._connection);
+            MySqlCommand query = new MySqlCommand("SELECT username, password FROM serwer165956_projektstudia.user WHERE username = '"+user_name+"' AND password = md5('"+user_password+"');", _database._connection);
             try
             {
                 _reader = query.ExecuteReader();
 
                 if (_reader.Read())
                 {
-                    database._connection.Close();
+                    _database._connection.Close();
                     return true;
                 }
                 MessageBox.Show("WRONG CREDENTIALS!");
-                database._connection.Close();
+                _database._connection.Close();
                 return false;
 
             }
             catch (MySqlException e)
             {
                 MessageBox.Show(e.ToString());
-                database._connection.Close();
+                _database._connection.Close();
                 return false;
             }
 
