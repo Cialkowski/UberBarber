@@ -5,10 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UberBarber"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+
+    <Border CornerRadius="10"
+            BorderThickness="5"
+               >
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#a0a0a0" Offset="0"/>
+                <GradientStop Color="#666666" Offset="0.75"/>
+                <GradientStop Color="DarkSlateGray" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <!--Nav Panel-->
+                <ColumnDefinition Width="250"/>
+                <!-- Content section-->
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--Nav Menu-->
+            <Border CornerRadius="10,0,0,10"
+                    Grid.Column="0">
+
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.3">
+                        <GradientStop Color="#3d2b1f" Offset="0"/>
+                        <GradientStop Color="#36454F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                
+            </Border>
+            
+            <!--Main Section-->
+            <Border CornerRadius="0,10,10,0"
+                    Grid.Column="1">
+
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1,2" EndPoint="0,0.4">
+                        <GradientStop Color="#3d2b1f" Offset="0"/>
+                        <GradientStop Color="#36454F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+            </Border>
+
+        </Grid>
+
+    </Border>
+
+
+
+
+
+
+
+
+    <!--  <Grid>
         <Button x:Name="button_user_handling" Content="Users handling" HorizontalAlignment="Left" Margin="296,251,0,0" VerticalAlignment="Top" Height="38" Width="128" Click="button_user_Click"/>
         <Button x:Name="button_service_handling" Content="Services handling" HorizontalAlignment="Left" Margin="296,207,0,0" VerticalAlignment="Top" Height="39" Width="128"/>
         <Button x:Name="button_barber_handling" Content="Barbers handling" HorizontalAlignment="Left" Margin="296,163,0,0" VerticalAlignment="Top" Height="39" Width="128"/>
     </Grid>
+    -->
 </Window>
