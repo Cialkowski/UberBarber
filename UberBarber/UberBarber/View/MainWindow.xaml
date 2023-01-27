@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UberBarber"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1300"
         WindowStyle="None"
@@ -59,6 +60,10 @@
 
                     </StackPanel>
                     <!-- Menu Buttons-->
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="red">
+                        
+                    </RadioButton>
                     
                     
                 </StackPanel>
