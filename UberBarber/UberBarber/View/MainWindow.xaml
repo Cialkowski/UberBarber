@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UberBarber"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="700" Width="1300"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
@@ -35,11 +35,33 @@
                     Grid.Column="0">
 
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.3">
+                    <LinearGradientBrush StartPoint="0.,0" EndPoint="1,0.2">
                         <GradientStop Color="#3d2b1f" Offset="0"/>
                         <GradientStop Color="#36454F" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
+
+                <StackPanel>
+                    
+                    <!--logo-->
+                    <StackPanel Orientation="Horizontal"
+                                Height="35"
+                                Margin="15,25,0,40">
+                        <Image Source="/Images/logoo.png"/>
+                        <TextBlock Text="UberBarber"
+                                   Foreground="LightGray"
+                                   FontSize="20"
+                                   FontFamily="Montserrat"
+                                   FontWeight="Medium"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0"/>
+
+
+                    </StackPanel>
+                    <!-- Menu Buttons-->
+                    
+                    
+                </StackPanel>
                 
             </Border>
             
@@ -48,7 +70,7 @@
                     Grid.Column="1">
 
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="1,2" EndPoint="0,0.4">
+                    <LinearGradientBrush StartPoint="1,1.6" EndPoint="0,0.6">
                         <GradientStop Color="#3d2b1f" Offset="0"/>
                         <GradientStop Color="#36454F" Offset="1"/>
                     </LinearGradientBrush>
