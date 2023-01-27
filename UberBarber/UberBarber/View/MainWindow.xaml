@@ -62,17 +62,30 @@
                     <!-- Menu Buttons-->
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color1}">
-
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
-
-
                         </StackPanel>
-                        
                     </RadioButton>
-                    
-                    
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource color2}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Calendar" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Calendar" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource color5}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="User" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="User" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+
+
                 </StackPanel>
                 
             </Border>
@@ -87,6 +100,30 @@
                         <GradientStop Color="#36454F" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <!--Control bar-->
+                        <RowDefinition Height="25"/>
+                        <!--Header /Caption -->
+                        <RowDefinition Height="35"/>
+                        <!--Content section-->
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!--control bar -->
+                    <StackPanel x:Name="pnlControlBar"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown">
+
+
+                    </StackPanel>                    
+                </Grid>
 
             </Border>
 
