@@ -61,7 +61,14 @@
                     </StackPanel>
                     <!-- Menu Buttons-->
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="red">
+                                 Tag="{StaticResource color1}">
+
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
+
+
+                        </StackPanel>
                         
                     </RadioButton>
                     
