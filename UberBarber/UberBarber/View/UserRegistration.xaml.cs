@@ -38,15 +38,8 @@ namespace UberBarber
             string confirm_password = pswd_box_confirm.Password;
             string email = text_email.Text;
 
-            if (confirm_password == password)
-            {
-                DatabaseQueries query = new DatabaseQueries();
-                query.Add_user(username, password, email);
-            }
-            else
-            {
-                MessageBox.Show("Password doesn't match!");
-            }
+            DatabaseQueries query = new DatabaseQueries();
+            query.Add_user(username, password, confirm_password, email);
             
         }
         //Minimize the window

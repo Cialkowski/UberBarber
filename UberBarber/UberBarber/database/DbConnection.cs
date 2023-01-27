@@ -14,10 +14,10 @@ namespace UberBarber
 {
     class DbConnection
     {
-        internal MySqlConnection _connection = connection();
-        private MySqlDataReader? _reader;
+        internal MySqlConnection _connection = Connection();
+        internal MySqlDataReader? _reader;
 
-        public static MySqlConnection connection()
+        public static MySqlConnection Connection()
         {
             //create connection
             string _server = "sql88.lh.pl";
@@ -25,8 +25,7 @@ namespace UberBarber
             string _database = "serwer165956_projektstudia";
             string _uid = "serwer165956_projektstudia";
             string _password = "Abcd123!";
-            string connection_string = "server=" + _server + ";" + "port=" + _port + ";" + "uid=" +
-                                       _uid + ";" + "pwd=" + _password + ";" + "database=" + _database + ";";
+            string connection_string = $"server={_server};port={_port};uid={_uid};pwd={_password};database={_database};";
 
             MySqlConnection connection = new(connection_string);
             return connection;
@@ -48,45 +47,6 @@ namespace UberBarber
         {
             _connection.Close();
         }
-
-        public void Read_simple(MySqlCommand query, string message)
-        {
-            try
-            {
-                _reader = query.ExecuteReader();
-
-                if (_reader.Read())
-                {
-                    _connection.Close();
-                }
-                else
-                {
-                    MessageBox.Show(message);
-                }
-
-            }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e.ToString());
-                _connection.Close();
-            }
-        }
-
-        public void Read_simple(MySqlCommand query, string good_message, string wrong_message)
-        {
-            try
-            {
-                _reader = query.ExecuteReader();
-                MessageBox.Show(good_message);
-            }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(wrong_message);
-                MessageBox.Show(e.ToString());
-                _connection.Close();
-            }
-        }
-
 
     }
 }
