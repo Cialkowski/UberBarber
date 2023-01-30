@@ -12,14 +12,14 @@ namespace UberBarber.User
     {
         public User(MySqlDataReader reader)
         {
-            username = (string)reader["username"];
-            password = (string)reader["password"];
-            is_worker = (bool)reader["is_worker"];
-            customer_id = (int)reader["customer_id"];
+            Username = (string)reader["username"];
+            Password = (string)reader["password"];
+            Is_worker = (bool)reader["is_worker"];
+            Customer_id = (int)reader["customer_id"];
         }
-        public string username { get; set; }
-        public string password { get; set; }
-        public bool is_worker { get; set; }
-        public int customer_id { get; set;}
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public bool Is_worker { get; set; }
+        public int Customer_id { get; set;}
     }
 }

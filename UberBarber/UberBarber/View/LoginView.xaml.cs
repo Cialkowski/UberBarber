@@ -51,7 +51,7 @@ namespace UberBarber.View
             {
                 query.Logging(txtUser.Text, txtPassword.Password);
                 new MainWindow().Show();
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {

@@ -34,20 +34,20 @@ namespace UberBarber.database
         {
             if (User_validation(username, password, confirm_password, email))
             {
+                // add user to database
                 Open_connection();
-                MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `is_worker`) VALUES ('{username}', md5('{password}'), 'lol');", _connection);
+                MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`) VALUES ('{username}', md5('{password}'), '{email}');", _connection);
                 try
                 {
                     _reader = query.ExecuteReader();
                     MessageBox.Show("Done!");
                 }
-                catch (MySqlException e) { MessageBox.Show(e.Message);}
+                catch (MySqlException e) { MessageBox.Show(e.Message); }
                 finally { Close_connection(); }
             }
         }
 
         public bool User_validation(string username, string password, string confirm_password, string email)
-        // TODO: email validation
         {
             // password validation
             if (password != confirm_password)
@@ -56,27 +56,24 @@ namespace UberBarber.database
                 return false;
             }
             Open_connection();
-            MySqlCommand query = new($"SELECT username from serwer165956_projektstudia.user WHERE username = '{username}';", _connection);
-            // username validation
+            MySqlCommand query = new($"CALL user_validation('{username}', '{email}')", _connection);
+            // username + email validation
             try
             {
                 _reader = query.ExecuteReader();
-
-                if (_reader.Read())
+                string info = "";
+                while (_reader.Read())
                 {
-                    MessageBox.Show("Username already exists!");
+                    info = (string)_reader[0];
+                }
+                if (info != "valid")
+                {
+                    MessageBox.Show(info);
                     return false;
                 }
-
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-            finally
-            { Close_connection(); }
-
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { Close_connection(); }
             return true;
         }
     }
