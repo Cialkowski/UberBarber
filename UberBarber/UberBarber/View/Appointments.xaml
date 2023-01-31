@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="Appointments" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="add_appointment_button" Content="Add" HorizontalAlignment="Left" Margin="136,53,0,0" VerticalAlignment="Top" Height="87" Width="133"/>
+        <DataGrid x:Name="appointments_datagrid" d:ItemsSource="{d:SampleData ItemCount=5}" RenderTransformOrigin="0.471,0.561" Margin="285,53,36,63"/>
+        <Button x:Name="refresh_datagrid_button" Content="Refresh" HorizontalAlignment="Left" Margin="161,179,0,0" VerticalAlignment="Top" Height="67" Width="108" Click="refresh_datagrid_button_Click"/>
+
     </Grid>
 </Window>

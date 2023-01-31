@@ -12,21 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace UberBarber
+namespace UberBarber.View
 {
     /// <summary>
-    /// Interaction logic for Appointments.xaml
+    /// Interaction logic for AddAppointments.xaml
     /// </summary>
-    public partial class Appointments : Window
+    public partial class AddAppointments : Window
     {
-        public Appointments()
+        public AddAppointments()
         {
             InitializeComponent();
-        }
-
-        private void refresh_datagrid_button_Click(object sender, RoutedEventArgs e)
-        {
-            appointments_datagrid.Items.Refresh();
         }
     }
 }

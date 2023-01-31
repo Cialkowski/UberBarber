@@ -51,5 +51,39 @@ namespace UberBarber.database
             }
 
         }
+
+        internal bool select_barbers()
+        {
+            try
+            {
+                _database._connection.Open();
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Cannot connect to server. Contact administrator");
+            }
+
+            MySqlCommand query = new MySqlCommand("SELECT username, password FROM serwer165956_projektstudia.user WHERE username = '" + user_name + "' AND password = md5('" + user_password + "');", _database._connection);
+            try
+            {
+                _reader = query.ExecuteReader();
+
+                if (_reader.Read())
+                {
+                    _database._connection.Close();
+                    return true;
+                }
+                MessageBox.Show("WRONG CREDENTIALS!");
+                _database._connection.Close();
+                return false;
+
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.ToString());
+                _database._connection.Close();
+                return false;
+            }
+        }
     }
 }
