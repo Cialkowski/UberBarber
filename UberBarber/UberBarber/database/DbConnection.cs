@@ -19,7 +19,9 @@ namespace UberBarber
 
         public static MySqlConnection Connection()
         {
-            //create connection
+            // This method creates database connection.
+            // Returns appropriate MySqlConnection element.
+
             string _server = "sql88.lh.pl";
             string _port = "3306";
             string _database = "serwer165956_projektstudia";
@@ -33,6 +35,8 @@ namespace UberBarber
 
         public void Open_connection()
         {
+            // This method opens MySqlConnection and informs about server problems if they appear.
+
             try
             {
                 _connection.Open();
@@ -45,6 +49,8 @@ namespace UberBarber
 
         public void Close_connection()
         {
+            // This method closes MySqlConnection.
+
             _connection.Close();
         }
 

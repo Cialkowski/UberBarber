@@ -25,14 +25,18 @@ namespace UberBarber
         {
             InitializeComponent();
         }
-        //This functionality allows you to drag the window to any place
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            //This function allows you to drag the window to any place
+
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
         private void Button_confirm_Click(object sender, RoutedEventArgs e)
         {
+            // This method collect content from user registration forms and creates new User after correct validation.
+            // Closes user registration window after succesful operation.
+
             string username = text_username.Text;
             string password = pswd_box.Password;
             string confirm_password = pswd_box_confirm.Password;
@@ -43,14 +47,16 @@ namespace UberBarber
             Close();
             
         }
-        //Minimize the window
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
+            // This method minimizes the window.
+
             WindowState = WindowState.Minimized;
         }
-        //Close this window
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
+            // This method closes the window.
+
             Close();
         }
     }

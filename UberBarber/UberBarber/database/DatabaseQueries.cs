@@ -31,6 +31,7 @@ namespace UberBarber.database
         }
 
         public void Add_user(string username, string password, string confirm_password, string email)
+            // This method use validation function, after passing it - adds User to database.
         {
             if (User_validation(username, password, confirm_password, email))
             {
@@ -48,6 +49,8 @@ namespace UberBarber.database
         }
 
         public bool User_validation(string username, string password, string confirm_password, string email)
+            // This method checks if passwords match, uses procedure to check if email or username are taken.
+            // Returns false when validation is not correct and true after passing correctly.
         {
             // password validation
             if (password != confirm_password)
@@ -55,15 +58,17 @@ namespace UberBarber.database
                 MessageBox.Show("Passwords does't match!");
                 return false;
             }
+
+            // username + email validation
             Open_connection();
             MySqlCommand query = new($"CALL user_validation('{username}', '{email}')", _connection);
-            // username + email validation
             try
             {
                 _reader = query.ExecuteReader();
                 string info = "";
                 while (_reader.Read())
                 {
+                    // assign first element in first column
                     info = (string)_reader[0];
                 }
                 if (info != "valid")
