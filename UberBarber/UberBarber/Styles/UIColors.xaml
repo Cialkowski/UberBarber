@@ -28,6 +28,7 @@
     <!--Font Colors-->
     <SolidColorBrush x:Key="titleColor1" Color="White"/>
     <SolidColorBrush x:Key="titleColor2" Color="LightGray"/>
+    <SolidColorBrush x:Key="titleColor3" Color="#A9A9A9"/>
     <SolidColorBrush x:Key="plainTextColor1" Color="DarkGray"/>
     <SolidColorBrush x:Key="plainTextColor2" Color="#D3D3D3"/>
     <!--Panel Colors-->
