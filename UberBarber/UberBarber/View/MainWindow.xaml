@@ -36,9 +36,9 @@
                     Grid.Column="0">
 
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="0.,0" EndPoint="1,0.2">
+                    <LinearGradientBrush StartPoint="0.,0" EndPoint="1,0.4">
                         <GradientStop Color="#3d2b1f" Offset="0"/>
-                        <GradientStop Color="#36454F" Offset="1"/>
+                        <GradientStop Color="#34454F" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
 
@@ -122,8 +122,50 @@
                                 MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
                                 MouseEnter="pnlControlBar_MouseEnter">
 
+                        <Button x:Name="btnCLose"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color4}"
+                                Click="btnClose_Click">
+                            <fa:IconImage Icon="WindowClose" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
 
-                    </StackPanel>                    
+                        <Button x:Name="btnMInimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color4}"
+                                Click="btnMinimize_Click">
+                            <fa:IconImage Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        
+                        <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color10}"
+                                Click="btnMaximize_Click">
+                            <fa:IconImage Icon="WindowMaximize" Style="{StaticResource controlButtonIcon}" RenderTransformOrigin="0.5,0.561"/>
+                        </Button>
+
+                    </StackPanel>
+                    
+                    <!--Header /Caption -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!--Caption-->
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <fa:IconImage Icon="Home"
+                                          Height="20"
+                                          Width="20"
+                                          Foreground="{StaticResource titleColor2}"
+                                          Margin="35,0,10,0"/>
+
+                        </StackPanel>
+                        
+                    </Grid>
+
                 </Grid>
 
             </Border>

@@ -165,7 +165,7 @@
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
                              Padding="20,0,0,0">
-                                                <PasswordBox.Background>
+                        <PasswordBox.Background>
                             <ImageBrush ImageSource="/Images/key-icon.png"
                                         Stretch="None"
                                         AlignmentX="Left"/>
