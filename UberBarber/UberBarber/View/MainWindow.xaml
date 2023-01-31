@@ -61,7 +61,7 @@
                     </StackPanel>
                     <!-- Menu Buttons-->
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color1}">
+                                 Tag="{StaticResource color2}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
@@ -112,6 +112,12 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     
+                    
+                    <!--Content section-->
+                    <ContentControl Content=""
+                                    Grid.Row="2"
+                                    Margin="25"/>
+
                     <!--control bar -->
                     <StackPanel x:Name="pnlControlBar"
                                 Grid.Row="0"
@@ -221,7 +227,7 @@
                         </StackPanel>
                         
                     </Grid>
-
+                    
                 </Grid>
 
             </Border>
