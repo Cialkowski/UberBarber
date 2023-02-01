@@ -24,7 +24,6 @@ namespace UberBarber.database
 
                 if (!_reader.Read())
                 {
-                    MessageBox.Show("WRONG CREDENTIALS!");
                     return false;
                 }
                 return true;

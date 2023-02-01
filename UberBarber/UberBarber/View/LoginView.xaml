@@ -16,25 +16,25 @@
         <Border.Background>
             <ImageBrush ImageSource="/Images/back-images.jpg"/>
         </Border.Background>
-            
-            
+
+
         <Border CornerRadius="10"
             BorderThickness="5"
                 Opacity="0.65">
-        <Border.BorderBrush>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#a0a0a0" Offset="0"/>
                     <GradientStop Color="#666666" Offset="0.75"/>
                     <GradientStop Color="DarkSlateGray" Offset="1"/>
-            </LinearGradientBrush>
-        </Border.BorderBrush>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
 
-        <Border.Background>
-            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
                     <GradientStop Color="#3d2b1f" Offset="0"/>
                     <GradientStop Color="#36454F" Offset="0.75"/>
-            </LinearGradientBrush>
-        </Border.Background>
+                </LinearGradientBrush>
+            </Border.Background>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -125,7 +125,7 @@
                     <Image Source="/Images/logoo.png"
                            Width="100"
                            Height="100">
-                        
+
                     </Image>
                     <TextBlock Text="UberBarber"
                                Foreground="White"
@@ -135,7 +135,7 @@
                                HorizontalAlignment="Center"
                                TextWrapping="Wrap"
                                Margin="0,5,0,0">
-                        
+
                     </TextBlock>
                     <TextBlock Text="We just cut hair"
                                Foreground="LightGray"
@@ -170,11 +170,11 @@
                             <ImageBrush ImageSource="/Images/user-icon.png"
                                         Stretch="None"
                                         AlignmentX="Left" >
-                                
+
                             </ImageBrush>
                         </TextBox.Background>
                     </TextBox>
-                    
+
                     <TextBlock Text="Password"
                                Foreground="White"
                                FontSize="12"
@@ -202,6 +202,7 @@
                             </ImageBrush>
                         </PasswordBox.Background>
                     </PasswordBox>
+                    <Label x:Name="label_info" FontFamily="Montserrat" Foreground="Red" HorizontalAlignment="Center" FontSize="18"/>
 
                     <Button x:Name="btnLogin"                          
                             BorderThickness="0"
@@ -272,7 +273,7 @@
                     </StackPanel>
                 </StackPanel>
 
-            
+
             </Grid>
         </Border>
     </Border>

@@ -53,7 +53,11 @@ namespace UberBarber.View
 
             try
             {
-                if (query.Logging(txtUser.Text, txtPassword.Password))
+                if (!query.Logging(txtUser.Text, txtPassword.Password))
+                {
+                    label_info.Content = "Wrong credentials!";
+                }
+                else
                 {
                     new MainWindow().Show();
                     Close();
