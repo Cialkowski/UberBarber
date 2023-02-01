@@ -17,7 +17,6 @@ Please decide which impact your changes have to the next realease.
 - [ ] Add reviewers to pull-request
 - [ ] Assign yourself to pull-request
 - [ ] Add labels to pull-request
-- [ ] Add project to pull-request
 - [ ] Link an issue to from repository
 
 Please note that all items which are listed above are relevant to merge the pull-request!
