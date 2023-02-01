@@ -32,20 +32,20 @@ namespace UberBarber.View
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             // This method minimizes the window.
 
             WindowState = WindowState.Minimized;
         }
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             // This method closes the whole application.
 
             Application.Current.Shutdown();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             // TODO: correct doctring
             //open new window if given credentials are correct
@@ -69,7 +69,7 @@ namespace UberBarber.View
             }
         }
 
-        private void btnSignup_Click(object sender, RoutedEventArgs e)
+        private void BtnSignup_Click(object sender, RoutedEventArgs e)
         {
             // TODO: correct doctring
 
