@@ -24,7 +24,6 @@ namespace UberBarber.database
 
                 if (!_reader.Read())
                     MessageBox.Show("WRONG CREDENTIALS!");
-
             }
             catch (MySqlException e) { MessageBox.Show(e.Message); }
             finally { Close_connection(); }
