@@ -56,8 +56,6 @@
                                    FontWeight="Medium"
                                    VerticalAlignment="Center"
                                    Margin="10,0,0,0"/>
-
-
                     </StackPanel>
                     <!-- Menu Buttons-->
                     <RadioButton Style="{StaticResource menuButton}"
@@ -83,8 +81,6 @@
                             <TextBlock Text="User" Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
-
-
 
                 </StackPanel>
                 
@@ -236,17 +232,4 @@
 
     </Border>
 
-
-
-
-
-
-
-
-    <!--  <Grid>
-        <Button x:Name="button_user_handling" Content="Users handling" HorizontalAlignment="Left" Margin="296,251,0,0" VerticalAlignment="Top" Height="38" Width="128" Click="button_user_Click"/>
-        <Button x:Name="button_service_handling" Content="Services handling" HorizontalAlignment="Left" Margin="296,207,0,0" VerticalAlignment="Top" Height="39" Width="128"/>
-        <Button x:Name="button_barber_handling" Content="Barbers handling" HorizontalAlignment="Left" Margin="296,163,0,0" VerticalAlignment="Top" Height="39" Width="128"/>
-    </Grid>
-    -->
 </Window>
