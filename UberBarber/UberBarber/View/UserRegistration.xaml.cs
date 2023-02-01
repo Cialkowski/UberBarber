@@ -45,7 +45,6 @@ namespace UberBarber
             DatabaseQueries query = new DatabaseQueries();
             query.Add_user(username, password, confirm_password, email);
             Close();
-            
         }
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
