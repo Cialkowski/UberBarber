@@ -1,12 +1,6 @@
 ### Description
 Description here
 
-### Semantic Versioning
-Please decide which impact your changes have to the next realease.
-
-- [ ] Major
-- [ ] Minor
-- [ ] Patch
 
 #### Checklist for Developer
 - [ ] WPF issue
@@ -20,4 +14,5 @@ Please decide which impact your changes have to the next realease.
 - [ ] Link an issue to from repository
 
 Please note that all items which are listed above are relevant to merge the pull-request!
+
 If the checkboxes are empty pull-request will be closed!
