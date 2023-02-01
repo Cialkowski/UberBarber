@@ -53,13 +53,15 @@ namespace UberBarber.View
 
             try
             {
-                query.Logging(txtUser.Text, txtPassword.Password);
-                new MainWindow().Show();
-                Close();
+                if (query.Logging(txtUser.Text, txtPassword.Password))
+                {
+                    new MainWindow().Show();
+                    Close();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 

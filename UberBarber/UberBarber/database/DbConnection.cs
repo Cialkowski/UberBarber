@@ -41,9 +41,9 @@ namespace UberBarber
             {
                 _connection.Open();
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
-                MessageBox.Show("Cannot connect to server. Contact administrator");
+                MessageBox.Show(e.Message, "Cannot connect to server. Contact administrator");
             }
         }
 
@@ -55,7 +55,7 @@ namespace UberBarber
             {
                 _connection.Close();
             }
-            catch(MySqlException) { MessageBox.Show("Cann")}
+            catch(MySqlException e) { MessageBox.Show(e.Message, "Cannoct disconnect from server");  }
         }
 
     }
