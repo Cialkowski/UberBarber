@@ -51,7 +51,11 @@ namespace UberBarber
         {
             // This method closes MySqlConnection.
 
-            _connection.Close();
+            try
+            {
+                _connection.Close();
+            }
+            catch(MySqlException) { MessageBox.Show("Cann")}
         }
 
     }
