@@ -120,6 +120,4 @@
         <Setter Property="Height" Value="16"/>
     </Style>
 
-
-
 </ResourceDictionary>
