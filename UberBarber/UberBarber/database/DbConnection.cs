@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,31 +14,49 @@ namespace UberBarber
 {
     class DbConnection
     {
-        internal MySqlConnection _connection;
-        private string _server;
-        private string _port;
-        private string _database;
-        private string _uid;
-        private string _password;
+        internal MySqlConnection _connection = Connection();
+        internal MySqlDataReader? _reader;
 
-        public DbConnection()
+        public static MySqlConnection Connection()
         {
-            //initialize constructor
-            initialize();
+            // This method creates database connection.
+            // Returns appropriate MySqlConnection element.
+
+            string _server = "sql88.lh.pl";
+            string _port = "3306";
+            string _database = "serwer165956_projektstudia";
+            string _uid = "serwer165956_projektstudia";
+            string _password = "Abcd123!";
+            string connection_string = $"server={_server};port={_port};uid={_uid};pwd={_password};database={_database};";
+
+            MySqlConnection connection = new(connection_string);
+            return connection;
         }
 
-        private void initialize()
+        public void Open_connection()
         {
-            //declare constructor
-            _server = "sql88.lh.pl";
-            _port = "3306";
-            _database = "serwer165956_projektstudia";
-            _uid = "serwer165956_projektstudia";
-            _password = "Abcd123!";
-            string connection_string = "server=" + _server + ";" + "port=" + _port + ";" + "uid=" +
-                                       _uid + ";" + "pwd=" + _password + ";" + "database=" + _database + ";";
+            // This method opens MySqlConnection and informs about server problems if they appear.
 
-            _connection = new MySqlConnection(connection_string);
+            try
+            {
+                _connection.Open();
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message, "Cannot connect to server. Contact administrator");
+            }
         }
+
+        public void Close_connection()
+        {
+            // This method closes MySqlConnection.
+
+            try
+            {
+                _connection.Close();
+            }
+            catch(MySqlException e) { MessageBox.Show(e.Message, "Cannoct disconnect from server");  }
+        }
+
     }
 }
