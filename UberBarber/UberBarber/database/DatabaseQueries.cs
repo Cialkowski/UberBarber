@@ -13,7 +13,7 @@ namespace UberBarber.database
     {
         
 
-        public void Logging(string user_name, string user_password)
+        public bool Logging(string user_name, string user_password)
         {
             /// <summary> This function opens connection to server and databse and executes logging query. </summary>>
             Open_connection();
@@ -23,9 +23,17 @@ namespace UberBarber.database
                 _reader = query.ExecuteReader();
 
                 if (!_reader.Read())
+                {
                     MessageBox.Show("WRONG CREDENTIALS!");
+                    return false;
+                }
+                return true;
             }
-            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            catch (MySqlException e) 
+            { 
+                MessageBox.Show(e.Message);
+                return false;
+            }
             finally { Close_connection(); }
         }
 
