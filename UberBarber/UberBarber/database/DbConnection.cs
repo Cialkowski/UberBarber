@@ -19,7 +19,9 @@ namespace UberBarber
 
         public static MySqlConnection Connection()
         {
-            //create connection
+            // This method creates database connection.
+            // Returns appropriate MySqlConnection element.
+
             string _server = "sql88.lh.pl";
             string _port = "3306";
             string _database = "serwer165956_projektstudia";
@@ -33,19 +35,27 @@ namespace UberBarber
 
         public void Open_connection()
         {
+            // This method opens MySqlConnection and informs about server problems if they appear.
+
             try
             {
                 _connection.Open();
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
-                MessageBox.Show("Cannot connect to server. Contact administrator");
+                MessageBox.Show(e.Message, "Cannot connect to server. Contact administrator");
             }
         }
 
         public void Close_connection()
         {
-            _connection.Close();
+            // This method closes MySqlConnection.
+
+            try
+            {
+                _connection.Close();
+            }
+            catch(MySqlException e) { MessageBox.Show(e.Message, "Cannoct disconnect from server");  }
         }
 
     }

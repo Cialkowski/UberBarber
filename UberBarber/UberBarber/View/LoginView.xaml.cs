@@ -25,42 +25,50 @@ namespace UberBarber.View
         {
             InitializeComponent();
         }
-        //This functionality allows you to drag the window to any place
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            //This function allows you to drag the window to any place.
+
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-        //Minimize the window
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
+            // This method minimizes the window.
+
             WindowState = WindowState.Minimized;
         }
-        //Close the window
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
+            // This method closes the whole application.
+
             Application.Current.Shutdown();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            // TODO: correct doctring
             //open new window if given credentials are correct
             DatabaseQueries query = new DatabaseQueries();
 
             try
             {
-                query.Logging(txtUser.Text, txtPassword.Password);
-                new MainWindow().Show();
-                this.Close();
+                if (query.Logging(txtUser.Text, txtPassword.Password))
+                {
+                    new MainWindow().Show();
+                    Close();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnSignup_Click(object sender, RoutedEventArgs e)
         {
+            // TODO: correct doctring
+
             new UserRegistration().Show();
         }
     }

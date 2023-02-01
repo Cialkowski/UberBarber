@@ -63,7 +63,7 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"
                             Grid.Column="1"
-                            Click="btnMinimize_Click">
+                            Click="BtnMinimize_Click">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="DarkGray"/>
@@ -94,7 +94,7 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"
                             Grid.Column="2"
-                            Click="btnClose_Click">
+                            Click="BtnClose_Click">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#808080"/>
@@ -228,7 +228,7 @@
                             Cursor="Hand"
                             Grid.Column="2"
                             Margin="15"
-                            Click="button_confirm_Click">
+                            Click="Button_confirm_Click">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#808080"/>
