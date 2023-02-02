@@ -202,6 +202,7 @@
                             </ImageBrush>
                         </PasswordBox.Background>
                     </PasswordBox>
+                    <!-- Label with error info-->
                     <Label x:Name="label_info" FontFamily="Montserrat" Foreground="Red" HorizontalAlignment="Center" FontSize="18"/>
 
                     <Button x:Name="btnLogin"                          
