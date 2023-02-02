@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UberBarber"
         mc:Ignorable="d"
-        Title="User" Height="390" Width="611"
+        Title="User" Height="420" Width="611"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -14,7 +14,7 @@
         MouseDown="Window_MouseDown">
 
     <Border CornerRadius="12">
-      
+
         <Border CornerRadius="10"
             BorderThickness="5"
                 Opacity="0.96">
@@ -219,6 +219,8 @@
                                         AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
+                    <!-- Label with error info-->
+                    <Label x:Name="LabelInfoUserReg" FontFamily="Montserrat" Foreground="Red" FontSize="12" HorizontalAlignment="Center"/>
                     <Button x:Name="Confirm"                          
                             BorderThickness="0"
                             Content="Confirm"

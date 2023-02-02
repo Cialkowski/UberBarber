@@ -32,20 +32,20 @@ namespace UberBarber.View
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
             // This method minimizes the window.
 
             WindowState = WindowState.Minimized;
         }
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             // This method closes the whole application.
 
             Application.Current.Shutdown();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             // TODO: correct doctring
             //open new window if given credentials are correct
@@ -53,7 +53,11 @@ namespace UberBarber.View
 
             try
             {
-                if (query.Logging(txtUser.Text, txtPassword.Password))
+                if (!query.Logging(txtUser.Text, txtPassword.Password))
+                {
+                    label_info.Content = "Wrong credentials!";
+                }
+                else
                 {
                     new MainWindow().Show();
                     Close();
@@ -61,11 +65,11 @@ namespace UberBarber.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void btnSignup_Click(object sender, RoutedEventArgs e)
+        private void BtnSignup_Click(object sender, RoutedEventArgs e)
         {
             // TODO: correct doctring
 
