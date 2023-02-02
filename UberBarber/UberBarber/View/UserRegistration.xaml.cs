@@ -43,8 +43,19 @@ namespace UberBarber
             string email = text_email.Text;
 
             DatabaseQueries query = new DatabaseQueries();
-            if (query.Add_user(username, password, confirm_password, email))
+            string message = query.Add_user(username, password, confirm_password, email);
+            
+            if ( message != "Done" )
+            {
+                LabelInfoUserReg.Content = message;
+            }
+            else
+            {
+                // LabelInfoUserReg.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 255, 125, 35));
+                MessageBox.Show($"User: {username}\nHas been added", message,MessageBoxButton.OK, MessageBoxImage.Information);
+
                 Close();
+            }
         }
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
