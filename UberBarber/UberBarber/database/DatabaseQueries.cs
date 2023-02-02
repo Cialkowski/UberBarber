@@ -36,10 +36,16 @@ namespace UberBarber.database
             finally { Close_connection(); }
         }
 
-        public bool Add_user(string username, string password, string confirm_password, string email)
+        public string Add_user(string username, string password, string confirm_password, string email)
         // This method use validation function, after passing it - adds User to database.
         {
-            if (User_validation(username, password, confirm_password, email))
+            string message = "Something went wrong :(";
+            if (User_validation(username, password, confirm_password, email) != "valid")
+            {
+                message = User_validation(username, password, confirm_password, email);
+                return message;
+            }
+            else
             {
                 // add user to database
                 Open_connection();
@@ -47,28 +53,27 @@ namespace UberBarber.database
                 try
                 {
                     _reader = query.ExecuteReader();
-                    MessageBox.Show("Done!");
-                    return true;
+                    message = "Done";
                 }
                 catch (MySqlException e)
                 {
                     MessageBox.Show(e.Message);
-                    return false;
                 }
                 finally { Close_connection(); }
+                return message;
             }
-            else { return false; }
         }
 
-        public bool User_validation(string username, string password, string confirm_password, string email)
+        public string User_validation(string username, string password, string confirm_password, string email)
             // This method checks if passwords match, uses procedure to check if email or username are taken.
             // Returns false when validation is not correct and true after passing correctly.
         {
+            string message = "Something went wrong :(";
             // password validation
             if (password != confirm_password)
             {
-                MessageBox.Show("Passwords does't match!");
-                return false;
+                message = "Passwords don't match!";
+                return message;
             }
 
             // username + email validation
@@ -77,21 +82,19 @@ namespace UberBarber.database
             try
             {
                 _reader = query.ExecuteReader();
-                string info = "";
                 while (_reader.Read())
                 {
                     // assign first element in first column
-                    info = (string)_reader[0];
+                    message = (string)_reader[0];
                 }
-                if (info != "valid")
+                if (message != "valid")
                 {
-                    MessageBox.Show(info);
-                    return false;
+                    return message;
                 }
             }
             catch (MySqlException e) { MessageBox.Show(e.Message); }
-            finally { Close_connection(); }
-            return true;
+            finally {Close_connection(); }
+            return message;
         }
     }
 }
