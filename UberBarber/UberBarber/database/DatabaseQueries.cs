@@ -37,8 +37,8 @@ namespace UberBarber.database
             finally { Close_connection(); }
         }
 
-        public void Add_user(string username, string password, string confirm_password, string email)
-            // This method use validation function, after passing it - adds User to database.
+        public bool Add_user(string username, string password, string confirm_password, string email)
+        // This method use validation function, after passing it - adds User to database.
         {
             if (User_validation(username, password, confirm_password, email))
             {
@@ -49,10 +49,16 @@ namespace UberBarber.database
                 {
                     _reader = query.ExecuteReader();
                     MessageBox.Show("Done!");
+                    return true;
                 }
-                catch (MySqlException e) { MessageBox.Show(e.Message); }
+                catch (MySqlException e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
                 finally { Close_connection(); }
             }
+            else { return false; }
         }
 
         public bool User_validation(string username, string password, string confirm_password, string email)

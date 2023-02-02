@@ -4,11 +4,232 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UberBarber"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button x:Name="button_user_handling" Content="Users handling" HorizontalAlignment="Left" Margin="344,226,0,0" VerticalAlignment="Top" Height="38" Width="128" Click="button_user_Click"/>
-        <Button x:Name="button_service_handling" Content="Services handling" HorizontalAlignment="Left" Margin="344,182,0,0" VerticalAlignment="Top" Height="39" Width="128"/>
-        <Button x:Name="button_barber_handling" Content="Barbers handling" HorizontalAlignment="Left" Margin="344,138,0,0" VerticalAlignment="Top" Height="39" Width="128"/>
-    </Grid>
+        Title="MainWindow" Height="700" Width="1300"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+
+    <Border CornerRadius="10"
+            BorderThickness="5"
+               >
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#a0a0a0" Offset="0"/>
+                <GradientStop Color="#666666" Offset="0.75"/>
+                <GradientStop Color="DarkSlateGray" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <!--Nav Panel-->
+                <ColumnDefinition Width="250"/>
+                <!-- Content section-->
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--Nav Menu-->
+            <Border CornerRadius="10,0,0,10"
+                    Grid.Column="0">
+
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.,0" EndPoint="1,0.4">
+                        <GradientStop Color="#3d2b1f" Offset="0"/>
+                        <GradientStop Color="#34454F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <StackPanel>
+                    
+                    <!--logo-->
+                    <StackPanel Orientation="Horizontal"
+                                Height="35"
+                                Margin="15,25,0,40">
+                        <Image Source="/Images/logoo.png"/>
+                        <TextBlock Text="UberBarber"
+                                   Foreground="LightGray"
+                                   FontSize="20"
+                                   FontFamily="Montserrat"
+                                   FontWeight="Medium"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0"/>
+                    </StackPanel>
+                    <!-- Menu Buttons-->
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource color2}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource color2}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Calendar" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Calendar" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource color5}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="User" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="User" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                </StackPanel>
+                
+            </Border>
+            
+            <!--Main Section-->
+            <Border CornerRadius="0,10,10,0"
+                    Grid.Column="1">
+
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1,1.6" EndPoint="0,0.6">
+                        <GradientStop Color="#3d2b1f" Offset="0"/>
+                        <GradientStop Color="#36454F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <!--Control bar-->
+                        <RowDefinition Height="25"/>
+                        <!--Header /Caption -->
+                        <RowDefinition Height="35"/>
+                        <!--Content section-->
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    
+                    <!--Content section-->
+                    <ContentControl Content=""
+                                    Grid.Row="2"
+                                    Margin="25"/>
+
+                    <!--control bar -->
+                    <StackPanel x:Name="pnlControlBar"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
+                                MouseEnter="pnlControlBar_MouseEnter">
+
+                        <Button x:Name="btnCLose"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color4}"
+                                Click="btnClose_Click">
+                            <fa:IconImage Icon="WindowClose" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+
+                        <Button x:Name="btnMInimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color4}"
+                                Click="btnMinimize_Click">
+                            <fa:IconImage Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        
+                        <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color10}"
+                                Click="btnMaximize_Click">
+                            <fa:IconImage Icon="WindowMaximize" Style="{StaticResource controlButtonIcon}" RenderTransformOrigin="0.5,0.561"/>
+                        </Button>
+
+                    </StackPanel>
+                    
+                    <!--Header /Caption -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!--Caption-->
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <fa:IconImage Icon="Home"
+                                          Height="20"
+                                          Width="20"
+                                          Foreground="{StaticResource titleColor2}"
+                                          Margin="35,0,10,0"/>
+                            <TextBlock Text="Dashboard"
+                                       Foreground="{StaticResource titleColor2}"
+                                       FontSize="16"
+                                       FontFamily="Montserrat"
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                        
+                        <!--user options-->
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    FlowDirection="RightToLeft"
+                                    VerticalAlignment="Center"
+                                    Margin="0,0,10,0">
+
+                            <Button Style="{StaticResource iconButton}"
+                                    Tag="{StaticResource color1}">
+                                <fa:IconImage Icon="AngleDown" 
+                                              Style="{StaticResource iconButtonIcon}"
+                                              Height="15"
+                                              Width="15"/>
+                            </Button>
+
+                            <TextBlock Text="UserName TODO"
+                                       Foreground="{StaticResource titleColor3}"
+                                       FontFamily="Montserrat"
+                                       FontSize="16"
+                                       FontWeight="Heavy"
+                                       VerticalAlignment="Center"/>
+                            <Ellipse Height="35" Width="35"
+                                     Stroke="{StaticResource color2}"
+                                     StrokeThickness="2"
+                                     Margin="10,0,10,0">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/profile-picture.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Button Style="{StaticResource iconButton}"
+                                    Tag="{StaticResource color6}">
+                                <fa:IconImage Icon="ClockO" Style="{StaticResource iconButtonIcon}"
+                                              Height="23"
+                                              Width="23"/>
+                            </Button>
+                            <Button Style="{StaticResource iconButton}"
+                                    Tag="{StaticResource color6}">
+                                <fa:IconImage Icon="Envelope" Style="{StaticResource iconButtonIcon}"
+                                              Height="23"
+                                              Width="23"/>
+                            </Button>
+                            <Button Style="{StaticResource iconButton}"
+                                    Tag="{StaticResource color6}">
+                                <fa:IconImage Icon="Bell" Style="{StaticResource iconButtonIcon}"
+                                              Height="23"
+                                              Width="23"/>
+                            </Button>
+
+                        </StackPanel>
+                        
+                    </Grid>
+                    
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+    </Border>
+
 </Window>
