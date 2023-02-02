@@ -11,13 +11,16 @@ namespace UberBarber.database
 {
     class DatabaseQueries : DbConnection
     {
-        
+
 
         public bool Logging(string user_name, string user_password)
         {
             /// <summary> This function opens connection to server and databse and executes logging query. </summary>>
             Open_connection();
-            MySqlCommand query = new($"SELECT username, password FROM serwer165956_projektstudia.user WHERE username = '{user_name}' AND password = md5('{user_password}');", _connection);
+            MySqlCommand query =
+                new(
+                    $"SELECT username, password FROM serwer165956_projektstudia.user WHERE username = '{user_name}' AND password = md5('{user_password}');",
+                    _connection);
             try
             {
                 _reader = query.ExecuteReader();
@@ -26,18 +29,22 @@ namespace UberBarber.database
                 {
                     return false;
                 }
+
                 return true;
             }
-            catch (MySqlException e) 
+            catch (MySqlException e)
             {
                 MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            finally { Close_connection(); }
+            finally
+            {
+                Close_connection();
+            }
         }
 
         public string Add_user(string username, string password, string confirm_password, string email)
-        // This method use validation function, after passing it - adds User to database.
+            // This method use validation function, after passing it - adds User to database.
         {
             string message = "Something went wrong :(";
             if (User_validation(username, password, confirm_password, email) != "valid")
@@ -49,7 +56,10 @@ namespace UberBarber.database
             {
                 // add user to database
                 Open_connection();
-                MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`) VALUES ('{username}', md5('{password}'), '{email}');", _connection);
+                MySqlCommand query =
+                    new(
+                        $"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`) VALUES ('{username}', md5('{password}'), '{email}');",
+                        _connection);
                 try
                 {
                     _reader = query.ExecuteReader();
@@ -59,7 +69,11 @@ namespace UberBarber.database
                 {
                     MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                finally { Close_connection(); }
+                finally
+                {
+                    Close_connection();
+                }
+
                 return message;
             }
         }
@@ -87,13 +101,21 @@ namespace UberBarber.database
                     // assign first element in first column
                     message = (string)_reader[0];
                 }
+
                 if (message != "valid")
                 {
                     return message;
                 }
             }
-            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
-            finally {Close_connection(); }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                Close_connection();
+            }
+
             return message;
         }
 
@@ -113,41 +135,13 @@ namespace UberBarber.database
                     DateTime date = (DateTime)_reader[2];
                 }
             }
-            catch (MySqlException e) { MessageBox.Show(e.Message); }
-            finally { Close_connection(); }
-        }
-
-        internal bool select_barbers()
-        {
-            try
-            {
-                _database._connection.Open();
-            }
-            catch (MySqlException)
-            {
-                MessageBox.Show("Cannot connect to server. Contact administrator");
-            }
-
-            MySqlCommand query = new MySqlCommand("SELECT username, password FROM serwer165956_projektstudia.user WHERE username = '" + user_name + "' AND password = md5('" + user_password + "');", _database._connection);
-            try
-            {
-                _reader = query.ExecuteReader();
-
-                if (_reader.Read())
-                {
-                    _database._connection.Close();
-                    return true;
-                }
-                MessageBox.Show("WRONG CREDENTIALS!");
-                _database._connection.Close();
-                return false;
-
-            }
             catch (MySqlException e)
             {
-                MessageBox.Show(e.ToString());
-                _database._connection.Close();
-                return false;
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                Close_connection();
             }
         }
     }
