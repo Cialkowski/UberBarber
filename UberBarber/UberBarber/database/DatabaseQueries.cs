@@ -11,45 +11,88 @@ namespace UberBarber.database
 {
     class DatabaseQueries : DbConnection
     {
-        private DbConnection _database = new();
-        private MySqlDataReader _reader;
+        
 
-        internal bool logging(string user_name, string user_password)
+        public bool Logging(string user_name, string user_password)
         {
             /// <summary> This function opens connection to server and databse and executes logging query. </summary>>
-            /// <returns> True if authentication and query execute is successful, otherwise False. </returns>
-
-            try
-            {
-                _database._connection.Open();
-            }
-            catch (MySqlException)
-            {
-                MessageBox.Show("Cannot connect to server. Contact administrator");
-            }
-
-            MySqlCommand query = new MySqlCommand("SELECT username, password FROM serwer165956_projektstudia.user WHERE username = '"+user_name+"' AND password = md5('"+user_password+"');", _database._connection);
+            Open_connection();
+            MySqlCommand query = new($"SELECT username, password FROM serwer165956_projektstudia.user WHERE username = '{user_name}' AND password = md5('{user_password}');", _connection);
             try
             {
                 _reader = query.ExecuteReader();
 
-                if (_reader.Read())
+                if (!_reader.Read())
                 {
-                    _database._connection.Close();
+                    MessageBox.Show("WRONG CREDENTIALS!");
+                    return false;
+                }
+                return true;
+            }
+            catch (MySqlException e) 
+            { 
+                MessageBox.Show(e.Message);
+                return false;
+            }
+            finally { Close_connection(); }
+        }
+
+        public bool Add_user(string username, string password, string confirm_password, string email)
+        // This method use validation function, after passing it - adds User to database.
+        {
+            if (User_validation(username, password, confirm_password, email))
+            {
+                // add user to database
+                Open_connection();
+                MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`) VALUES ('{username}', md5('{password}'), '{email}');", _connection);
+                try
+                {
+                    _reader = query.ExecuteReader();
+                    MessageBox.Show("Done!");
                     return true;
                 }
-                MessageBox.Show("WRONG CREDENTIALS!");
-                _database._connection.Close();
-                return false;
-
+                catch (MySqlException e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                finally { Close_connection(); }
             }
-            catch (MySqlException e)
+            else { return false; }
+        }
+
+        public bool User_validation(string username, string password, string confirm_password, string email)
+            // This method checks if passwords match, uses procedure to check if email or username are taken.
+            // Returns false when validation is not correct and true after passing correctly.
+        {
+            // password validation
+            if (password != confirm_password)
             {
-                MessageBox.Show(e.ToString());
-                _database._connection.Close();
+                MessageBox.Show("Passwords does't match!");
                 return false;
             }
 
+            // username + email validation
+            Open_connection();
+            MySqlCommand query = new($"CALL user_validation('{username}', '{email}')", _connection);
+            try
+            {
+                _reader = query.ExecuteReader();
+                string info = "";
+                while (_reader.Read())
+                {
+                    // assign first element in first column
+                    info = (string)_reader[0];
+                }
+                if (info != "valid")
+                {
+                    MessageBox.Show(info);
+                    return false;
+                }
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { Close_connection(); }
+            return true;
         }
 
         internal bool select_barbers()
