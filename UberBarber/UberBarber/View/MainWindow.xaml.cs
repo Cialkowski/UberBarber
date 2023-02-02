@@ -64,5 +64,10 @@ namespace UberBarber
                 this.WindowState= WindowState.Maximized;
             else this.WindowState=WindowState.Normal;
         }
+
+        private void RadioButton_Calendar_Checked(object sender, RoutedEventArgs e)
+        {
+            ContentControl_Main.Content = "hello world";
+        }
     }
 }

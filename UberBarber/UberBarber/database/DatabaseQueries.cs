@@ -94,5 +94,25 @@ namespace UberBarber.database
             finally { Close_connection(); }
             return true;
         }
+
+        public void Get_appointments(int user_id)
+            // This method shows returns appointments for current logged user.
+        {
+            Open_connection();
+            MySqlCommand query = new($"CALL show_appointments_for_user({user_id})");
+
+            try
+            {
+                _reader = query.ExecuteReader();
+                while (_reader.Read())
+                {
+                    string barber_name = (string)_reader[0];
+                    string service_name = (string)_reader[1];
+                    DateTime date = (DateTime)_reader[2];
+                }
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            finally { Close_connection(); }
+        }
     }
 }
