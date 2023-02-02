@@ -35,6 +35,7 @@ namespace UberBarber
         private void Button_confirm_Click(object sender, RoutedEventArgs e)
         {
             // This method collect content from user registration forms and creates new User after correct validation.
+            // Shows a label with error information
             // Closes user registration window after succesful operation.
 
             string username = text_username.Text;
@@ -46,13 +47,13 @@ namespace UberBarber
             string message = query.Add_user(username, password, confirm_password, email);
             
             if ( message != "Done" )
+            // Show label if there is an error
             {
                 LabelInfoUserReg.Content = message;
             }
             else
             {
-                // LabelInfoUserReg.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 255, 125, 35));
-                MessageBox.Show($"User: {username}\nHas been added", message,MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"User: {username}\nHas been added", message, MessageBoxButton.OK, MessageBoxImage.Information);
 
                 Close();
             }

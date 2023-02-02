@@ -29,8 +29,8 @@ namespace UberBarber.database
                 return true;
             }
             catch (MySqlException e) 
-            { 
-                MessageBox.Show(e.Message);
+            {
+                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             finally { Close_connection(); }
@@ -57,7 +57,7 @@ namespace UberBarber.database
                 }
                 catch (MySqlException e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 finally { Close_connection(); }
                 return message;
@@ -66,7 +66,7 @@ namespace UberBarber.database
 
         public string User_validation(string username, string password, string confirm_password, string email)
             // This method checks if passwords match, uses procedure to check if email or username are taken.
-            // Returns false when validation is not correct and true after passing correctly.
+            // Returns proper message when the validation is correct or not.
         {
             string message = "Something went wrong :(";
             // password validation
@@ -92,7 +92,7 @@ namespace UberBarber.database
                     return message;
                 }
             }
-            catch (MySqlException e) { MessageBox.Show(e.Message); }
+            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
             finally {Close_connection(); }
             return message;
         }
