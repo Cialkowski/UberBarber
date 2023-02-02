@@ -43,8 +43,8 @@ namespace UberBarber
             string email = text_email.Text;
 
             DatabaseQueries query = new DatabaseQueries();
-            query.Add_user(username, password, confirm_password, email);
-            Close();
+            if (query.Add_user(username, password, confirm_password, email))
+                Close();
         }
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
