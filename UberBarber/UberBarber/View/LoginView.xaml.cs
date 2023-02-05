@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,7 +70,22 @@ namespace UberBarber.View
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void OnUsernameOrPasswordChanged(object sender,RoutedEventArgs e)
+        {
+            enableOrDisableLoginButton();
+        }
+        private void enableOrDisableLoginButton()
+        {
+            // This method enable or disable login button.
+            // if txtPassword is empty and txtUser is empy then the login button is disabled, otherwise the login button is enabled
 
+            if (string.IsNullOrWhiteSpace(txtPassword.Password) || string.IsNullOrWhiteSpace(txtUser.Text))
+            {
+                btnLogin.IsEnabled = false;
+            }
+            else
+                btnLogin.IsEnabled = true;
+        }
         private void BtnSignup_Click(object sender, RoutedEventArgs e)
         {
             // TODO: correct doctring
@@ -76,4 +93,4 @@ namespace UberBarber.View
             new UserRegistration().Show();
         }
     }
-}
+} 
