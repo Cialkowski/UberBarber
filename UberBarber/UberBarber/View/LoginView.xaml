@@ -216,7 +216,8 @@
                             Cursor="Hand"
                             Grid.Column="2"
                             Margin="15"
-                            Click="BtnLogin_Click">
+                            Click="BtnLogin_Click"
+                            IsEnabled="False">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#808080"/>
