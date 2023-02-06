@@ -83,7 +83,7 @@ namespace UberBarber.database
             // username validation
             else if (!Regex.IsMatch(username, usernamePattern))
             {
-                message = "Username must contain letters, numbers, dots and have at least 6 characters";
+                message = "Username can only contain letters, numbers, dots and have at least 6 characters";
                 return message;
             }
             //password validation
