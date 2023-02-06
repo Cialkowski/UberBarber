@@ -89,7 +89,7 @@ namespace UberBarber.database
             //password validation
             else if (!Regex.IsMatch(password, passwordPattern))
             {
-                message = "Password must contain at least 6 characters";
+                message = "Password must contain at least 6 letters";
                 return message;
             }
             // email validation
