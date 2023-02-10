@@ -132,9 +132,32 @@
 
                     <!--Content section-->
                     <ContentControl
+                                    x:Name="UserContent"
                                     Grid.Row="2"
                                     Margin="25">
-                        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="dgvUser"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <DataGrid Grid.Row="1" Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="dgvUser" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="950" Height="380" VerticalScrollBarVisibility="Visible"/>
+                            <Button Grid.Row="2" Grid.Column="1" x:Name="ButtonAddUser" Content="Add User" Height="50" HorizontalAlignment="Center" Margin="-210,400,0,0" VerticalAlignment="Top" Width="200"/>
+                            <Button Grid.Row="2" Grid.Column="1" x:Name="ButtonRemoveUser" Content="Remove User" Height="50" HorizontalAlignment="Center" Margin="210,400,0,0" VerticalAlignment="Top" Width="200"/>
+                        </Grid>
+                    </ContentControl>
+                    <ContentControl
+                                    x:Name="Draft1Content"
+                                    Grid.Row="2"
+                                    Margin="25">
+                        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="dgvDraft1"/>
+                    </ContentControl>
+                    <ContentControl
+                                    x:Name="Draft2Content"
+                                    Grid.Row="2"
+                                    Margin="25">
                     </ContentControl>
 
                     <!--control bar -->

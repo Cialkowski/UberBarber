@@ -28,7 +28,9 @@ namespace UberBarber
         public MainWindow()
         {
             InitializeComponent();
-            dgvUser.Visibility= Visibility.Collapsed;
+            Draft1Content.Visibility = Visibility.Collapsed;
+            Draft2Content.Visibility = Visibility.Collapsed;
+            UserContent.Visibility = Visibility.Collapsed;
         }
 
         private void button_user_Click(object sender, RoutedEventArgs e)
@@ -70,7 +72,7 @@ namespace UberBarber
         private void buttonUser_Click(object sender, RoutedEventArgs e)
             // This method shows DataGrid with user records.
         {
-            dgvUser.Visibility= Visibility.Visible;
+            UserContent.Visibility = Visibility.Visible;
             DatabaseQueries query = new();
             dgvUser.ItemsSource = query.GetUsers();
         }
