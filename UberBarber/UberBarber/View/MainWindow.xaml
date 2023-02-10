@@ -89,7 +89,7 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"
                             Margin="15"
-                            Height="40"
+                            Height="40" Click="buttonUser_Click"
                             >
                         <Button.Style>
                             <Style TargetType="Button">
@@ -134,7 +134,7 @@
                     <ContentControl
                                     Grid.Row="2"
                                     Margin="25">
-                        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="dgvUser"/>
                     </ContentControl>
 
                     <!--control bar -->

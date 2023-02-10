@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using Org.BouncyCastle.Asn1.X509;
+using UberBarber.database;
+using static UberBarber.database.DatabaseQueries;
 
 namespace UberBarber
 {
@@ -26,7 +28,7 @@ namespace UberBarber
         public MainWindow()
         {
             InitializeComponent();
-            
+            dgvUser.Visibility= Visibility.Collapsed;
         }
 
         private void button_user_Click(object sender, RoutedEventArgs e)
@@ -64,5 +66,14 @@ namespace UberBarber
                 this.WindowState= WindowState.Maximized;
             else this.WindowState=WindowState.Normal;
         }
+
+        private void buttonUser_Click(object sender, RoutedEventArgs e)
+            // This method shows DataGrid with user records.
+        {
+            dgvUser.Visibility= Visibility.Visible;
+            DatabaseQueries query = new();
+            dgvUser.ItemsSource = query.GetUsers();
+        }
+
     }
 }

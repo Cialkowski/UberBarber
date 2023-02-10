@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using MySql.Data.MySqlClient;
+using UberBarber.User;
+using static UberBarber.User.User;
 
 namespace UberBarber.database
 {
@@ -95,6 +99,27 @@ namespace UberBarber.database
             catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
             finally {Close_connection(); }
             return message;
+        }
+
+        public List<User.User> GetUsers()
+            // This method gets all data from users table add returns it as a list.
+        {
+            List<User.User> users = new();
+            Open_connection();
+            try
+            {
+                MySqlCommand query = new("SELECT * FROM serwer165956_projektstudia.user;", _connection);
+                _reader = query.ExecuteReader();
+
+                //Add records to list
+                while (_reader.Read())
+                {
+                    users.Add(new User.User(_reader));
+                }
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { Close_connection(); }
+            return users;
         }
     }
 }

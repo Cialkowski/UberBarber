@@ -16,11 +16,11 @@ namespace UberBarber.User
             Username = (string)reader["username"];
             Password = (string)reader["password"];
             Is_worker = (bool)reader["is_worker"];
-            Customer_id = (int)reader["customer_id"];
+            Email = (string)reader["email"];
         }
         public string Username { get; set; }
         public string Password { get; set; }
         public bool Is_worker { get; set; }
-        public int Customer_id { get; set;}
+        public string Email { get; set;}
     }
 }
