@@ -22,7 +22,7 @@
                 <GradientStop Color="DarkSlateGray" Offset="1"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
-        
+
         <Grid>
 
             <Grid.ColumnDefinitions>
@@ -43,7 +43,7 @@
                 </Border.Background>
 
                 <StackPanel>
-                    
+
                     <!--logo-->
                     <StackPanel Orientation="Horizontal"
                                 Height="35"
@@ -82,10 +82,31 @@
                         </StackPanel>
                     </RadioButton>
 
+                    <Button x:Name="buttonUser" BorderThickness="0"
+                            Content="User"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Margin="15"
+                            Height="40"
+                            >
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#808080"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#D3D3D3"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
                 </StackPanel>
-                
+
             </Border>
-            
+
             <!--Main Section-->
             <Border CornerRadius="0,10,10,0"
                     Grid.Column="1">
@@ -107,12 +128,14 @@
                         <!--Content section-->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    
-                    
+
+
                     <!--Content section-->
-                    <ContentControl Content=""
+                    <ContentControl
                                     Grid.Row="2"
-                                    Margin="25"/>
+                                    Margin="25">
+                        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                    </ContentControl>
 
                     <!--control bar -->
                     <StackPanel x:Name="pnlControlBar"
@@ -137,7 +160,7 @@
                                 Click="btnMinimize_Click">
                             <fa:IconImage Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
-                        
+
                         <Button x:Name="btnMaximize"
                                 Style="{StaticResource controlButton}"
                                 Tag="{StaticResource color10}"
@@ -146,14 +169,14 @@
                         </Button>
 
                     </StackPanel>
-                    
+
                     <!--Header /Caption -->
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--Caption-->
                         <StackPanel Grid.Column="0"
                                     Orientation="Horizontal"
@@ -170,7 +193,7 @@
                                        FontWeight="Medium"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
-                        
+
                         <!--user options-->
                         <StackPanel Grid.Column="1"
                                     Orientation="Horizontal"
@@ -221,9 +244,9 @@
                             </Button>
 
                         </StackPanel>
-                        
+
                     </Grid>
-                    
+
                 </Grid>
 
             </Border>
