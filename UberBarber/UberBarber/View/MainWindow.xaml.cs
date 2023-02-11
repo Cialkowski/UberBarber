@@ -77,5 +77,9 @@ namespace UberBarber
             dgvUser.ItemsSource = query.GetUsers();
         }
 
+        private void ButtonRemoveUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
