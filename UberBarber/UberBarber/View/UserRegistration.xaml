@@ -222,7 +222,14 @@
                         </TextBox.Background>
                     </TextBox>
                     <!-- TextBlock with error info-->
-                    <TextBlock x:Name="TextBlockInfoUserReg" FontFamily="Montserrat" Margin="0,5,0,-5" Foreground="Red" FontSize="12" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="TextBlockInfoUserReg" 
+                               FontFamily="Montserrat" 
+                               Margin="0,5,0,-5" 
+                               Foreground="Red" 
+                               FontSize="12" 
+                               HorizontalAlignment="Center" 
+                               TextWrapping="Wrap">
+                    </TextBlock>
                     <Button x:Name="Confirm"                          
                             BorderThickness="0"
                             Content="Confirm"
