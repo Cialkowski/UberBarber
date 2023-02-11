@@ -10,7 +10,6 @@ namespace UberBarber.User
 {
     public class User
     {
-        // TODO: delete when unnecessary - draft Edit_user class
         public User(MySqlDataReader reader)
         {
             User_id = (int)reader["user_id"];
