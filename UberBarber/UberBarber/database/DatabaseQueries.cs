@@ -120,6 +120,7 @@ namespace UberBarber.database
         }
 
         public void Remove_user(string username)
+            // This method removes selected user.
         {
             Open_connection();
             try
@@ -133,6 +134,7 @@ namespace UberBarber.database
 
         public string Edit_user(string password, string confirm_password, string email, int user_id)
         {
+            // This method edits password and email of selected user.
             string message = "Something went wrong :(";
             if (User_validation("", password, confirm_password, email) != "valid")
             {

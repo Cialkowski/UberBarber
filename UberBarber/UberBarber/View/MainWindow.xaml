@@ -213,7 +213,6 @@
                         </Grid>
                     </ContentControl>
 
-
                     <!--control bar -->
                     <StackPanel x:Name="pnlControlBar"
                                 Grid.Row="0"

@@ -58,8 +58,10 @@ namespace UberBarber
             string message;
 
             DatabaseQueries query = new();
+            // Check if edit conctructor was used
             if (!Is_constructor_edit)
             {
+                // Default constructor
                 message = query.Add_user(username, password, confirm_password, email);
 
                 if (message != "Done")
@@ -76,6 +78,7 @@ namespace UberBarber
             }
             else
             {
+                // Edit constructor
                 message = query.Edit_user(password, confirm_password, email, Selected_user.User_id);
 
                 if (message != "Done")
