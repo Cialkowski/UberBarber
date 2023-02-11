@@ -29,15 +29,12 @@ namespace UberBarber
         public MainWindow()
         {
             InitializeComponent();
+            // Set contents to non visible.
             Draft1Content.Visibility = Visibility.Collapsed;
             Draft2Content.Visibility = Visibility.Collapsed;
             UserContent.Visibility = Visibility.Collapsed;
         }
 
-        private void button_user_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: users handling
-        }
         //full screen funcitonality and drag move
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
@@ -71,20 +68,22 @@ namespace UberBarber
         }
 
         private void buttonUser_Click(object sender, RoutedEventArgs e)
-            // This method shows DataGrid with user records.
         {
+            // This method shows DataGrid with user records.
             UserContent.Visibility = Visibility.Visible;
             Refresh_Dgv_User();
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
+            // This method edits selected user.
             User.User user = (User.User)dgvUser.SelectedItem;
             new UserRegistration(user).Show();
         }
 
         private void BtnRemove_Click(object sender, RoutedEventArgs e)
         {
+            // This method removes selected user after confirmation.
             User.User user = (User.User)dgvUser.SelectedItem;
             if (MessageBox.Show("Are you sure that you want delete this office?",
                                 "Delete Office",
@@ -99,12 +98,14 @@ namespace UberBarber
 
         public void Refresh_Dgv_User()
         {
+            // This method refreshes DataGrid.
             DatabaseQueries query = new();
             dgvUser.ItemsSource = query.Get_users();
         }
 
         private void ButtonAddUser_Click(object sender, RoutedEventArgs e)
         {
+            // This method shows UserRegistration window.
             new UserRegistration().Show();
         }
     }
