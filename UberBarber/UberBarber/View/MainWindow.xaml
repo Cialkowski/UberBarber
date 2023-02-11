@@ -143,9 +143,51 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <DataGrid Grid.Row="1" Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="dgvUser" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="950" Height="380" VerticalScrollBarVisibility="Visible"/>
-                            <Button Grid.Row="2" Grid.Column="1" x:Name="ButtonAddUser" Content="Add User" Height="50" HorizontalAlignment="Center" Margin="-210,400,0,0" VerticalAlignment="Top" Width="200"/>
-                            <Button Grid.Row="2" Grid.Column="1" x:Name="ButtonRemoveUser" Content="Remove User" Height="50" HorizontalAlignment="Center" Margin="210,400,0,0" VerticalAlignment="Top" Width="200" Click="ButtonRemoveUser_Click"/>
+                            <DataGrid Grid.Row="1" Grid.Column="1" x:Name="dgvUser" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="800" Height="380" VerticalScrollBarVisibility="Visible" CanUserAddRows="False" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        <Setter Property="FontSize" Value="15"/>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Padding" Value="20,5,20,5"/>
+                                        <Setter Property="FontSize" Value="20"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                                    <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Username" Binding="{Binding Username}" IsReadOnly="True"/>
+                                    <DataGridCheckBoxColumn Header="Is Worker" Binding="{Binding Is_worker}" CanUserSort="False" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="E-mail" Binding="{Binding Email}"  CanUserSort="False" IsReadOnly="True"/>
+                                    <DataGridTemplateColumn Header="Edit">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="btnEdit" Width="100" Height="50" Content="Edit"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Remove">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="btnActivity" Width="100" Height="50" Content="Remove"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Grid.Row="2" Grid.Column="1" x:Name="ButtonAddUser" Content="Add User" Height="50" HorizontalAlignment="Center" Margin="0,430,0,0" VerticalAlignment="Top" Width="200"/>
                         </Grid>
                     </ContentControl>
                     <ContentControl
