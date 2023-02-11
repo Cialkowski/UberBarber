@@ -140,9 +140,9 @@ namespace UberBarber.database
         // This method use validation function, after passing it - adds barber to database.
         {
             string message = "Something went wrong :(";
-            if (BarberValidation(phoneNumber, age, userId) != "valid")
+            if (Barber_Validation(phoneNumber, age, userId) != "valid")
             {
-                message = BarberValidation(phoneNumber, age, userId);
+                message = Barber_Validation(phoneNumber, age, userId);
                 return message;
             }
             else
@@ -163,7 +163,26 @@ namespace UberBarber.database
                 return message;
             }
         }
+        public List<Barber.Barber> Get_barbers()
+        // This method gets all data from barbers table add returns it as a list.
+        {
+            List<Barber.Barber> barbers = new();
+            Open_connection();
+            try
+            {
+                MySqlCommand query = new("SELECT * FROM serwer165956_projektstudia.barber;", _connection);
+                _reader = query.ExecuteReader();
 
+                //Add records to list
+                while (_reader.Read())
+                {
+                    barbers.Add(new Barber.Barber(_reader));
+                }
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { Close_connection(); }
+            return barbers;
+        }
 
     }
 }
