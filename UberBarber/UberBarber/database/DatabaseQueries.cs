@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Annotations;
 using MySql.Data.MySqlClient;
 
 namespace UberBarber.database
@@ -96,5 +98,72 @@ namespace UberBarber.database
             finally {Close_connection(); }
             return message;
         }
+
+        public string Barber_Validation(string phoneNumber, int age, int userId)
+        // This method checks if passwords match, uses procedure to check if email or username are taken.
+        // Returns proper message when the validation is correct or not.
+        {
+            string message = "Something went wrong :(";
+            string phoneNumberPattern = "^\\d{9}$";
+            //age validation
+            if (age > 100 || age < 16)
+            {
+                message = "Age must be between 16 and 100";
+                return message;
+            }
+            //phone number validation
+            else if (!Regex.IsMatch(phoneNumber, phoneNumberPattern))
+            {
+                message = "Phone number must be 9 digits";
+                return message;
+            }
+            Open_connection();
+            MySqlCommand query = new($"CALL barber_validation({userId}, '{phoneNumber}')", _connection);
+            try
+            {
+                _reader = query.ExecuteReader();
+                while (_reader.Read())
+                {
+                    // assign first element in first column
+                    message = (string)_reader[0];
+                }
+                if (message != "valid")
+                {
+                    return message;
+                }
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { Close_connection(); }
+            return message;
+        }
+        public string Add_Barber(string name, string title, string phoneNumber, int age, int userId)
+        // This method use validation function, after passing it - adds barber to database.
+        {
+            string message = "Something went wrong :(";
+            if (BarberValidation(phoneNumber, age, userId) != "valid")
+            {
+                message = BarberValidation(phoneNumber, age, userId);
+                return message;
+            }
+            else
+            {
+                // add barber to database
+                Open_connection();
+                MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`barber` (`name`, `title`, `phone_number`,`age`,`user_id`) VALUES ('{name}', '{title}', '{phoneNumber}', {age}, {userId});", _connection);
+                try
+                {
+                    _reader = query.ExecuteReader();
+                    message = "Done";
+                }
+                catch (MySqlException e)
+                {
+                    MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally { Close_connection(); }
+                return message;
+            }
+        }
+
+
     }
 }
