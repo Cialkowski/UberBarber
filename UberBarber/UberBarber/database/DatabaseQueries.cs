@@ -41,7 +41,7 @@ namespace UberBarber.database
         }
 
         public string Add_user(string username, string password, string confirm_password, string email)
-        // This method use validation function, after passing it - adds Edit_user to database.
+        // This method use validation function, after passing it - adds User to database.
         {
             string message = "Something went wrong :(";
             if (User_validation(username, password, confirm_password, email) != "valid")
