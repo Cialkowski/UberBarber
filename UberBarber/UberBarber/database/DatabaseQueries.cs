@@ -41,7 +41,7 @@ namespace UberBarber.database
         }
 
         public string Add_user(string username, string password, string confirm_password, string email)
-        // This method use validation function, after passing it - adds User to database.
+        // This method use validation function, after passing it - adds Edit_user to database.
         {
             string message = "Something went wrong :(";
             if (User_validation(username, password, confirm_password, email) != "valid")
@@ -59,10 +59,7 @@ namespace UberBarber.database
                     _reader = query.ExecuteReader();
                     message = "Done";
                 }
-                catch (MySqlException e)
-                {
-                    MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
                 finally { Close_connection(); }
                 return message;
             }
@@ -101,7 +98,7 @@ namespace UberBarber.database
             return message;
         }
 
-        public List<User.User> GetUsers()
+        public List<User.User> Get_users()
             // This method gets all data from users table add returns it as a list.
         {
             List<User.User> users = new();
@@ -122,7 +119,7 @@ namespace UberBarber.database
             return users;
         }
 
-        public void RemoveUser(string username)
+        public void Remove_user(string username)
         {
             Open_connection();
             try
@@ -132,6 +129,30 @@ namespace UberBarber.database
             }
             catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
             finally { Close_connection(); }
+        }
+
+        public string Edit_user(string password, string confirm_password, string email, int user_id)
+        {
+            string message = "Something went wrong :(";
+            if (User_validation("", password, confirm_password, email) != "valid")
+            {
+                message = User_validation("", password, confirm_password, email);
+                return message;
+            }
+            else
+            {
+                Open_connection();
+                MySqlCommand query = new($"UPDATE `serwer165956_projektstudia`.`user` SET `password` = md5('{password}'), `is_worker` = '1', `email` = '{email}' WHERE (`user_id` = '{user_id}');", _connection);
+                try
+                {
+                    _reader = query.ExecuteReader();
+                    message = "Done";
+                }
+                catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                finally { Close_connection(); }
+                return message;
+            }
+
         }
     }
 }

@@ -79,7 +79,8 @@ namespace UberBarber
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Edit");
+            User.User user = (User.User)dgvUser.SelectedItem;
+            new UserRegistration(user).Show();
         }
 
         private void BtnRemove_Click(object sender, RoutedEventArgs e)
@@ -91,15 +92,20 @@ namespace UberBarber
                                 MessageBoxImage.Question) == MessageBoxResult.OK)
             {
                 DatabaseQueries query = new();
-                query.RemoveUser(user.Username);
+                query.Remove_user(user.Username);
             }
             Refresh_Dgv_User();
         }
 
-        private void Refresh_Dgv_User()
+        public void Refresh_Dgv_User()
         {
             DatabaseQueries query = new();
-            dgvUser.ItemsSource = query.GetUsers();
+            dgvUser.ItemsSource = query.Get_users();
+        }
+
+        private void ButtonAddUser_Click(object sender, RoutedEventArgs e)
+        {
+            new UserRegistration().Show();
         }
     }
 }
