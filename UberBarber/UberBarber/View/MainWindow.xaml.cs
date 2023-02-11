@@ -17,6 +17,7 @@ using System.Windows.Interop;
 using Org.BouncyCastle.Asn1.X509;
 using UberBarber.database;
 using static UberBarber.database.DatabaseQueries;
+using static UberBarber.User.User;
 
 namespace UberBarber
 {
@@ -73,13 +74,32 @@ namespace UberBarber
             // This method shows DataGrid with user records.
         {
             UserContent.Visibility = Visibility.Visible;
-            DatabaseQueries query = new();
-            dgvUser.ItemsSource = query.GetUsers();
+            Refresh_Dgv_User();
         }
 
-        private void ButtonRemoveUser_Click(object sender, RoutedEventArgs e)
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Edit");
+        }
 
+        private void BtnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            User.User user = (User.User)dgvUser.SelectedItem;
+            if (MessageBox.Show("Are you sure that you want delete this office?",
+                                "Delete Office",
+                                MessageBoxButton.OKCancel,
+                                MessageBoxImage.Question) == MessageBoxResult.OK)
+            {
+                DatabaseQueries query = new();
+                query.RemoveUser(user.Username);
+            }
+            Refresh_Dgv_User();
+        }
+
+        private void Refresh_Dgv_User()
+        {
+            DatabaseQueries query = new();
+            dgvUser.ItemsSource = query.GetUsers();
         }
     }
 }

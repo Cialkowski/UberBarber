@@ -174,14 +174,14 @@
                                     <DataGridTemplateColumn Header="Edit">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button x:Name="btnEdit" Width="100" Height="50" Content="Edit"/>
+                                                <Button x:Name="BtnEdit" Width="100" Height="50" Content="Edit" Click="BtnEdit_Click"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                     <DataGridTemplateColumn Header="Remove">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button x:Name="btnActivity" Width="100" Height="50" Content="Remove"/>
+                                                <Button x:Name="BtnRemove" Width="100" Height="50" Content="Remove" Click="BtnRemove_Click"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>

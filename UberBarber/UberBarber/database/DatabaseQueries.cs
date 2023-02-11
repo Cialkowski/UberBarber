@@ -121,5 +121,17 @@ namespace UberBarber.database
             finally { Close_connection(); }
             return users;
         }
+
+        public void RemoveUser(string username)
+        {
+            Open_connection();
+            try
+            {
+                MySqlCommand query = new($"DELETE FROM serwer165956_projektstudia.user WHERE (username = '{username}');", _connection);
+                _reader = query.ExecuteReader();
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { Close_connection(); }
+        }
     }
 }

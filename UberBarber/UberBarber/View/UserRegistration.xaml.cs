@@ -43,7 +43,7 @@ namespace UberBarber
             string confirm_password = pswd_box_confirm.Password;
             string email = text_email.Text;
 
-            DatabaseQueries query = new DatabaseQueries();
+            DatabaseQueries query = new();
             string message = query.Add_user(username, password, confirm_password, email);
             
             if ( message != "Done" )
