@@ -348,7 +348,7 @@
                                               Width="15"/>
                             </Button>
 
-                            <TextBlock Text="UserName TODO"
+                            <TextBlock x:Name="UsernameTextblock"
                                        Foreground="{StaticResource titleColor3}"
                                        FontFamily="Montserrat"
                                        FontSize="16"
