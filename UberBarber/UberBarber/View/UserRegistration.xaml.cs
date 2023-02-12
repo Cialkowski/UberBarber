@@ -35,7 +35,7 @@ namespace UberBarber
         private void Button_confirm_Click(object sender, RoutedEventArgs e)
         {
             // This method collect content from user registration forms and creates new User after correct validation.
-            // Shows a label with error information
+            // Shows a text block with error information
             // Closes user registration window after succesful operation.
 
             string username = text_username.Text;
@@ -47,9 +47,9 @@ namespace UberBarber
             string message = query.Add_user(username, password, confirm_password, email);
             
             if ( message != "Done" )
-            // Show label if there is an error
+            // Show text block if there is an error
             {
-                LabelInfoUserReg.Content = message;
+                TextBlockInfoUserReg.Text = message;
             }
             else
             {
@@ -63,6 +63,22 @@ namespace UberBarber
             // This method minimizes the window.
 
             WindowState = WindowState.Minimized;
+        }
+        private void OnPasswordBoxAndConfirmPasswordBoxChanged(object sender, EventArgs e)
+        {
+            enableOrDisableConfirmRegistrationButton();
+        }
+        private void enableOrDisableConfirmRegistrationButton()
+        {
+            // This method enable or disable confirm registration button.
+            // If the passwords do not match, then the button is disabled, otherwise the button is enabled 
+
+            if (string.Equals(pswd_box.Password, pswd_box_confirm.Password,StringComparison.OrdinalIgnoreCase))
+            {
+                Confirm.IsEnabled = true;
+            }
+            else
+                Confirm.IsEnabled = false;
         }
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {

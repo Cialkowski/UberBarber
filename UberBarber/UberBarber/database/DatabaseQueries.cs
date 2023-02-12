@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using MySql.Data.MySqlClient;
@@ -69,14 +70,35 @@ namespace UberBarber.database
             // Returns proper message when the validation is correct or not.
         {
             string message = "Something went wrong :(";
+            string usernamePattern = "^[a-zA-Z0-9.]{6,}$";
+            string passwordPattern = "^[\\w\\d]{6,}$";
+            string emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
             // password validation
             if (password != confirm_password)
             {
                 message = "Passwords don't match!";
                 return message;
             }
-
-            // username + email validation
+            // username validation
+            else if (!Regex.IsMatch(username, usernamePattern))
+            {
+                message = "Username can only contain letters, numbers, dots and have at least 6 characters";
+                return message;
+            }
+            //password validation
+            else if (!Regex.IsMatch(password, passwordPattern))
+            {
+                message = "Password must contain at least 6 characters";
+                return message;
+            }
+            // email validation
+            else if (!Regex.IsMatch(email, emailPattern))
+            {
+                message = "Email address is invalid";
+                return message;
+            }
+            
             Open_connection();
             MySqlCommand query = new($"CALL user_validation('{username}', '{email}')", _connection);
             try
