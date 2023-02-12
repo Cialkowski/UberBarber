@@ -61,59 +61,17 @@
                                    Margin="10,0,0,0"/>
                     </StackPanel>
                     <!-- Menu Buttons-->
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color2}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Home"
-                                          Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Dashboard"
-                                       Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color2}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Calendar"
-                                          Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Calendar"
-                                       Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color5}">
+                    
+                    <Button x:Name="buttonUser"
+                            Click="buttonUser_Click"
+                            Style="{StaticResource menuButtonn}"
+                            Tag="{StaticResource color5}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="User"
-                                          Style="{StaticResource menuButtonIcon}"/>
+                                          Style="{StaticResource menuButtonIconn}"/>
                             <TextBlock Text="User"
-                                       Style="{StaticResource menuButtonText}"/>
+                                       Style="{StaticResource menuButtonTextt}"/>
                         </StackPanel>
-                    </RadioButton>
-
-                    <Button x:Name="buttonUser"
-                            BorderThickness="0"
-                            Content="User"
-                            Foreground="White"
-                            FontSize="12"
-                            FontFamily="Montserrat"
-                            Cursor="Hand"
-                            Margin="15"
-                            Height="40"
-                            Click="buttonUser_Click">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background"
-                                        Value="#808080"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"
-                                             Value="True">
-                                        <Setter Property="Background"
-                                                Value="#D3D3D3"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
                     </Button>
 
                 </StackPanel>
