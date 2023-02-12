@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Xml.Linq;
 using UberBarber.User;
+using System.Reflection;
 
 namespace UberBarber.database.BarberQueries
 {
@@ -95,7 +96,7 @@ namespace UberBarber.database.BarberQueries
             {
                 MySqlCommand query = new("SELECT * FROM serwer165956_projektstudia.barber;", _connection);
                 _reader = query.ExecuteReader();
-
+                  
                 // Add records to list
                 while (_reader.Read())
                 {
@@ -144,6 +145,29 @@ namespace UberBarber.database.BarberQueries
                 finally { Close_connection(); }
                 return message;
             }
+        }
+        public List<Service.Service> Get_all_services_for_barber(int barberId)
+        // This method gets all services assigned to barber. Returns it as a list.
+        {
+            string getAllServicesForBarberQuery = "select s.name,s.time,s.price,s.description from serwer165956_projektstudia.service s" +
+                           "inner join serwer165956_projektstudia.barber b" +
+                           $"on s.barber_id = {barberId}";
+            List<Service.Service> barbers = new();
+            Open_connection();
+            try
+            {
+                MySqlCommand query = new(getAllServicesForBarberQuery, _connection);
+                _reader = query.ExecuteReader();
+
+                // Add records to list
+                while (_reader.Read())
+                {
+                    barbers.Add(new Service.Service(_reader));
+                }
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { Close_connection(); }
+            return barbers;
         }
     }
 }
