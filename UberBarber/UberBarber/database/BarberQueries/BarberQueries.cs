@@ -73,7 +73,7 @@ namespace UberBarber.database.BarberQueries
             {
                 // add barber to database
                 Open_connection();
-                MySqlCommand query = new($"CALL serwer165956_projektstudia.add_barber_and_update_user({userId}, '{title}', '{name}', {phoneNumber}, {age});");
+                MySqlCommand query = new($"CALL serwer165956_projektstudia.add_barber_and_update_user({userId}, '{title}', '{name}', {phoneNumber}, {age});", _connection);
                 try
                 {
                     _reader = query.ExecuteReader();
