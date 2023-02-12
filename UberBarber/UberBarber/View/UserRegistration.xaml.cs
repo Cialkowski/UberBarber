@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using UberBarber.database;
 
@@ -70,7 +71,7 @@ namespace UberBarber
 
                 if (message != "Done")
                 {
-                    LabelInfoUserReg.Content = message;
+                    TextBlockInfoUserReg.Text = message;
                 }
                 else
                 {

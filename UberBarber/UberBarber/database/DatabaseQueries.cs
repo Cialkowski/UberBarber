@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
 
 namespace UberBarber.database
 {

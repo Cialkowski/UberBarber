@@ -71,8 +71,8 @@ namespace UberBarber
         {
             // This method removes selected user after confirmation.
             User.User user = (User.User)dgvUser.SelectedItem;
-            if (MessageBox.Show("Are you sure that you want delete this office?",
-                                "Delete Office",
+            if (MessageBox.Show("Are you sure that you want delete this user?",
+                                "Delete User",
                                 MessageBoxButton.OKCancel,
                                 MessageBoxImage.Question) == MessageBoxResult.OK)
             {
