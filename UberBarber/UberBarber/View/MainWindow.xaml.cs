@@ -4,6 +4,8 @@ using System.Windows.Input;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using UberBarber.database;
+using static UberBarber.User.CurrentUser;
+using UberBarber.User;
 
 namespace UberBarber
 {
@@ -19,6 +21,7 @@ namespace UberBarber
             Draft1Content.Visibility = Visibility.Collapsed;
             Draft2Content.Visibility = Visibility.Collapsed;
             UserContent.Visibility = Visibility.Collapsed;
+            UsernameTextblock.Text = CurrentUser.Get_username();
         }
 
         //full screen funcitonality and drag move
