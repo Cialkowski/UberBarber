@@ -100,6 +100,7 @@
                             Cursor="Hand"
                             Margin="15"
                             Height="40"
+                            IsEnabled="False"
                             Click="buttonUser_Click">
                         <Button.Style>
                             <Style TargetType="Button">
@@ -348,7 +349,7 @@
                                               Width="15"/>
                             </Button>
 
-                            <TextBlock Text="UserName TODO"
+                            <TextBlock x:Name="UsernameTextblock"
                                        Foreground="{StaticResource titleColor3}"
                                        FontFamily="Montserrat"
                                        FontSize="16"

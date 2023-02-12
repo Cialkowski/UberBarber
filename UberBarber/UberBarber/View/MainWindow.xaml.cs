@@ -4,6 +4,8 @@ using System.Windows.Input;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using UberBarber.database;
+using static UberBarber.User.CurrentUser;
+using UberBarber.User;
 
 namespace UberBarber
 {
@@ -12,6 +14,7 @@ namespace UberBarber
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool user_permissions = CurrentUser.Get_is_worker();
         public MainWindow()
         {
             InitializeComponent();
@@ -19,6 +22,11 @@ namespace UberBarber
             Draft1Content.Visibility = Visibility.Collapsed;
             Draft2Content.Visibility = Visibility.Collapsed;
             UserContent.Visibility = Visibility.Collapsed;
+            UsernameTextblock.Text = CurrentUser.Get_username();
+            if (user_permissions)
+            {
+                buttonUser.IsEnabled= true;
+            }
         }
 
         //full screen funcitonality and drag move
@@ -27,7 +35,7 @@ namespace UberBarber
 
         private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WindowInteropHelper helper = new WindowInteropHelper(this);
+            WindowInteropHelper helper = new(this);
             SendMessage(helper.Handle, 161, 2, 0);
         }
 
