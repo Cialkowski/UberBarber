@@ -13,18 +13,20 @@
         WindowStartupLocation="CenterScreen">
 
     <Border CornerRadius="10"
-            BorderThickness="5"
-               >
+            BorderThickness="5">
         <Border.BorderBrush>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#a0a0a0" Offset="0"/>
-                <GradientStop Color="#666666" Offset="0.75"/>
-                <GradientStop Color="DarkSlateGray" Offset="1"/>
+            <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="1,1">
+                <GradientStop Color="#a0a0a0"
+                              Offset="0"/>
+                <GradientStop Color="#666666"
+                              Offset="0.75"/>
+                <GradientStop Color="DarkSlateGray"
+                              Offset="1"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
-        
-        <Grid>
 
+        <Grid>
             <Grid.ColumnDefinitions>
                 <!--Nav Panel-->
                 <ColumnDefinition Width="250"/>
@@ -34,16 +36,17 @@
             <!--Nav Menu-->
             <Border CornerRadius="10,0,0,10"
                     Grid.Column="0">
-
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="0.,0" EndPoint="1,0.4">
-                        <GradientStop Color="#3d2b1f" Offset="0"/>
-                        <GradientStop Color="#34454F" Offset="1"/>
+                    <LinearGradientBrush StartPoint="0.,0"
+                                         EndPoint="1,0.4">
+                        <GradientStop Color="#3d2b1f"
+                                      Offset="0"/>
+                        <GradientStop Color="#34454F"
+                                      Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-
+                
                 <StackPanel>
-                    
                     <!--logo-->
                     <StackPanel Orientation="Horizontal"
                                 Height="35"
@@ -61,39 +64,72 @@
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color2}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="Home"
+                                          Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Dashboard"
+                                       Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color2}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Calendar" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Calendar" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="Calendar"
+                                          Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Calendar"
+                                       Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color5}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="User" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="User" Style="{StaticResource menuButtonText}"/>
+                            <fa:IconImage Icon="User"
+                                          Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="User"
+                                       Style="{StaticResource menuButtonText}"/>
                         </StackPanel>
                     </RadioButton>
 
+                    <Button x:Name="buttonUser"
+                            BorderThickness="0"
+                            Content="User"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Margin="15"
+                            Height="40"
+                            Click="buttonUser_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background"
+                                        Value="#808080"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Background"
+                                                Value="#D3D3D3"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
                 </StackPanel>
-                
+
             </Border>
-            
+
             <!--Main Section-->
             <Border CornerRadius="0,10,10,0"
                     Grid.Column="1">
-
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="1,1.6" EndPoint="0,0.6">
-                        <GradientStop Color="#3d2b1f" Offset="0"/>
-                        <GradientStop Color="#36454F" Offset="1"/>
+                    <LinearGradientBrush StartPoint="1,1.6"
+                                         EndPoint="0,0.6">
+                        <GradientStop Color="#3d2b1f"
+                                      Offset="0"/>
+                        <GradientStop Color="#36454F"
+                                      Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
 
@@ -108,11 +144,133 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     
-                    
                     <!--Content section-->
-                    <ContentControl Content=""
+                    <!--Draft content1-->
+                    <ContentControl
+                                    x:Name="Draft1Content"
                                     Grid.Row="2"
-                                    Margin="25"/>
+                                    Margin="25">
+                        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}"
+                                  x:Name="dgvDraft1"/>
+                    </ContentControl>
+                    <!--Draft content2-->
+                    <ContentControl x:Name="Draft2Content"
+                                    Grid.Row="2"
+                                    Margin="25">
+                    </ContentControl>
+                    <!--User content-->
+                    <ContentControl x:Name="UserContent"
+                                    Grid.Row="2"
+                                    Margin="25">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!--1 column-->
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <!--2 rows-->
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!--User datagrid-->
+                            <DataGrid Grid.Row="1"
+                                      Grid.Column="1"
+                                      x:Name="dgvUser"
+                                      HorizontalAlignment="Center"
+                                      Margin="0,10,0,0"
+                                      VerticalAlignment="Top"
+                                      Width="800"
+                                      Height="380"
+                                      VerticalScrollBarVisibility="Visible"
+                                      CanUserAddRows="False"
+                                      ItemsSource="{Binding}"
+                                      AutoGenerateColumns="False">
+                                <!--Header styles-->
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                                        <Setter Property="FontWeight"
+                                                Value="Bold"/>
+                                        <Setter Property="HorizontalAlignment"
+                                                Value="Center"/>
+                                        <Setter Property="HorizontalContentAlignment"
+                                                Value="Center"/>
+                                        <Setter Property="FontSize"
+                                                Value="15"/>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                                <!--Cell styles-->
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Padding"
+                                                Value="20,5,20,5"/>
+                                        <Setter Property="FontSize"
+                                                Value="20"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                                    <Border Padding="{TemplateBinding Padding}"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            Background="{TemplateBinding Background}"
+                                                            SnapsToDevicePixels="True">
+                                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                                <DataGrid.Columns>
+                                    <!--Regular columns-->
+                                    <DataGridTextColumn Header="Username"
+                                                        Binding="{Binding Username}"
+                                                        IsReadOnly="True"/>
+                                    <DataGridCheckBoxColumn Header="Is Worker"
+                                                            Binding="{Binding Is_worker}"
+                                                            CanUserSort="False"
+                                                            IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="E-mail"
+                                                        Binding="{Binding Email}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <!--Button edit column-->
+                                    <DataGridTemplateColumn Header="Edit">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="BtnEdit"
+                                                        Width="100"
+                                                        Height="50"
+                                                        Content="Edit"
+                                                        Click="BtnEdit_Click"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Button remove column-->
+                                    <DataGridTemplateColumn Header="Remove">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="BtnRemove"
+                                                        Width="100"
+                                                        Height="50"
+                                                        Content="Remove"
+                                                        Click="BtnRemove_Click"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Grid.Row="2"
+                                    Grid.Column="1"
+                                    x:Name="ButtonAddUser"
+                                    Content="Add User"
+                                    Height="50"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,430,0,0"
+                                    VerticalAlignment="Top"
+                                    Width="200"
+                                    Click="ButtonAddUser_Click"/>
+                        </Grid>
+                    </ContentControl>
 
                     <!--control bar -->
                     <StackPanel x:Name="pnlControlBar"
@@ -128,32 +286,36 @@
                                 Style="{StaticResource controlButton}"
                                 Tag="{StaticResource color4}"
                                 Click="btnClose_Click">
-                            <fa:IconImage Icon="WindowClose" Style="{StaticResource controlButtonIcon}"/>
+                            <fa:IconImage Icon="WindowClose"
+                                          Style="{StaticResource controlButtonIcon}"/>
                         </Button>
 
                         <Button x:Name="btnMInimize"
                                 Style="{StaticResource controlButton}"
                                 Tag="{StaticResource color4}"
                                 Click="btnMinimize_Click">
-                            <fa:IconImage Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
+                            <fa:IconImage Icon="WindowMinimize"
+                                          Style="{StaticResource controlButtonIcon}"/>
                         </Button>
-                        
+
                         <Button x:Name="btnMaximize"
                                 Style="{StaticResource controlButton}"
                                 Tag="{StaticResource color10}"
                                 Click="btnMaximize_Click">
-                            <fa:IconImage Icon="WindowMaximize" Style="{StaticResource controlButtonIcon}" RenderTransformOrigin="0.5,0.561"/>
+                            <fa:IconImage Icon="WindowMaximize"
+                                          Style="{StaticResource controlButtonIcon}"
+                                          RenderTransformOrigin="0.5,0.561"/>
                         </Button>
 
                     </StackPanel>
-                    
+
                     <!--Header /Caption -->
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--Caption-->
                         <StackPanel Grid.Column="0"
                                     Orientation="Horizontal"
@@ -170,7 +332,7 @@
                                        FontWeight="Medium"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
-                        
+
                         <!--user options-->
                         <StackPanel Grid.Column="1"
                                     Orientation="Horizontal"
@@ -203,27 +365,30 @@
 
                             <Button Style="{StaticResource iconButton}"
                                     Tag="{StaticResource color6}">
-                                <fa:IconImage Icon="ClockO" Style="{StaticResource iconButtonIcon}"
+                                <fa:IconImage Icon="ClockO"
+                                              Style="{StaticResource iconButtonIcon}"
                                               Height="23"
                                               Width="23"/>
                             </Button>
                             <Button Style="{StaticResource iconButton}"
                                     Tag="{StaticResource color6}">
-                                <fa:IconImage Icon="Envelope" Style="{StaticResource iconButtonIcon}"
+                                <fa:IconImage Icon="Envelope"
+                                              Style="{StaticResource iconButtonIcon}"
                                               Height="23"
                                               Width="23"/>
                             </Button>
                             <Button Style="{StaticResource iconButton}"
                                     Tag="{StaticResource color6}">
-                                <fa:IconImage Icon="Bell" Style="{StaticResource iconButtonIcon}"
+                                <fa:IconImage Icon="Bell"
+                                              Style="{StaticResource iconButtonIcon}"
                                               Height="23"
                                               Width="23"/>
                             </Button>
 
                         </StackPanel>
-                        
+
                     </Grid>
-                    
+
                 </Grid>
 
             </Border>

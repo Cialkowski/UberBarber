@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
 
 namespace UberBarber.database
 {
@@ -56,10 +51,7 @@ namespace UberBarber.database
                     _reader = query.ExecuteReader();
                     message = "Done";
                 }
-                catch (MySqlException e)
-                {
-                    MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
                 finally { Close_connection(); }
                 return message;
             }
@@ -117,6 +109,65 @@ namespace UberBarber.database
             catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
             finally {Close_connection(); }
             return message;
+        }
+
+        public List<User.User> Get_users()
+            // This method gets all data from users table add returns it as a list.
+        {
+            List<User.User> users = new();
+            Open_connection();
+            try
+            {
+                MySqlCommand query = new("SELECT * FROM serwer165956_projektstudia.user;", _connection);
+                _reader = query.ExecuteReader();
+
+                //Add records to list
+                while (_reader.Read())
+                {
+                    users.Add(new User.User(_reader));
+                }
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { Close_connection(); }
+            return users;
+        }
+
+        public void Remove_user(string username)
+            // This method removes selected user.
+        {
+            Open_connection();
+            try
+            {
+                MySqlCommand query = new($"DELETE FROM serwer165956_projektstudia.user WHERE (username = '{username}');", _connection);
+                _reader = query.ExecuteReader();
+            }
+            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { Close_connection(); }
+        }
+
+        public string Edit_user(string password, string confirm_password, string email, int user_id)
+        {
+            // This method edits password and email of selected user.
+            string message = "Something went wrong :(";
+            if (User_validation("", password, confirm_password, email) != "valid")
+            {
+                message = User_validation("", password, confirm_password, email);
+                return message;
+            }
+            else
+            {
+                Open_connection();
+                MySqlCommand query = new($"UPDATE `serwer165956_projektstudia`.`user` SET `password` = md5('{password}'), `is_worker` = '1', `email` = '{email}' WHERE (`user_id` = '{user_id}');", _connection);
+                try
+                {
+                    _reader = query.ExecuteReader();
+                    message = "Done";
+                }
+                catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                finally { Close_connection(); }
+                return message;
+            }
+
         }
     }
 }
