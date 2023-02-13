@@ -33,6 +33,10 @@ namespace UberBarber
             Selected_user = user;
             text_username.Text = Selected_user.Username;
             text_username.IsEnabled = false;
+            if (Selected_user.Is_worker)
+            {
+                CheckBoxPremissions.IsChecked = true;
+            }
 
             text_email.Text = Selected_user.Email;
             Is_constructor_edit = true;
@@ -97,7 +101,7 @@ namespace UberBarber
             else
             {
                 // Edit constructor
-                message = query.Edit_user(password, confirm_password, email, Selected_user.User_id);
+                message = query.Edit_user(password, confirm_password, email, Selected_user.User_id, is_worker);
 
                 if (message != "Done")
                 {
