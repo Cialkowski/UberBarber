@@ -18,6 +18,7 @@ namespace UberBarber.User
 
         public MailSender()
         {
+            // set super email data
             this.msg_email = new MailMessage();
             this.login = new NetworkCredential("miecho.pierwszy966@gmail.com", "luomhgaxzwlsxjah");
             this.client = new SmtpClient("smtp.gmail.com");
@@ -28,12 +29,14 @@ namespace UberBarber.User
         }
         public enum Action
         {
+            // enum for email actions
             Edit,
             Add
         }
 
         private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
         {
+            // This method shows feedback for every scenario.
             if (e.Cancelled)
                 MessageBox.Show(string.Format("{0} send canceled.", e.UserState), "Message", MessageBoxButton.OK, MessageBoxImage.Error);
             if (e.Error != null)
@@ -43,23 +46,28 @@ namespace UberBarber.User
         }
         public void Send(Action action, string email, string first_name, string password, string role)
         {
+            // This method sends an email to user.
+
+            msg_email.Subject = "Your UberBarber data";
             try
             {
                 if (!(email.Equals("")))
                 {
                     msg_email.To.Add(new MailAddress(email));
                 }
-                msg_email.Subject = "Your UberBarber data";
                 if (action == Action.Add)
+                // email content for creating new user
                 {
                     msg_email.Body = "<h2>Hello dear " + first_name + " - our new " + role + "<h2/><p> You are receiving this message because Your data was added to our UserBarber database.<br />Do not show this message to anyone.<p/>" +
                      "<p><b>Username: " + first_name + "<br />Password: " + password + "</b><p/> <p>Yours sincerely, <br /> Admin of UberBarber 2023<p/>";
                 }
                 else if (action == Action.Edit)
+                // email content for edited user
                 {
                     msg_email.Body = "<h2>Hello dear " + first_name + "<h2/><p> You are receiving this message because Your data was edited in our UberBarber database.<br />Do not show this message to anyone.<p/>" +
                   "<p><b>Username: " + first_name + "<br />Password: " + password + "</b><p/> <p>Yours sincerely, <br /> Admin of UberBarber 2023<p/>";
                 }
+
                 msg_email.BodyEncoding = Encoding.UTF8;
                 msg_email.IsBodyHtml = true;
                 msg_email.Priority = MailPriority.Normal;

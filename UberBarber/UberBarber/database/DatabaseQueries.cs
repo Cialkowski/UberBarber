@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 using UberBarber.User;
 using static UberBarber.User.CurrentUser;
+using System;
 
 namespace UberBarber.database
 {
@@ -43,7 +44,7 @@ namespace UberBarber.database
             finally { Close_connection(); }
         }
 
-        public string Add_user(string username, string password, string confirm_password, string email)
+        public string Add_user(string username, string password, string confirm_password, string email, bool is_worker)
         // This method use validation function, after passing it - adds User to database.
         {
             string message = "Something went wrong :(";
@@ -56,7 +57,7 @@ namespace UberBarber.database
             {
                 // add user to database
                 Open_connection();
-                MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`, `is_worker`) VALUES ('{username}', md5('{password}'), '{email}', 1);", _connection);
+                MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`, `is_worker`) VALUES ('{username}', md5('{password}'), '{email}', '{Convert.ToInt32(is_worker)}');", _connection);
                 try
                 {
                     _reader = query.ExecuteReader();

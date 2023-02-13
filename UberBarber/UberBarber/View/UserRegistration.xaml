@@ -236,7 +236,9 @@
                               FontFamily="Montserrat"
                               FontWeight="Medium"
                               FontSize="14"
-                              Cursor="Hand" IsEnabled="False"/>
+                              Cursor="Hand"
+                              IsEnabled="False"
+                              Visibility="Collapsed"/>
                     <Button x:Name="Confirm"                          
                             BorderThickness="0"
                             Content="Confirm"
