@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UberBarber.View"
         mc:Ignorable="d"
-        Title="AddAppointment" Height="450" Width="800"
+        Title="AddAppointment" Height="600" Width="820"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -207,7 +207,7 @@
 
         <Border CornerRadius="10"
             BorderThickness="5"
-                Opacity="0.96" Margin="0,0,-20,-110" HorizontalAlignment="Right" Width="820">
+                Opacity="0.96" Margin="0,0,0,0" HorizontalAlignment="Right" Width="820">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#a0a0a0" Offset="0"/>
@@ -423,7 +423,7 @@
                 </StackPanel>
                 <StackPanel Grid.Row="1"
                             Orientation="Vertical"
-                            Margin="30,344,329,23" >
+                            Margin="30,390,329,23" >
                     <Button x:Name="ButtonAddAppointment"                          
                             BorderThickness="0"
                             Content="Add Appointment"
