@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Google.Protobuf;
 
 namespace UberBarber.View
 {
@@ -19,6 +20,8 @@ namespace UberBarber.View
     /// </summary>
     public partial class AddAppointment : Window
     {
+        public DateTime Selected_date { get; set; }
+
         public AddAppointment()
         {
             InitializeComponent();
@@ -26,6 +29,8 @@ namespace UberBarber.View
 
         private void CalendarVisitDate_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (CalendarVisitDate.SelectedDate != null) Selected_date = CalendarVisitDate.SelectedDate.Value;
+            MessageBox.Show(Selected_date.ToString());
 
         }
 

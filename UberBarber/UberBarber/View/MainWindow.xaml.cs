@@ -131,16 +131,17 @@ namespace UberBarber
             dgvAppointments.ItemsSource = query.Get_Appointments_for_current_user();
         }
 
-        private void ButtonAddAppointments_Click(object sender, RoutedEventArgs e)
-        {
-            new AddAppointment().Show();
-        }
 
         private void buttonAppointments_Click(object sender, RoutedEventArgs e)
         {
             AppointmentsContent.Visibility = Visibility.Visible;
             UserContent.Visibility = Visibility.Collapsed;
             Refresh_Dgv_Appointments();
+        }
+
+        private void ButtonAdd_Appointment_Click(object sender, RoutedEventArgs e)
+        {
+            new AddAppointment().Show();
         }
     }
 }
