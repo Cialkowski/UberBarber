@@ -6,6 +6,7 @@ using System.Windows.Interop;
 using UberBarber.database;
 using static UberBarber.User.CurrentUser;
 using UberBarber.User;
+using UberBarber.View;
 
 namespace UberBarber
 {
@@ -135,6 +136,11 @@ namespace UberBarber
         {
             DatabaseQueries query = new();
             dgvAppointments.ItemsSource = query.Get_Appointments_for_current_user();
+        }
+
+        private void ButtonAddAppointments_Click(object sender, RoutedEventArgs e)
+        {
+            new AddAppointment().Show();
         }
     }
 }

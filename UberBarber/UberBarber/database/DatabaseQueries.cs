@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
@@ -261,7 +262,7 @@ namespace UberBarber.database
 
         public int Get_current_user_id(string user_name)
         {
-            /// <summary> This function opens connection to server and gets user_id from given username </summary>>
+            //This function opens connection to server and gets user_id from given username
             Open_connection();
             MySqlCommand query =
                 new($"SELECT user_id from serwer165956_projektstudia.user where username = '{user_name}';",
@@ -291,6 +292,31 @@ namespace UberBarber.database
 
         public void Remove_appointment()
         {
+            //TODO
+        }
+
+        public void Add_appointments(string barber, string service, DateTime date)
+        {
+            //This method creates a new record of appointment for current user in database.
+
+            // add appointment to database
+            Open_connection();
+            MySqlCommand query =
+                new(
+                    $"INSERT INTO `serwer165956_projektstudia`.`appointments` (`customer_id`, `barber_id`, `service_id`, `start_time`) VALUES ('{CurrentUser.Get_user_id()}', '{barber}', '{service}', '{date}');",
+                    _connection);
+            try
+            {
+                _reader = query.ExecuteReader();
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                Close_connection();
+            }
 
         }
     }
