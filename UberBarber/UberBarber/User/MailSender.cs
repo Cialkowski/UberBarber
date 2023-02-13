@@ -81,5 +81,23 @@ namespace UberBarber.User
                 MessageBox.Show("E-mail can not be send - no e-mail address has been entered", "Message", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+        public static bool IsValidEmail(string email)
+          // This method checks email validation.
+        {
+            List<string> top_domain = new() { ".com", ".org", ".net", ".int", ".edu", ".gov" };
+            try
+            {
+                if (!(top_domain.Contains(email.Substring((email.Length - 4), 4))))
+                {
+                    return false;
+                }
+                var eMailValidator = new System.Net.Mail.MailAddress(email);
+                return email.LastIndexOf(".") > email.LastIndexOf("@");
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
