@@ -207,7 +207,7 @@
 
         <Border CornerRadius="10"
             BorderThickness="5"
-                Opacity="0.96" Margin="0,0,0,-59">
+                Opacity="0.96" Margin="0,0,-20,-110" HorizontalAlignment="Right" Width="820">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#a0a0a0" Offset="0"/>
@@ -416,7 +416,7 @@
 
                     <Viewbox>
                         <Calendar Style="{DynamicResource CalendarStyle1}">
-                            
+
                         </Calendar>
                     </Viewbox>
 
@@ -424,7 +424,7 @@
                 <StackPanel Grid.Row="1"
                             Orientation="Vertical"
                             Margin="30,344,329,23" >
-                    <Button x:Name="AddAppointment"                          
+                    <Button x:Name="ButtonAddAppointment"                          
                             BorderThickness="0"
                             Content="Add Appointment"
                             Foreground="White"
@@ -432,7 +432,7 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"
                             Click="BtnAddApointment_Click"
-                            IsEnabled="False" Height="114">
+                            IsEnabled="False" Height="178">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="#808080"/>
@@ -466,7 +466,7 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="0,15,0,0"/>
-                    <ComboBox Style="{StaticResource Combo}"
+                    <ComboBox x:Name="ComboBoxBarber" Style="{StaticResource Combo}"
                               Tag="{StaticResource color5}"
                              >
                     </ComboBox>
@@ -476,12 +476,11 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="0,15,0,0"/>
-                    <ComboBox Style="{StaticResource Combo}"
+                    <ComboBox x:Name="ComboBox_Services" Style="{StaticResource Combo}"
                               Tag="{StaticResource color5}"
                              >
                     </ComboBox>
                 </StackPanel>
-                <Button x:Name="SumbitButton" Content="submit" HorizontalAlignment="Left" Margin="395,347,0,0" Grid.Row="1" VerticalAlignment="Top" Click="SumbitButton_Click"/>
             </Grid>
         </Border>
     </Border>
