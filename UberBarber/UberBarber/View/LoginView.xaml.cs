@@ -38,7 +38,7 @@ namespace UberBarber.View
         {
             // TODO: correct doctring
             //open new window if given credentials are correct
-            DatabaseQueries query = new DatabaseQueries();
+            DatabaseQueries query = new();
 
             try
             {

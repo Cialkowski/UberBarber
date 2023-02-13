@@ -63,6 +63,7 @@
                     <!-- Menu Buttons-->
 
                     <Button x:Name="buttonUser"
+                            IsEnabled="false"
                             Click="buttonUser_Click"
                             Style="{StaticResource menuButtonn}"
                             Tag="{StaticResource color5}">
@@ -335,6 +336,7 @@
                             </Button>
 
                             <TextBlock Text="UserName TODO"
+                                       x:Name="UsernameTextblock"
                                        Foreground="{StaticResource titleColor3}"
                                        FontFamily="Montserrat"
                                        FontSize="16"

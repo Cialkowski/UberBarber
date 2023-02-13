@@ -2,26 +2,37 @@
 using System.Windows;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
+using UberBarber.User;
+using static UberBarber.User.CurrentUser;
 
 namespace UberBarber.database
 {
     class DatabaseQueries : DbConnection
     {
-        
-
         public bool Logging(string user_name, string user_password)
         {
             /// <summary> This function opens connection to server and databse and executes logging query. </summary>>
             Open_connection();
-            MySqlCommand query = new($"SELECT username, password FROM serwer165956_projektstudia.user WHERE username = '{user_name}' AND password = md5('{user_password}');", _connection);
+            MySqlCommand query = new($"call serwer165956_projektstudia.login_pswd_is_worker('{user_name}', '{user_password}');", _connection);
+            string message = "failed";
+            bool is_worker = false;
             try
             {
                 _reader = query.ExecuteReader();
 
-                if (!_reader.Read())
+                while (_reader.Read())
+                {
+                    message = (string)_reader[0];
+                }
+                if (message == "failed")
                 {
                     return false;
                 }
+                else if (message == "1")
+                {
+                    is_worker= true;
+                }
+                CurrentUser.Set_username_permissions(user_name, is_worker);
                 return true;
             }
             catch (MySqlException e) 
