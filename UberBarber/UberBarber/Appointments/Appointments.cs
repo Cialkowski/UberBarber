@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using MySql.Data.Types;
 
 namespace UberBarber.Appointments
 {
@@ -11,8 +12,8 @@ namespace UberBarber.Appointments
     {
         public Appointments(MySqlDataReader reader)
         {
-            Barber_name = (string)reader["barber_id"];
-            Service_name = (string)reader["service_id"];
+            Barber_name = (string)reader["barber"];
+            Service_name = (string)reader["usluga"];
             Visit_date = (DateTime)reader["date"];
             User_id = (int)reader["user_id"];
         }

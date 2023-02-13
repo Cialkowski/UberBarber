@@ -234,14 +234,14 @@ namespace UberBarber.database
 
         public List<Appointments.Appointments> Get_Appointments_for_current_user()
         {
-            int customer_id = CurrentUser.Get_user_id();
             List<Appointments.Appointments> appointments = new();
             Open_connection();
             try
             {
-                MySqlCommand query = new($"CALL serwer165956_projektstudia.show_appointments_for_user({customer_id});");
+                MySqlCommand query = new($"CALL serwer165956_projektstudia.show_appointments_for_user({CurrentUser.Get_user_id()});", _connection);
                 _reader = query.ExecuteReader();
 
+                //Add records to list
                 while (_reader.Read())
                 {
                     appointments.Add(new Appointments.Appointments(_reader));
@@ -287,6 +287,11 @@ namespace UberBarber.database
             {
                 Close_connection();
             }
+        }
+
+        public void Remove_appointment()
+        {
+
         }
     }
 }

@@ -45,7 +45,7 @@
                                       Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-                
+
                 <StackPanel>
                     <!--logo-->
                     <StackPanel Orientation="Horizontal"
@@ -71,8 +71,8 @@
                         </StackPanel>
                     </RadioButton>
 
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color2}">
+                    <RadioButton x:Name="RadioButton_Calendar" Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource color2}" Checked="RadioButton_Calendar_Checked">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Calendar"
                                           Style="{StaticResource menuButtonIcon}"/>
@@ -144,7 +144,7 @@
                         <!--Content section-->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    
+
                     <!--Content section-->
                     <!--Draft content1-->
                     <ContentControl
@@ -175,10 +175,9 @@
                             </Grid.RowDefinitions>
                             <!--User datagrid-->
                             <DataGrid Grid.Row="1"
-                                      Grid.Column="1"
                                       x:Name="dgvUser"
-                                      HorizontalAlignment="Center"
-                                      Margin="0,10,0,0"
+                                      HorizontalAlignment="Left"
+                                      Margin="722,126,0,0"
                                       VerticalAlignment="Top"
                                       Width="800"
                                       Height="380"
@@ -389,6 +388,89 @@
                         </StackPanel>
 
                     </Grid>
+                    <DataGrid
+                        x:Name="dgvAppointments"
+                        HorizontalAlignment="Left"
+                        Margin="168,204,0,0"
+                        Width="628"
+                        VerticalScrollBarVisibility="Visible"
+                        CanUserAddRows="False"
+                        ItemsSource="{Binding}"
+                        AutoGenerateColumns="False" Grid.Row="2" Height="336" VerticalAlignment="Top">
+                        <!--Header styles-->
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="FontWeight"
+                                    Value="Bold"/>
+                                <Setter Property="HorizontalAlignment"
+                                    Value="Center"/>
+                                <Setter Property="HorizontalContentAlignment"
+                                    Value="Center"/>
+                                <Setter Property="FontSize"
+                                    Value="15"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                        <!--Cell styles-->
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Setter Property="Padding"
+                                    Value="20,5,20,5"/>
+                                <Setter Property="FontSize"
+                                    Value="20"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                            <Border Padding="{TemplateBinding Padding}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Background="{TemplateBinding Background}"
+                                                SnapsToDevicePixels="True">
+                                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <DataGrid.Columns>
+                            <!--Regular columns-->
+                            <DataGridTextColumn Header="Barber"
+                                Binding="{Binding Barber_name}"
+                                IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Service"
+                                Binding="{Binding Service_name}"
+                                CanUserSort="False"
+                                IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Visit_date"
+                                Binding="{Binding Visit_date}"
+                                CanUserSort="False"
+                                IsReadOnly="True"/>
+                            <!--Button edit column-->
+                            <DataGridTemplateColumn Header="Edit">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="BtnAppointmentEdit"
+                                            Width="100"
+                                            Height="50"
+                                            Content="Edit"
+                                            Click="BtnAppointmentEdit_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!--Button remove column-->
+                            <DataGridTemplateColumn Header="Remove">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="BtnAppointmentRemove"
+                                            Width="100"
+                                            Height="50"
+                                            Content="Remove"
+                                            Click="BtnAppointmentRemove_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
                 </Grid>
 

@@ -102,5 +102,40 @@ namespace UberBarber
             // This method shows UserRegistration window.
             new UserRegistration().Show();
         }
+
+        private void RadioButton_Calendar_Checked(object sender, RoutedEventArgs e)
+        {
+            // This method shows DataGrid with appointments for current user.
+            UserContent.Visibility = Visibility.Visible;
+            Refresh_Dgv_Appointments();
+
+        }
+
+        private void BtnAppointmentRemove_Click(object sender, RoutedEventArgs e)
+        {
+            // This method removes selected appointment after confirmation.
+            Appointments.Appointments appointment = (Appointments.Appointments)dgvAppointments.SelectedItem;
+            if (MessageBox.Show("Are you sure that you want delete this appointment?",
+                    "Delete Appointment",
+                    MessageBoxButton.OKCancel,
+                    MessageBoxImage.Question) == MessageBoxResult.OK)
+            {
+                DatabaseQueries query = new();
+                query.Remove_appointment();
+            }
+            Refresh_Dgv_Appointments();
+        }
+
+        private void BtnAppointmentEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void Refresh_Dgv_Appointments()
+        {
+            DatabaseQueries query = new();
+            dgvAppointments.ItemsSource = query.Get_Appointments_for_current_user();
+        }
     }
 }
+    

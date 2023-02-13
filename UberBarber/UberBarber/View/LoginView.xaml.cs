@@ -43,14 +43,6 @@ namespace UberBarber.View
             try
             {
                 query.Get_current_user_id(txtUser.Text);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
-            try
-            {
                 if (!query.Logging(txtUser.Text, txtPassword.Password))
                 {
                     label_info.Content = "Wrong credentials!";
