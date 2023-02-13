@@ -76,6 +76,18 @@
                         </StackPanel>
                     </Button>
 
+                    <Button x:Name="buttonAppointments"
+                            IsEnabled="false"
+                            Click="buttonAppointments_Click"
+                            Style="{StaticResource menuButtonn}"
+                            Tag="{StaticResource color5}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="User"
+                                          Style="{StaticResource menuButtonIconn}"/>
+                            <TextBlock Text="Appointments"
+                                       Style="{StaticResource menuButtonTextt}"/>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
 
             </Border>
@@ -114,7 +126,7 @@
                                   x:Name="dgvDraft1"/>
                     </ContentControl>
                     <!--Draft content2-->
-                    <ContentControl x:Name="Draft2Content"
+                    <ContentControl x:Name="AppointmentsContent"
                                     Grid.Row="2"
                                     Margin="25">
                     </ContentControl>

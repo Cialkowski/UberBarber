@@ -6,11 +6,8 @@ using System.Text.RegularExpressions;
 using Google.Protobuf.WellKnownTypes;
 using UberBarber.User;
 using static UberBarber.User.CurrentUser;
-<<<<<<< HEAD
 using UberBarber.Appointments;
-=======
 using System;
->>>>>>> 97191f97258d07ce741dda8573501e5de859c862
 
 namespace UberBarber.database
 {
@@ -57,48 +54,36 @@ namespace UberBarber.database
             }
         }
 
-<<<<<<< HEAD
-        public string Add_user(string username, string password, string confirm_password, string email)
+            public string Add_user(string username, string password, string confirm_password, string email, bool is_worker)
             // This method use validation function, after passing it - adds User to database.
-=======
-        public string Add_user(string username, string password, string confirm_password, string email, bool is_worker)
-        // This method use validation function, after passing it - adds User to database.
->>>>>>> 97191f97258d07ce741dda8573501e5de859c862
-        {
-            string message = "Something went wrong :(";
-            if (User_validation(username, password, confirm_password, email) != "valid")
             {
-                message = User_validation(username, password, confirm_password, email);
-                return message;
-            }
-            else
-            {
-                // add user to database
-                Open_connection();
-<<<<<<< HEAD
-                MySqlCommand query =
-                    new(
-                        $"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`) VALUES ('{username}', md5('{password}'), '{email}');",
-                        _connection);
-=======
-                MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`, `is_worker`) VALUES ('{username}', md5('{password}'), '{email}', '{Convert.ToInt32(is_worker)}');", _connection);
->>>>>>> 97191f97258d07ce741dda8573501e5de859c862
-                try
+                string message = "Something went wrong :(";
+                if (User_validation(username, password, confirm_password, email) != "valid")
                 {
-                    _reader = query.ExecuteReader();
-                    message = "Done";
+                    message = User_validation(username, password, confirm_password, email);
+                    return message;
                 }
-                catch (MySqlException e)
+                else
                 {
-                    MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                finally
-                {
-                    Close_connection();
-                }
+                    // add user to database
+                    Open_connection();
+                    MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`, `is_worker`) VALUES ('{username}', md5('{password}'), '{email}', '{Convert.ToInt32(is_worker)}');", _connection);
+                    try
+                    {
+                        _reader = query.ExecuteReader();
+                        message = "Done";
+                    }
+                    catch (MySqlException e)
+                    {
+                        MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    finally
+                    {
+                        Close_connection();
+                    }
 
-                return message;
-            }
+                    return message;
+                }
         }
 
         public string User_validation(string username, string password, string confirm_password, string email)
@@ -197,12 +182,8 @@ namespace UberBarber.database
             Open_connection();
             try
             {
-<<<<<<< HEAD
-                MySqlCommand query =
-                    new($"DELETE FROM serwer165956_projektstudia.user WHERE (username = '{username}');", _connection);
-=======
+
                 MySqlCommand query = new($"call serwer165956_projektstudia.remove_user('{username}');", _connection);
->>>>>>> 97191f97258d07ce741dda8573501e5de859c862
                 _reader = query.ExecuteReader();
             }
             catch (MySqlException e)
