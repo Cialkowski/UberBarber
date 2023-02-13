@@ -160,9 +160,9 @@ namespace UberBarber.database
         {
             // This method edits password and email of selected user.
             string message = "Something went wrong :(";
-            if (User_validation("", password, confirm_password, email) != "valid")
+            if (User_validation("edituser", password, confirm_password, email) != "valid")
             {
-                message = User_validation("", password, confirm_password, email);
+                message = User_validation("edituser", password, confirm_password, email);
                 return message;
             }
             else
