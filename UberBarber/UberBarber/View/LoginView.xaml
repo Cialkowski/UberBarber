@@ -165,7 +165,8 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,3,0,0"
-                             Padding="20,0,0,0">
+                             Padding="20,0,0,0"
+                             TextChanged="OnUsernameOrPasswordChanged">
                         <TextBox.Background>
                             <ImageBrush ImageSource="/Images/user-icon.png"
                                         Stretch="None"
@@ -193,7 +194,8 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,3,0,0"
-                             Padding="20,0,0,0">
+                             Padding="20,0,0,0"
+                             PasswordChanged="OnUsernameOrPasswordChanged">
                         <PasswordBox.Background>
                             <ImageBrush ImageSource="/Images/key-icon.png"
                                         Stretch="None"
@@ -214,7 +216,8 @@
                             Cursor="Hand"
                             Grid.Column="2"
                             Margin="15"
-                            Click="BtnLogin_Click">
+                            Click="BtnLogin_Click"
+                            IsEnabled="False">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#808080"/>
@@ -245,13 +248,12 @@
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"/>
-
                         <Button Content="Sign Up" 
                                 Click="BtnSignup_Click"
                                 Foreground="#708090"
-                                Margin="10,-2,0,0">
+                                >
                             <Button.Style>
-                                <Style TargetType="Button">
+                                <Style TargetType="{x:Type Button}">
                                     <Setter Property="Background" Value="Transparent"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
@@ -261,7 +263,7 @@
                                 </Style>
                             </Button.Style>
                             <Button.Template>
-                                <ControlTemplate TargetType="Button">
+                                <ControlTemplate TargetType="{x:Type Button}">
                                     <Border 
                                         Background="{TemplateBinding Background}">
                                         <ContentPresenter VerticalAlignment="Center"

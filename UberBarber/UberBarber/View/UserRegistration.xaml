@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UberBarber"
         mc:Ignorable="d"
-        Title="User" Height="420" Width="611"
+        Title="User" Height="440" Width="611"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -164,7 +164,8 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
-                             Padding="20,0,0,0">
+                             Padding="20,0,0,0"
+                             PasswordChanged="OnPasswordBoxAndConfirmPasswordBoxChanged">
                         <PasswordBox.Background>
                             <ImageBrush ImageSource="/Images/key-icon.png"
                                         Stretch="None"
@@ -188,7 +189,8 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
-                             Padding="20,0,0,0">
+                             Padding="20,0,0,0"
+                             PasswordChanged="OnPasswordBoxAndConfirmPasswordBoxChanged">
                         <PasswordBox.Background>
                             <ImageBrush ImageSource="/Images/key-icon.png"
                                         Stretch="None"
@@ -219,8 +221,24 @@
                                         AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
-                    <!-- Label with error info-->
-                    <Label x:Name="LabelInfoUserReg" FontFamily="Montserrat" Foreground="Red" FontSize="12" HorizontalAlignment="Center"/>
+                    <!-- TextBlock with error info-->
+                    <TextBlock x:Name="TextBlockInfoUserReg" 
+                               FontFamily="Montserrat" 
+                               Margin="0,5,0,-5" 
+                               Foreground="Red" 
+                               FontSize="12" 
+                               HorizontalAlignment="Center" 
+                               TextWrapping="Wrap">
+                    </TextBlock>
+                    <CheckBox x:Name="CheckBoxPremissions"
+                              Content="Additional permissions"
+                              Foreground="DarkGray"
+                              FontFamily="Montserrat"
+                              FontWeight="Medium"
+                              FontSize="14"
+                              Cursor="Hand"
+                              IsEnabled="False"
+                              Visibility="Collapsed"/>
                     <Button x:Name="Confirm"                          
                             BorderThickness="0"
                             Content="Confirm"
@@ -230,7 +248,8 @@
                             Cursor="Hand"
                             Grid.Column="2"
                             Margin="15"
-                            Click="Button_confirm_Click">
+                            Click="Button_confirm_Click"
+                            IsEnabled="False">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#808080"/>

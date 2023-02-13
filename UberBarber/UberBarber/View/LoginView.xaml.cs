@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using UberBarber.database;
-using static UberBarber.database.DatabaseQueries;
 
 namespace UberBarber.View
 {
@@ -49,7 +38,7 @@ namespace UberBarber.View
         {
             // TODO: correct doctring
             //open new window if given credentials are correct
-            DatabaseQueries query = new DatabaseQueries();
+            DatabaseQueries query = new();
 
             try
             {
@@ -68,7 +57,22 @@ namespace UberBarber.View
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void OnUsernameOrPasswordChanged(object sender,RoutedEventArgs e)
+        {
+            enableOrDisableLoginButton();
+        }
+        private void enableOrDisableLoginButton()
+        {
+            // This method enable or disable login button.
+            // if txtPassword is empty and txtUser is empy then the login button is disabled, otherwise the login button is enabled
 
+            if (string.IsNullOrWhiteSpace(txtPassword.Password) || string.IsNullOrWhiteSpace(txtUser.Text))
+            {
+                btnLogin.IsEnabled = false;
+            }
+            else
+                btnLogin.IsEnabled = true;
+        }
         private void BtnSignup_Click(object sender, RoutedEventArgs e)
         {
             // TODO: correct doctring
@@ -76,4 +80,4 @@ namespace UberBarber.View
             new UserRegistration().Show();
         }
     }
-}
+} 
