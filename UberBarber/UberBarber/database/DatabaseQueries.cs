@@ -76,7 +76,6 @@ namespace UberBarber.database
             string message = "Something went wrong :(";
             string usernamePattern = "^[a-zA-Z0-9.]{6,}$";
             string passwordPattern = "^[\\w\\d]{6,}$";
-            string emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
             // password validation
             if (password != confirm_password)
@@ -97,7 +96,7 @@ namespace UberBarber.database
                 return message;
             }
             // email validation
-            else if (!Regex.IsMatch(email, emailPattern))
+            else if (!MailSender.IsValidEmail(email))
             {
                 message = "Email address is invalid";
                 return message;
@@ -161,6 +160,7 @@ namespace UberBarber.database
         {
             // This method edits password and email of selected user.
             string message = "Something went wrong :(";
+
             if (User_validation("edituser", password, confirm_password, email) != "valid")
             {
                 message = User_validation("edituser", password, confirm_password, email);
