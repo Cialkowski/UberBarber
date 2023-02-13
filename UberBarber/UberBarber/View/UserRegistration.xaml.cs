@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using UberBarber.database;
+using UberBarber.User;
 
 namespace UberBarber
 {
@@ -45,6 +47,7 @@ namespace UberBarber
             string email = text_email.Text;
             string message;
 
+            MailSender mailSender = new MailSender();
             DatabaseQueries query = new();
             // Check if edit conctructor was used
             if (!Is_constructor_edit)
@@ -60,7 +63,7 @@ namespace UberBarber
                 else
                 {
                     MessageBox.Show($"User: {username}\nHas been added", message, MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    mailSender.Send(MailSender.Action.Add, email, username, password, "customer");
                     Close();
                 }
             }
@@ -76,7 +79,7 @@ namespace UberBarber
                 else
                 {
                     MessageBox.Show($"User: {username}\nHas been edited", "Done", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    mailSender.Send(MailSender.Action.Edit, email, username, password, "customer");
                     Close();
                 }
             }
