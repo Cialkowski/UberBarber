@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using UberBarber.database;
+using UberBarber.User;
 
 namespace UberBarber
 {
@@ -10,13 +12,22 @@ namespace UberBarber
     /// </summary>
     public partial class UserRegistration : Window
     {
+        bool user_permissions = CurrentUser.Get_is_worker();
         public bool Is_constructor_edit = false;
         public User.User Selected_user { get; set; }
         public UserRegistration()
+            // default constructor
         {
             InitializeComponent();
+            if (user_permissions)
+                // if user has external permissions Checkbox is visible
+            {
+                CheckBoxPremissions.Visibility = Visibility.Visible;
+                CheckBoxPremissions.IsEnabled= true;
+            }
         }
         public UserRegistration(User.User user)
+            // constructor for user editing
         {
             InitializeComponent();
             Selected_user = user;
@@ -25,6 +36,13 @@ namespace UberBarber
 
             text_email.Text = Selected_user.Email;
             Is_constructor_edit = true;
+
+            if (user_permissions)
+            // if user has external permissions Checkbox is visible
+            {
+                CheckBoxPremissions.Visibility = Visibility.Visible;
+                CheckBoxPremissions.IsEnabled = true;
+            }
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -37,20 +55,32 @@ namespace UberBarber
         {
             // This method collect content from user registration forms and edit or creates new User after correct validation.
             // Shows a text block with error information
-            // Closes user registration window after succesful operation.
+            // Sends email and closes user registration window after succesful operation.
 
             string username = text_username.Text;
             string password = pswd_box.Password;
             string confirm_password = pswd_box_confirm.Password;
             string email = text_email.Text;
+            bool is_worker = false;
+            string permission = "customer";
             string message;
 
+            if (CheckBoxPremissions.IsChecked == true)
+            {
+                is_worker = true;
+            }
+            if (is_worker== true)
+            {
+                permission = "barber";
+            }
+
+            MailSender mailSender = new MailSender();
             DatabaseQueries query = new();
             // Check if edit conctructor was used
             if (!Is_constructor_edit)
             {
                 // Default constructor
-                message = query.Add_user(username, password, confirm_password, email);
+                message = query.Add_user(username, password, confirm_password, email, is_worker);
 
                 if (message != "Done")
                 // Show label if there is an error
@@ -60,7 +90,7 @@ namespace UberBarber
                 else
                 {
                     MessageBox.Show($"User: {username}\nHas been added", message, MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    mailSender.Send(MailSender.Action.Add, email, username, password, permission);
                     Close();
                 }
             }
@@ -76,7 +106,7 @@ namespace UberBarber
                 else
                 {
                     MessageBox.Show($"User: {username}\nHas been edited", "Done", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    mailSender.Send(MailSender.Action.Edit, email, username, password, permission);
                     Close();
                 }
             }
