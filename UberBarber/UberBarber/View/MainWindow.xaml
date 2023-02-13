@@ -138,7 +138,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <!--User datagrid-->
+                            <!--Appointments datagrid-->
                             <DataGrid Grid.Row="1"
                                       Grid.Column="1"
                                       x:Name="dgvAppointments"
@@ -148,13 +148,13 @@
                                       Style="{DynamicResource DataGridStyle1}">
                                 <DataGrid.Columns>
                                     <!--Regular columns-->
-                                    <DataGridTextColumn Header="Header1"
+                                    <DataGridTextColumn Header="Barber"
                                                         Width="auto"
-                                                        Binding="{Binding Username}"
+                                                        Binding="{Binding Barber_name}"
                                                         IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="E-mail"
+                                    <DataGridTextColumn Header="Service"
                                                         Width="auto"
-                                                        Binding="{Binding Email}"
+                                                        Binding="{Binding Service_name}"
                                                         CanUserSort="False"
                                                         IsReadOnly="True"/>
                                     <!--Buttons Operations column-->

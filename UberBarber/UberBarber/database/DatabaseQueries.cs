@@ -244,6 +244,7 @@ namespace UberBarber.database
                 {
                     appointments.Add(new Appointments.Appointments(_reader));
                 }
+
             }
             catch (MySqlException e)
             {

@@ -128,7 +128,7 @@ namespace UberBarber
         public void Refresh_Dgv_Appointments()
         {
             DatabaseQueries query = new();
-            //dgvAppointments.ItemsSource = query.Get_Appointments_for_current_user();
+            dgvAppointments.ItemsSource = query.Get_Appointments_for_current_user();
         }
 
         private void ButtonAddAppointments_Click(object sender, RoutedEventArgs e)
