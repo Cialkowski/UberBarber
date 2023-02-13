@@ -77,7 +77,6 @@
                     </Button>
 
                     <Button x:Name="buttonAppointments"
-                            IsEnabled="false"
                             Click="buttonAppointments_Click"
                             Style="{StaticResource menuButtonn}"
                             Tag="{StaticResource color5}">
@@ -125,10 +124,92 @@
                         <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}"
                                   x:Name="dgvDraft1"/>
                     </ContentControl>
-                    <!--Draft content2-->
+                    <!--Appointments content-->
                     <ContentControl x:Name="AppointmentsContent"
                                     Grid.Row="2"
                                     Margin="25">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!--1 column-->
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <!--2 rows-->
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!--User datagrid-->
+                            <DataGrid Grid.Row="1"
+                                      Grid.Column="1"
+                                      x:Name="dgvAppointments"
+                                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                                      CellStyle="{DynamicResource DataGridCellStyle1}"
+                                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                                      Style="{DynamicResource DataGridStyle1}">
+                                <DataGrid.Columns>
+                                    <!--Regular columns-->
+                                    <DataGridTextColumn Header="Header1"
+                                                        Width="auto"
+                                                        Binding="{Binding Username}"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="E-mail"
+                                                        Width="auto"
+                                                        Binding="{Binding Email}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <!--Buttons Operations column-->
+                                    <DataGridTemplateColumn Header="Operations" Width="auto" >
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Style="{StaticResource gridEditButton}">
+                                                        <Icon:PackIconMaterial Kind="PencilOutline" 
+                                                                               Style="{StaticResource gridButtonIcon}"/>
+                                                    </Button>
+                                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" >
+                                                        <Icon:PackIconMaterial Kind="DeleteOutline" 
+                                                                               Style="{StaticResource gridButtonIcon}"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Grid.Row="1"
+                                    x:Name="example"
+                                    Content="example"
+                                    Height="50"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Width="200"
+                                    Margin="376,530,0,0"
+                                    Foreground="#708090"
+                                    FontSize="20"
+                                    FontWeight="Bold">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#36454F"/>
+                                                <Setter Property="Foreground" Value="#8A9A5B"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border 
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
                     </ContentControl>
                     <!--User content-->
                     <ContentControl x:Name="UserContent"

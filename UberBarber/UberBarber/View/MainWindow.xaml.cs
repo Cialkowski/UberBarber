@@ -21,7 +21,7 @@ namespace UberBarber
             InitializeComponent();
             // Set contents to non visible.
             Draft1Content.Visibility = Visibility.Collapsed;
-            Draft2Content.Visibility = Visibility.Collapsed;
+            AppointmentsContent.Visibility = Visibility.Collapsed;
             UserContent.Visibility = Visibility.Collapsed;
             UsernameTextblock.Text = CurrentUser.Get_username();
             if (user_permissions)
@@ -66,6 +66,7 @@ namespace UberBarber
         {
             // This method shows DataGrid with user records.
             UserContent.Visibility = Visibility.Visible;
+            AppointmentsContent.Visibility = Visibility.Collapsed;
             Refresh_Dgv_User();
         }
 
@@ -104,18 +105,10 @@ namespace UberBarber
             new UserRegistration().Show();
         }
 
-        private void RadioButton_Calendar_Checked(object sender, RoutedEventArgs e)
-        {
-            // This method shows DataGrid with appointments for current user.
-            UserContent.Visibility = Visibility.Visible;
-            Refresh_Dgv_Appointments();
-
-        }
-
         private void BtnAppointmentRemove_Click(object sender, RoutedEventArgs e)
         {
             // This method removes selected appointment after confirmation.
-            Appointments.Appointments appointment = (Appointments.Appointments)dgvAppointments.SelectedItem;
+           // Appointments.Appointments appointment = (Appointments.Appointments)dgvAppointments.SelectedItem;
             if (MessageBox.Show("Are you sure that you want delete this appointment?",
                     "Delete Appointment",
                     MessageBoxButton.OKCancel,
@@ -135,12 +128,19 @@ namespace UberBarber
         public void Refresh_Dgv_Appointments()
         {
             DatabaseQueries query = new();
-            dgvAppointments.ItemsSource = query.Get_Appointments_for_current_user();
+            //dgvAppointments.ItemsSource = query.Get_Appointments_for_current_user();
         }
 
         private void ButtonAddAppointments_Click(object sender, RoutedEventArgs e)
         {
             new AddAppointment().Show();
+        }
+
+        private void buttonAppointments_Click(object sender, RoutedEventArgs e)
+        {
+            AppointmentsContent.Visibility = Visibility.Visible;
+            UserContent.Visibility = Visibility.Collapsed;
+            Refresh_Dgv_Appointments();
         }
     }
 }

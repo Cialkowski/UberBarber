@@ -7,7 +7,6 @@ using Google.Protobuf.WellKnownTypes;
 using UberBarber.User;
 using static UberBarber.User.CurrentUser;
 using UberBarber.Appointments;
-using System;
 
 namespace UberBarber.database
 {
