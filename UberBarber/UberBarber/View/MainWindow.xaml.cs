@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
-using Org.BouncyCastle.Asn1.X509;
+using UberBarber.database;
+using static UberBarber.User.CurrentUser;
+using UberBarber.User;
 
 namespace UberBarber
 {
@@ -23,23 +14,28 @@ namespace UberBarber
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool user_permissions = CurrentUser.Get_is_worker();
         public MainWindow()
         {
             InitializeComponent();
-            
+            // Set contents to non visible.
+            Draft1Content.Visibility = Visibility.Collapsed;
+            Draft2Content.Visibility = Visibility.Collapsed;
+            UserContent.Visibility = Visibility.Collapsed;
+            UsernameTextblock.Text = CurrentUser.Get_username();
+            if (user_permissions)
+            {
+                buttonUser.IsEnabled= true;
+            }
         }
 
-        private void button_user_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: users handling
-        }
         //full screen funcitonality and drag move
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WindowInteropHelper helper = new WindowInteropHelper(this);
+            WindowInteropHelper helper = new(this);
             SendMessage(helper.Handle, 161, 2, 0);
         }
 
@@ -65,9 +61,46 @@ namespace UberBarber
             else this.WindowState=WindowState.Normal;
         }
 
-        private void RadioButton_Calendar_Checked(object sender, RoutedEventArgs e)
+        private void buttonUser_Click(object sender, RoutedEventArgs e)
         {
-            ContentControl_Main.Content = "hello world";
+            // This method shows DataGrid with user records.
+            UserContent.Visibility = Visibility.Visible;
+            Refresh_Dgv_User();
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            // This method edits selected user.
+            User.User user = (User.User)dgvUser.SelectedItem;
+            new UserRegistration(user).Show();
+        }
+
+        private void BtnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            // This method removes selected user after confirmation.
+            User.User user = (User.User)dgvUser.SelectedItem;
+            if (MessageBox.Show("Are you sure that you want delete this user?",
+                                "Delete User",
+                                MessageBoxButton.OKCancel,
+                                MessageBoxImage.Question) == MessageBoxResult.OK)
+            {
+                DatabaseQueries query = new();
+                query.Remove_user(user.Username);
+            }
+            Refresh_Dgv_User();
+        }
+
+        public void Refresh_Dgv_User()
+        {
+            // This method refreshes DataGrid.
+            DatabaseQueries query = new();
+            dgvUser.ItemsSource = query.Get_users();
+        }
+
+        private void ButtonAddUser_Click(object sender, RoutedEventArgs e)
+        {
+            // This method shows UserRegistration window.
+            new UserRegistration().Show();
         }
     }
 }

@@ -165,7 +165,8 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,3,0,0"
-                             Padding="20,0,0,0">
+                             Padding="20,0,0,0"
+                             TextChanged="OnUsernameOrPasswordChanged">
                         <TextBox.Background>
                             <ImageBrush ImageSource="/Images/user-icon.png"
                                         Stretch="None"
@@ -193,7 +194,8 @@
                              Height="28"
                              VerticalContentAlignment="Center"
                              Margin="0,3,0,0"
-                             Padding="20,0,0,0">
+                             Padding="20,0,0,0"
+                             PasswordChanged="OnUsernameOrPasswordChanged">
                         <PasswordBox.Background>
                             <ImageBrush ImageSource="/Images/key-icon.png"
                                         Stretch="None"
@@ -214,7 +216,8 @@
                             Cursor="Hand"
                             Grid.Column="2"
                             Margin="15"
-                            Click="BtnLogin_Click">
+                            Click="BtnLogin_Click"
+                            IsEnabled="False">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#808080"/>
