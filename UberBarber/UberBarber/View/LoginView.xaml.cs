@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using UberBarber.database;
+using UberBarber.User;
 
 namespace UberBarber.View
 {
@@ -39,7 +40,15 @@ namespace UberBarber.View
             // TODO: correct doctring
             //open new window if given credentials are correct
             DatabaseQueries query = new();
+            try
+            {
+                query.Get_current_user_id(txtUser.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
+            }
             try
             {
                 if (!query.Logging(txtUser.Text, txtPassword.Password))
