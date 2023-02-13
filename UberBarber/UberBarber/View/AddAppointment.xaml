@@ -21,7 +21,7 @@
             </ControlTemplate.Resources>
             <Grid x:Name="PART_Root">
                 <Grid.Resources>
-                    <SolidColorBrush x:Key="DisabledColor" Color="#A5FFFFFF"/>
+                    <SolidColorBrush x:Key="DisabledColor" Color="red"/>
                 </Grid.Resources>
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="CommonStates">
@@ -33,8 +33,8 @@
                         </VisualState>
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
-                <Border Background="#7393B3" BorderBrush="#7393B3" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="1">
-                    <Border BorderBrush="#FFFFFFFF" BorderThickness="2" CornerRadius="1">
+                <Border Background="{StaticResource color5}" BorderBrush="{StaticResource color5}" BorderThickness="3" CornerRadius="10">
+                    <Border BorderBrush="{StaticResource color5}" BorderThickness="2" CornerRadius="1">
                         <Grid>
                             <Grid.Resources>
                                 <ControlTemplate x:Key="PreviousButtonTemplate" TargetType="{x:Type Button}">
