@@ -22,6 +22,7 @@ namespace UberBarber.Appointments
         public string Service_name { get; set; }
         public DateTime Visit_date { get; set; }
         public int User_id { get; set; }
+
     }
 
 }

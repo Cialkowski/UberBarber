@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="AddAppointment" Height="450" Width="800">
     <Grid>
-        <ComboBox x:Name="ComboBoxBarber" HorizontalAlignment="Left" Margin="99,65,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Barber" HorizontalAlignment="Left" Margin="40,63,0,0" VerticalAlignment="Top"/>
-        <Label Content="Service" HorizontalAlignment="Left" Margin="40,108,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="ComboBoxService" HorizontalAlignment="Left" Margin="99,112,0,0" VerticalAlignment="Top" Width="120"/>
-        <Calendar x:Name="CalendarVisitDate" HorizontalAlignment="Left" Margin="291,49,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="168" Width="187">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="789*"/>
+            <ColumnDefinition Width="11*"/>
+        </Grid.ColumnDefinitions>
+        <Calendar x:Name="CalendarVisitDate" HorizontalAlignment="Left" Margin="20,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="179" Width="206" SelectedDatesChanged="CalendarVisitDate_SelectedDatesChanged">
             <Calendar.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -21,6 +21,26 @@
                 </TransformGroup>
             </Calendar.RenderTransform>
         </Calendar>
+        <ContentControl x:Name="CalendarContent" HorizontalAlignment="Left"
+                        Margin="252,23,0,0"
+                        VerticalAlignment="Top" Height="335" Width="458">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="48,33,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="48,70,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+            </Grid>
+        </ContentControl>
 
     </Grid>
 </Window>

@@ -391,7 +391,7 @@
                     <DataGrid
                         x:Name="dgvAppointments"
                         HorizontalAlignment="Left"
-                        Margin="46,179,0,0"
+                        Margin="47,52,0,0"
                         Width="628"
                         VerticalScrollBarVisibility="Visible"
                         CanUserAddRows="False"

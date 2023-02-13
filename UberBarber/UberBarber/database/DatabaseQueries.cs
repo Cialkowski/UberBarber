@@ -300,14 +300,18 @@ namespace UberBarber.database
             //This method creates a new record of appointment for current user in database.
 
             // add appointment to database
+            List<Appointments.Appointments> appointments = new();
             Open_connection();
-            MySqlCommand query =
-                new(
-                    $"INSERT INTO `serwer165956_projektstudia`.`appointments` (`customer_id`, `barber_id`, `service_id`, `start_time`) VALUES ('{CurrentUser.Get_user_id()}', '{barber}', '{service}', '{date}');",
-                    _connection);
             try
             {
+                MySqlCommand query =
+                    new($"INSERT INTO `serwer165956_projektstudia`.`appointments` (`customer_id`, `barber_id`, `service_id`, `start_time`) VALUES ('{CurrentUser.Get_user_id()}', '{barber}', '{service}', '{date}');", _connection);
                 _reader = query.ExecuteReader();
+
+                while (_reader.Read())
+                {
+                    appointments.Add(new Appointments.Appointments(_reader));
+                }
             }
             catch (MySqlException e)
             {
@@ -318,6 +322,34 @@ namespace UberBarber.database
                 Close_connection();
             }
 
+        }
+
+        public void Add_customer(string name, string surrname, string phone_number, DateTime date, int transaction_id, int service_id, int barber_id, string description)
+        {
+            //This method creates a new records of customer.
+
+            //add customer to database
+            List<Customer.Customer> customers = new();
+            Open_connection();
+            try
+            {
+                MySqlCommand query =
+                    new($"INSERT INTO `serwer165956_projektstudia`.`customer` (`name`, `surrname`, `phone_number`, `date`, `transaction_id`, `service_id`, `barber_id`, `description`, `user_id`) VALUES ('{name}', '{surrname}', '{phone_number}', '{date}', '{transaction_id}', '{service_id}', '{barber_id}', '{description}', '{CurrentUser.User_id}');");
+                _reader = query.ExecuteReader();
+
+                while (_reader.Read())
+                {
+                    customers.Add(new Customer.Customer(_reader));
+                }
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                Close_connection();
+            }
         }
     }
 }

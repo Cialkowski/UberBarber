@@ -24,6 +24,9 @@ namespace UberBarber.View
             InitializeComponent();
         }
 
-        //TODO AFTER MICHAŁS WORK
+        private void CalendarVisitDate_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
