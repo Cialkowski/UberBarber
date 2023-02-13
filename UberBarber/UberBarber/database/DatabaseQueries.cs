@@ -303,7 +303,7 @@ namespace UberBarber.database
             try
             {
                 MySqlCommand query =
-                    new($"INSERT INTO `serwer165956_projektstudia`.`appointments` (`customer_id`, `barber_id`, `service_id`, `start_time`) VALUES ('{CurrentUser.Get_user_id()}', '{barber}', '{service}', '{date}');", _connection);
+                    new($"INSERT INTO `serwer165956_projektstudia`.`appointments` (`barber_id`, `service_id`, `start_time`) VALUES ('{barber}', '{service}', '{date}');", _connection);
                 _reader = query.ExecuteReader();
 
                 while (_reader.Read())
@@ -322,7 +322,7 @@ namespace UberBarber.database
 
         }
 
-        public void Add_customer(string name, string surrname, string phone_number, DateTime date, int transaction_id, int service_id, int barber_id, string description)
+        public void Add_customer(string name, string surrname, string phone_number, DateTime date, int service_id, int barber_id, string description)
         {
             //This method creates a new records of customer.
 
@@ -332,13 +332,15 @@ namespace UberBarber.database
             try
             {
                 MySqlCommand query =
-                    new($"INSERT INTO `serwer165956_projektstudia`.`customer` (`name`, `surrname`, `phone_number`, `date`, `transaction_id`, `service_id`, `barber_id`, `description`, `user_id`) VALUES ('{name}', '{surrname}', '{phone_number}', '{date}', '{transaction_id}', '{service_id}', '{barber_id}', '{description}', '{CurrentUser.User_id}');");
+                    new($"INSERT INTO `serwer165956_projektstudia`.`customer` (`name`, `surrname`, `phone_number`, `date`, `service_id`, `barber_id`, `description`, `user_id`) VALUES ('{name}', '{surrname}', '{phone_number}', '{date}', '{service_id}', '{barber_id}', '{description}', '{CurrentUser.User_id}');", _connection);
                 _reader = query.ExecuteReader();
 
                 while (_reader.Read())
                 {
                     customers.Add(new Customer.Customer(_reader));
                 }
+
+                MessageBox.Show("Customer registered");
             }
             catch (MySqlException e)
             {

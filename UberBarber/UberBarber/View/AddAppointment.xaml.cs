@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Google.Protobuf;
+using UberBarber.database;
 
 namespace UberBarber.View
 {
@@ -29,8 +30,8 @@ namespace UberBarber.View
 
         private void CalendarVisitDate_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CalendarVisitDate.SelectedDate != null) Selected_date = CalendarVisitDate.SelectedDate.Value;
-            MessageBox.Show(Selected_date.ToString());
+            //if (CalendarVisitDate.SelectedDate != null) Selected_date = CalendarVisitDate.SelectedDate.Value;
+            //MessageBox.Show(Selected_date.ToString());
 
         }
 
@@ -49,6 +50,19 @@ namespace UberBarber.View
 
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
+        }
+
+        private void SumbitButton_Click(object sender, RoutedEventArgs e)
+        {
+            int barber = 0;
+            int service = 0;
+            string first_name = text_name.Text;
+            string surrname = text_Surrname.Text;
+            string phone_number = "TODO";
+            string description = "TODO";
+            DatabaseQueries query = new();
+            query.Add_customer(first_name, surrname, phone_number, Selected_date, 1, 1, description);
+            //query.Add_appointments(barber.ToString(), service.ToString(), Selected_date);
         }
     }
 }

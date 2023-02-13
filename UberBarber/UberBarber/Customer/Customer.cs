@@ -17,7 +17,6 @@ namespace UberBarber.Customer
             Customer_surrname = (string)reader["surrname"];
             Phone_number = (string)reader["phone_number"];
             Date = (DateTime)reader["date"];
-            Transaction_id = (int)reader["transaction_id"];
             Service_id = (int)reader["service_id"];
             Barber_id = (int)reader["barber_id"];
             Description = (string)reader["description"];
@@ -29,7 +28,6 @@ namespace UberBarber.Customer
         public string Customer_surrname { get; set; }
         public string Phone_number { get; set; }
         public DateTime Date { get; set; }
-        public int Transaction_id { get; set; }
         public int Service_id { get; set;}
         public int Barber_id { get;set; }
         public string Description { get; set; }

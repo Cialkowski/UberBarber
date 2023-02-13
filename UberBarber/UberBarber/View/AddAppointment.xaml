@@ -175,6 +175,7 @@
                             Margin="30,10,496,0">
                     
                 </StackPanel>
+                <Button x:Name="SumbitButton" Content="submit" HorizontalAlignment="Left" Margin="395,347,0,0" Grid.Row="1" VerticalAlignment="Top" Click="SumbitButton_Click"/>
             </Grid>
         </Border>
     </Border>

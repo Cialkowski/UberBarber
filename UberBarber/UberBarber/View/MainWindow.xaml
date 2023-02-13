@@ -157,6 +157,11 @@
                                                         Binding="{Binding Service_name}"
                                                         CanUserSort="False"
                                                         IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Time"
+                                                        Width="auto"
+                                                        Binding="{Binding Visit_date}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
                                     <!--Buttons Operations column-->
                                     <DataGridTemplateColumn Header="Operations" Width="auto" >
                                         <DataGridTemplateColumn.CellTemplate>

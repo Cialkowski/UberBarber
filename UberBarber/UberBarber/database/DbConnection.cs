@@ -19,7 +19,7 @@ namespace UberBarber
             string _uid = "serwer165956_projektstudia";
             string _password = "Abcd123!";
             string connection_string =
-                $"server={_server};port={_port};uid={_uid};pwd={_password};database={_database};Convert Zero Datetime=True;Allow Zero Datetime=True";
+                $"server={_server};port={_port};uid={_uid};pwd={_password};database={_database};convert zero datetime=True;";
 
             MySqlConnection connection = new(connection_string);
             return connection;
