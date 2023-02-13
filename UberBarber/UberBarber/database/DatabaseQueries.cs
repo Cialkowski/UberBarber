@@ -56,7 +56,7 @@ namespace UberBarber.database
             {
                 // add user to database
                 Open_connection();
-                MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`) VALUES ('{username}', md5('{password}'), '{email}');", _connection);
+                MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`, `is_worker`) VALUES ('{username}', md5('{password}'), '{email}', 1);", _connection);
                 try
                 {
                     _reader = query.ExecuteReader();

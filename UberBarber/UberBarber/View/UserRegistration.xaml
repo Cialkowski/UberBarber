@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UberBarber"
         mc:Ignorable="d"
-        Title="User" Height="420" Width="611"
+        Title="User" Height="440" Width="611"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -230,6 +230,13 @@
                                HorizontalAlignment="Center" 
                                TextWrapping="Wrap">
                     </TextBlock>
+                    <CheckBox x:Name="CheckBoxPremissions"
+                              Content="Additional permissions"
+                              Foreground="DarkGray"
+                              FontFamily="Montserrat"
+                              FontWeight="Medium"
+                              FontSize="14"
+                              Cursor="Hand" IsEnabled="False"/>
                     <Button x:Name="Confirm"                          
                             BorderThickness="0"
                             Content="Confirm"
