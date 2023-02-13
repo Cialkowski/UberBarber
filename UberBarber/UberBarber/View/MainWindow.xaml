@@ -45,7 +45,7 @@
                                       Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-                
+
                 <StackPanel>
                     <!--logo-->
                     <StackPanel Orientation="Horizontal"
@@ -61,60 +61,18 @@
                                    Margin="10,0,0,0"/>
                     </StackPanel>
                     <!-- Menu Buttons-->
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color2}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Home"
-                                          Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Dashboard"
-                                       Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color2}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Calendar"
-                                          Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Calendar"
-                                       Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color5}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="User"
-                                          Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="User"
-                                       Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
 
                     <Button x:Name="buttonUser"
-                            BorderThickness="0"
-                            Content="User"
-                            Foreground="White"
-                            FontSize="12"
-                            FontFamily="Montserrat"
-                            Cursor="Hand"
-                            Margin="15"
-                            Height="40"
-                            IsEnabled="False"
-                            Click="buttonUser_Click">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background"
-                                        Value="#808080"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"
-                                             Value="True">
-                                        <Setter Property="Background"
-                                                Value="#D3D3D3"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
+                            IsEnabled="false"
+                            Click="buttonUser_Click"
+                            Style="{StaticResource menuButtonn}"
+                            Tag="{StaticResource color5}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="User"
+                                          Style="{StaticResource menuButtonIconn}"/>
+                            <TextBlock Text="User"
+                                       Style="{StaticResource menuButtonTextt}"/>
+                        </StackPanel>
                     </Button>
 
                 </StackPanel>
@@ -144,7 +102,7 @@
                         <!--Content section-->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    
+
                     <!--Content section-->
                     <!--Draft content1-->
                     <ContentControl
@@ -163,6 +121,7 @@
                     <ContentControl x:Name="UserContent"
                                     Grid.Row="2"
                                     Margin="25">
+                        <!--Tutaj jest ten grid jak cos-->
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <!--1 column-->
@@ -177,50 +136,10 @@
                             <DataGrid Grid.Row="1"
                                       Grid.Column="1"
                                       x:Name="dgvUser"
-                                      HorizontalAlignment="Center"
-                                      Margin="0,10,0,0"
-                                      VerticalAlignment="Top"
-                                      Width="800"
-                                      Height="380"
-                                      VerticalScrollBarVisibility="Visible"
-                                      CanUserAddRows="False"
-                                      ItemsSource="{Binding}"
-                                      AutoGenerateColumns="False">
-                                <!--Header styles-->
-                                <DataGrid.ColumnHeaderStyle>
-                                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                                        <Setter Property="FontWeight"
-                                                Value="Bold"/>
-                                        <Setter Property="HorizontalAlignment"
-                                                Value="Center"/>
-                                        <Setter Property="HorizontalContentAlignment"
-                                                Value="Center"/>
-                                        <Setter Property="FontSize"
-                                                Value="15"/>
-                                    </Style>
-                                </DataGrid.ColumnHeaderStyle>
-                                <!--Cell styles-->
-                                <DataGrid.CellStyle>
-                                    <Style TargetType="DataGridCell">
-                                        <Setter Property="Padding"
-                                                Value="20,5,20,5"/>
-                                        <Setter Property="FontSize"
-                                                Value="20"/>
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type DataGridCell}">
-                                                    <Border Padding="{TemplateBinding Padding}"
-                                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                                            Background="{TemplateBinding Background}"
-                                                            SnapsToDevicePixels="True">
-                                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </DataGrid.CellStyle>
+                                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                                      CellStyle="{DynamicResource DataGridCellStyle1}"
+                                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                                      Style="{DynamicResource DataGridStyle1}">
                                 <DataGrid.Columns>
                                     <!--Regular columns-->
                                     <DataGridTextColumn Header="Username"
@@ -242,7 +161,28 @@
                                                         Width="100"
                                                         Height="50"
                                                         Content="Edit"
-                                                        Click="BtnEdit_Click"/>
+                                                        Click="BtnEdit_Click">
+                                                    <Button.Style>
+                                                        <Style TargetType="Button">
+                                                            <Setter Property="Background" Value="#808080"/>
+                                                            <Style.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="Background" Value="#D3D3D3"/>
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                    <Button.Template>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border Width="60" Height="40"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Button.Template>
+                                                </Button>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -254,22 +194,68 @@
                                                         Width="100"
                                                         Height="50"
                                                         Content="Remove"
-                                                        Click="BtnRemove_Click"/>
+                                                        Click="BtnRemove_Click">
+                                                    <Button.Style>
+                                                        <Style TargetType="Button">
+                                                            <Setter Property="Background" Value="#899499"/>
+                                                            <Style.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="Background" Value="#C0C0C0"/>
+                                                                    <Setter Property="Foreground" Value="#36454F"/>
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Button.Style>
+                                                    <Button.Template>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border Width="60" Height="40"
+                                                                    CornerRadius="9"
+                                                                    Background="{TemplateBinding Background}">
+                                                                <ContentPresenter VerticalAlignment="Center"
+                                                                                  HorizontalAlignment="Center"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Button.Template>
+                                                </Button>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <Button Grid.Row="2"
-                                    Grid.Column="1"
+                            <Button Grid.Row="1"
                                     x:Name="ButtonAddUser"
                                     Content="Add User"
                                     Height="50"
-                                    HorizontalAlignment="Center"
-                                    Margin="0,430,0,0"
+                                    HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
                                     Width="200"
-                                    Click="ButtonAddUser_Click"/>
+                                    Click="ButtonAddUser_Click"
+                                    Margin="376,530,0,0"
+                                    Foreground="#708090"
+                                    FontSize="20"
+                                    FontWeight="Bold">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#36454F"/>
+                                                <Setter Property="Foreground" Value="#8A9A5B"/>
+                                            </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border 
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                            </Button>
                         </Grid>
                     </ContentControl>
 
@@ -349,7 +335,8 @@
                                               Width="15"/>
                             </Button>
 
-                            <TextBlock x:Name="UsernameTextblock"
+                            <TextBlock Text="UserName TODO"
+                                       x:Name="UsernameTextblock"
                                        Foreground="{StaticResource titleColor3}"
                                        FontFamily="Montserrat"
                                        FontSize="16"
