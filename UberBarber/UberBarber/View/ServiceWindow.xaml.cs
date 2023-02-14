@@ -27,7 +27,6 @@ namespace UberBarber.View
     {
         public Service.Service Service;
         public bool Is_constructor_edit = false;
-        DatabaseQueries query = new DatabaseQueries();
 
         public ServiceWindow()
         {
