@@ -73,13 +73,12 @@ namespace UberBarber.database
         }
 
         public string User_validation(string username, string password, string confirm_password, string email)
-            // This method checks if passwords match, uses procedure to check if email or username are taken.
-            // Returns proper message when the validation is correct or not.
+        // This method checks if passwords match, uses procedure to check if email or username are taken.
+        // Returns proper message when the validation is correct or not.
         {
             string message = "Something went wrong :(";
             string usernamePattern = "^[a-zA-Z0-9.]{6,}$";
             string passwordPattern = "^[\\w\\d]{6,}$";
-            string emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
             // password validation
             if (password != confirm_password)
@@ -100,7 +99,7 @@ namespace UberBarber.database
                 return message;
             }
             // email validation
-            else if (!Regex.IsMatch(email, emailPattern))
+            else if (!MailSender.IsValidEmail(email))
             {
                 message = "Email address is invalid";
                 return message;
@@ -116,26 +115,18 @@ namespace UberBarber.database
                     // assign first element in first column
                     message = (string)_reader[0];
                 }
-
                 if (message != "valid")
                 {
                     return message;
                 }
             }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                Close_connection();
-            }
-
+            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { Close_connection(); }
             return message;
         }
 
         public List<User.User> Get_users()
-            // This method gets all data from users table add returns it as a list.
+        // This method gets all data from users table add returns it as a list.
         {
             List<User.User> users = new();
             Open_connection();
@@ -150,42 +141,29 @@ namespace UberBarber.database
                     users.Add(new User.User(_reader));
                 }
             }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                Close_connection();
-            }
-
+            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { Close_connection(); }
             return users;
         }
 
         public void Remove_user(string username)
-            // This method removes selected user.
+        // This method removes selected user.
         {
             Open_connection();
             try
             {
-
                 MySqlCommand query = new($"call serwer165956_projektstudia.remove_user('{username}');", _connection);
                 _reader = query.ExecuteReader();
             }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                Close_connection();
-            }
+            catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { Close_connection(); }
         }
 
-        public string Edit_user(string password, string confirm_password, string email, int user_id)
+        public string Edit_user(string password, string confirm_password, string email, int user_id, bool is_worker)
         {
             // This method edits password and email of selected user.
             string message = "Something went wrong :(";
+
             if (User_validation("edituser", password, confirm_password, email) != "valid")
             {
                 message = User_validation("edituser", password, confirm_password, email);
@@ -194,24 +172,14 @@ namespace UberBarber.database
             else
             {
                 Open_connection();
-                MySqlCommand query =
-                    new(
-                        $"UPDATE `serwer165956_projektstudia`.`user` SET `password` = md5('{password}'), `is_worker` = '1', `email` = '{email}' WHERE (`user_id` = '{user_id}');",
-                        _connection);
+                MySqlCommand query = new($"UPDATE `serwer165956_projektstudia`.`user` SET `password` = md5('{password}'), `is_worker` = '{Convert.ToInt32(is_worker)}', `email` = '{email}' WHERE (`user_id` = '{user_id}');", _connection);
                 try
                 {
                     _reader = query.ExecuteReader();
                     message = "Done";
                 }
-                catch (MySqlException e)
-                {
-                    MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                finally
-                {
-                    Close_connection();
-                }
-
+                catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                finally { Close_connection(); }
                 return message;
             }
 
