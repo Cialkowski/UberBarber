@@ -101,6 +101,7 @@ namespace UberBarber.database.BarberQueries
                 while (_reader.Read())
                 {
                     Barber.Barber barber = new Barber.Barber(_reader);
+                    barber.Services = "";
                     barber.Services = string.Join(",",new BarberQueries().Get_all_services_for_barber(barber.BarberId));
                     barbers.Add(barber);
                 }
