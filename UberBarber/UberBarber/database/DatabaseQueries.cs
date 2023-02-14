@@ -79,7 +79,6 @@ namespace UberBarber.database
             string message = "Something went wrong :(";
             string usernamePattern = "^[a-zA-Z0-9.]{6,}$";
             string passwordPattern = "^[\\w\\d]{6,}$";
-            string emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
             // password validation
             if (password != confirm_password)
@@ -100,7 +99,7 @@ namespace UberBarber.database
                 return message;
             }
             // email validation
-            else if (!Regex.IsMatch(email, emailPattern))
+            else if (!MailSender.IsValidEmail(email))
             {
                 message = "Email address is invalid";
                 return message;
@@ -160,10 +159,11 @@ namespace UberBarber.database
             finally { Close_connection(); }
         }
 
-        public string Edit_user(string password, string confirm_password, string email, int user_id)
+        public string Edit_user(string password, string confirm_password, string email, int user_id, bool is_worker)
         {
             // This method edits password and email of selected user.
             string message = "Something went wrong :(";
+
             if (User_validation("edituser", password, confirm_password, email) != "valid")
             {
                 message = User_validation("edituser", password, confirm_password, email);
@@ -172,7 +172,7 @@ namespace UberBarber.database
             else
             {
                 Open_connection();
-                MySqlCommand query = new($"UPDATE `serwer165956_projektstudia`.`user` SET `password` = md5('{password}'), `is_worker` = '1', `email` = '{email}' WHERE (`user_id` = '{user_id}');", _connection);
+                MySqlCommand query = new($"UPDATE `serwer165956_projektstudia`.`user` SET `password` = md5('{password}'), `is_worker` = '{Convert.ToInt32(is_worker)}', `email` = '{email}' WHERE (`user_id` = '{user_id}');", _connection);
                 try
                 {
                     _reader = query.ExecuteReader();
