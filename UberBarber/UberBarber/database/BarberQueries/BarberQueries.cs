@@ -94,7 +94,7 @@ namespace UberBarber.database.BarberQueries
             Open_connection();
             try
             {
-                MySqlCommand query = new("SELECT * FROM serwer165956_projektstudia.barber;", _connection);
+                MySqlCommand query = new("SELECT b.barber_id, b.name,b.title,b.phone_number,b.age,b.user_id,u.username FROM serwer165956_projektstudia.barber b left join serwer165956_projektstudia.user u on b.user_id = u.user_id", _connection);
                 _reader = query.ExecuteReader();
                   
                 // Add records to list
@@ -113,7 +113,7 @@ namespace UberBarber.database.BarberQueries
             Open_connection();
             try
             {
-                MySqlCommand query = new($"DELETE FROM serwer165956_projektstudia.user WHERE (barber_id = {barberId});", _connection);
+                MySqlCommand query = new($"CALL serwer165956_projektstudia.remove_barber('{barberId}'); ", _connection);
                 _reader = query.ExecuteReader();
             }
             catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }

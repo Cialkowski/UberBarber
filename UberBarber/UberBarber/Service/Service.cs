@@ -15,14 +15,17 @@ namespace UberBarber.Service
             Name = (string)reader["name"];
             Time = (decimal)reader["time"];
             Price = (decimal)reader["price"];
-            BarberId = (int)reader["barber_id"];
             Description = (string)reader["description"];
         }
         public int ServiceId { get; set; }
         public string Name { get; set; }
         public decimal Time { get; set; }
         public decimal Price { get; set; }
-        public int BarberId { get; set; }
         public string Description { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

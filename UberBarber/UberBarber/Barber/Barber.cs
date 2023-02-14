@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UberBarber.database.BarberQueries;
 
 namespace UberBarber.Barber
 {
@@ -17,6 +18,7 @@ namespace UberBarber.Barber
             PhoneNumber = (string)reader["phone_number"];
             Age = (int)reader["age"];
             UserId = (int)reader["user_id"];
+            Username = (string)reader["username"];
         }
         public int BarberId { get; set; }   
         public string Name { get; set; }
@@ -24,5 +26,6 @@ namespace UberBarber.Barber
         public string PhoneNumber { get; set; }
         public int Age { get; set; }
         public int UserId { get; set; }
+        public string Username { get; set; }
     }
 }

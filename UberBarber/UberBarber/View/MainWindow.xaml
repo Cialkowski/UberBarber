@@ -75,6 +75,30 @@
                                        Style="{StaticResource menuButtonTextt}"/>
                         </StackPanel>
                     </Button>
+                    <Button x:Name="buttonBarber"
+                            IsEnabled="false"
+                            Click="ButtonBarber_Click"
+                            Style="{StaticResource menuButtonn}"
+                            Tag="{StaticResource color5}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Male"
+                                          Style="{StaticResource menuButtonIconn}"/>
+                            <TextBlock Text="Barber"
+                                       Style="{StaticResource menuButtonTextt}"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="buttonService"
+                            IsEnabled="True"
+                            Click="buttonService_Click"
+                            Style="{StaticResource menuButtonn}"
+                            Tag="{StaticResource color5}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="IdCard"
+                                          Style="{StaticResource menuButtonIconn}"/>
+                            <TextBlock Text="Service"
+                                       Style="{StaticResource menuButtonTextt}"/>
+                        </StackPanel>
+                    </Button>
 
                 </StackPanel>
 
@@ -189,31 +213,249 @@
                                     Foreground="#708090"
                                     FontSize="20"
                                     FontWeight="Bold">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Transparent"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
                                                 <Setter Property="Background" Value="#36454F"/>
                                                 <Setter Property="Foreground" Value="#8A9A5B"/>
                                             </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border 
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border 
                                         CornerRadius="10"
                                         Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
+                                            <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
                             </Button>
                         </Grid>
                     </ContentControl>
-
+                    <!--Barber content-->
+                    <ContentControl x:Name="BarberContent"
+                                    Grid.Row="2"
+                                    Margin="25">
+                        <!--Tutaj jest ten grid jak cos-->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!--1 column-->
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <!--2 rows-->
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!--Barber datagrid-->
+                            <DataGrid Grid.Row="1"
+                                      Grid.Column="1"
+                                      x:Name="dgvBarber"
+                                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                                      CellStyle="{DynamicResource DataGridCellStyle1}"
+                                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                                      Style="{DynamicResource DataGridStyle1}">
+                                <DataGrid.Columns>
+                                    <!--Regular columns-->
+                                    <DataGridTextColumn Header="Name"
+                                                        Width="auto"
+                                                        Binding="{Binding Name}"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Title"
+                                                        Width="auto"
+                                                        Binding="{Binding Title}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Phone number"
+                                                        Width="auto"
+                                                        Binding="{Binding PhoneNumber}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Age"
+                                                        Width="auto"
+                                                        Binding="{Binding Age}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="User"
+                                                        Width="auto"
+                                                        Binding="{Binding Username}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTemplateColumn Header="Services operations" Width="auto" >
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button  Click="BtnAddService_Click" Style="{StaticResource gridEditButton}">
+                                                        <Icon:PackIconMaterial Kind="PencilOutline" 
+                                                                               Style="{StaticResource gridButtonIcon}"/>
+                                                    </Button>
+                                                    <Button  Click="BtnDeleteService_Click" Style="{StaticResource gridEditButton}">
+                                                        <Icon:PackIconMaterial Kind="DeleteOutline" 
+                                                                               Style="{StaticResource gridButtonIcon}"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Buttons Operations column-->
+                                    <DataGridTemplateColumn Header="Barber operations" Width="auto" >
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button  Click="BtnEditBarber_Click" Style="{StaticResource gridEditButton}">
+                                                        <Icon:PackIconMaterial Kind="PencilOutline" 
+                                                                               Style="{StaticResource gridButtonIcon}"/>
+                                                    </Button>
+                                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" 
+                                                            Click="BtnRemoveBarber_Click">
+                                                        <Icon:PackIconMaterial Kind="DeleteOutline" 
+                                                                               Style="{StaticResource gridButtonIcon}"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Grid.Row="1"
+                                    x:Name="ButtonAddBarber"
+                                    Content="Add Barber"
+                                    Height="50"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Width="200"
+                                    Click="ButtonAddBarber_Click"
+                                    Margin="376,530,0,0"
+                                    Foreground="#708090"
+                                    FontSize="20"
+                                    FontWeight="Bold">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#36454F"/>
+                                                <Setter Property="Foreground" Value="#8A9A5B"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border 
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </ContentControl>
+                    <!--Service content-->
+                    <!--Barber content-->
+                    <ContentControl x:Name="ServiceContent"
+                                    Grid.Row="2"
+                                    Margin="25">
+                        <!--Tutaj jest ten grid jak cos-->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!--1 column-->
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <!--2 rows-->
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!--Barber datagrid-->
+                            <DataGrid Grid.Row="1"
+                                      Grid.Column="1"
+                                      x:Name="dgvService"
+                                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                                      CellStyle="{DynamicResource DataGridCellStyle1}"
+                                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                                      Style="{DynamicResource DataGridStyle1}">
+                                <DataGrid.Columns>
+                                    <!--Regular columns-->
+                                    <DataGridTextColumn Header="Name"
+                                                        Width="auto"
+                                                        Binding="{Binding Name}"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Time"
+                                                        Width="auto"
+                                                        Binding="{Binding Time}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Price"
+                                                        Width="auto"
+                                                        Binding="{Binding Price}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Description"
+                                                        Width="auto"
+                                                        Binding="{Binding Description}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTemplateColumn Header="Operations" Width="auto" >
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button  Click="BtnEditService_Click" Style="{StaticResource gridEditButton}">
+                                                        <Icon:PackIconMaterial Kind="PencilOutline" 
+                                                                               Style="{StaticResource gridButtonIcon}"/>
+                                                    </Button>
+                                                    <Button  Click="BtnRemoveService_Click" Style="{StaticResource gridEditButton}">
+                                                        <Icon:PackIconMaterial Kind="DeleteOutline" 
+                                                                               Style="{StaticResource gridButtonIcon}"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Buttons Operations column-->
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Grid.Row="1"
+                                    x:Name="ButtonAddService"
+                                    Content="Add Service"
+                                    HorizontalAlignment="Left"
+                                    Width="200"
+                                    Click="ButtonAddService_Click"
+                                    Margin="376,530,0,0"
+                                    Foreground="#708090"
+                                    FontSize="20"
+                                    FontWeight="Bold">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#36454F"/>
+                                                <Setter Property="Foreground" Value="#8A9A5B"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border 
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </ContentControl>
                     <!--control bar -->
                     <StackPanel x:Name="pnlControlBar"
                                 Grid.Row="0"
