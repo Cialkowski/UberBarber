@@ -167,10 +167,6 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button Style="{StaticResource gridEditButton}">
-                                                        <Icon:PackIconMaterial Kind="PencilOutline" 
-                                                                               Style="{StaticResource gridButtonIcon}"/>
-                                                    </Button>
                                                     <Button x:Name="Button_remove_appointment" Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}"
                                                             Click="Button_remove_appointment">
                                                         <Icon:PackIconMaterial Kind="DeleteOutline" 
