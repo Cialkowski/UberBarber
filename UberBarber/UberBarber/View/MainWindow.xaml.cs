@@ -9,6 +9,7 @@ using UberBarber.View;
 using UberBarber.database.AppointmentQueries;
 using UberBarber.database.BarberQueries;
 using UberBarber.database.ServiceQueries;
+using UberBarber.database.UserQueries;
 
 namespace UberBarber
 {
@@ -98,7 +99,7 @@ namespace UberBarber
                                 MessageBoxButton.OKCancel,
                                 MessageBoxImage.Question) == MessageBoxResult.OK)
             {
-                DatabaseQueries query = new();
+                UserQueries query = new();
                 query.Remove_user(user.Username);
             }
             Refresh_Dgv_User();
@@ -107,7 +108,7 @@ namespace UberBarber
         public void Refresh_Dgv_User()
         {
             // This method refreshes User DataGrid.
-            DatabaseQueries query = new();
+            UserQueries query = new(); query = new();
             dgvUser.ItemsSource = query.Get_users();
         }
 
