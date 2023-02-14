@@ -100,7 +100,9 @@ namespace UberBarber.database.BarberQueries
                 // Add records to list
                 while (_reader.Read())
                 {
-                    barbers.Add(new Barber.Barber(_reader));
+                    Barber.Barber barber = new Barber.Barber(_reader);
+                    barber.Services = string.Join(",",new BarberQueries().Get_all_services_for_barber(barber.BarberId));
+                    barbers.Add(barber);
                 }
             }
             catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
@@ -146,13 +148,11 @@ namespace UberBarber.database.BarberQueries
                 return message;
             }
         }
-        public List<Service.Service> Get_all_services_for_barber(int barberId)
+        public List<string?> Get_all_services_for_barber(int barberId)
         // This method gets all services assigned to barber. Returns it as a list.
         {
-            string getAllServicesForBarberQuery = "select s.name,s.time,s.price,s.description from serwer165956_projektstudia.service s" +
-                           "inner join serwer165956_projektstudia.barber b" +
-                           $"on s.barber_id = {barberId}";
-            List<Service.Service> barbers = new();
+            string getAllServicesForBarberQuery = $"select s.name from serwer165956_projektstudia.service s inner join serwer165956_projektstudia.serviceBarber b on s.service_id = b.service_id and b.barber_id = {barberId}";
+            List<string?> service = new List<string?>();
             Open_connection();
             try
             {
@@ -162,12 +162,12 @@ namespace UberBarber.database.BarberQueries
                 // Add records to list
                 while (_reader.Read())
                 {
-                    barbers.Add(new Service.Service(_reader));
+                    service.Add((string)_reader["name"]);
                 }
             }
             catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
             finally { Close_connection(); }
-            return barbers;
+            return service;
         }
     }
 }

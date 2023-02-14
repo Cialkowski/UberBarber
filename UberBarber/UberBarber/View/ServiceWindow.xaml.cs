@@ -90,7 +90,7 @@ namespace UberBarber.View
                 }
                 else
                 {
-                    MessageBox.Show($"SErvice: {name}\nHas been edited", "Done", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Service: {name}\nHas been edited", "Done", MessageBoxButton.OK, MessageBoxImage.Information);
                     Close();
                 }
             }

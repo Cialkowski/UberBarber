@@ -25,7 +25,8 @@ namespace UberBarber.Barber
         public string Title { get; set; }
         public string PhoneNumber { get; set; }
         public int Age { get; set; }
-        public int UserId { get; set; }
-        public string Username { get; set; }
+        public int? UserId { get; set; }
+        public string? Username { get; set; }
+        public string? Services { get; set;}
     }
 }

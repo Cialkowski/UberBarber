@@ -76,7 +76,7 @@
                         </StackPanel>
                     </Button>
                     <Button x:Name="buttonBarber"
-                            IsEnabled="false"
+                            IsEnabled="True"
                             Click="ButtonBarber_Click"
                             Style="{StaticResource menuButtonn}"
                             Tag="{StaticResource color5}">
@@ -286,7 +286,12 @@
                                                         Binding="{Binding Username}"
                                                         CanUserSort="False"
                                                         IsReadOnly="True"/>
-                                    <DataGridTemplateColumn Header="Services operations" Width="auto" >
+                                    <DataGridTextColumn Header="Barber services"
+                                                        Width="auto"
+                                                        Binding="{Binding Services}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTemplateColumn x:Name="DataGridTemplateBarber" Header="Services operations" Width="auto" >
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
@@ -303,7 +308,7 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                     <!--Buttons Operations column-->
-                                    <DataGridTemplateColumn Header="Barber operations" Width="auto" >
+                                    <DataGridTemplateColumn x:Name="DataGridTemplateBarber2" Header="Barber operations" Width="auto" >
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
@@ -321,6 +326,7 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                 </DataGrid.Columns>
+                                
                             </DataGrid>
                             <Button Grid.Row="1"
                                     x:Name="ButtonAddBarber"
@@ -359,7 +365,6 @@
                         </Grid>
                     </ContentControl>
                     <!--Service content-->
-                    <!--Barber content-->
                     <ContentControl x:Name="ServiceContent"
                                     Grid.Row="2"
                                     Margin="25">
@@ -403,7 +408,7 @@
                                                         Binding="{Binding Description}"
                                                         CanUserSort="False"
                                                         IsReadOnly="True"/>
-                                    <DataGridTemplateColumn Header="Operations" Width="auto" >
+                                    <DataGridTemplateColumn x:Name="DataGridTemplateService" Header="Operations" Width="auto" >
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">

@@ -31,7 +31,6 @@ namespace UberBarber
             if (user_permissions)
             {
                 buttonUser.IsEnabled= true;
-                buttonBarber.IsEnabled = true;
             }
         }
 
@@ -118,6 +117,12 @@ namespace UberBarber
             UserContent.Visibility = Visibility.Collapsed;
             ServiceContent.Visibility = Visibility.Collapsed;
             BarberContent.Visibility = Visibility.Visible;
+            if (!user_permissions)
+            {
+                ButtonAddBarber.Visibility = Visibility.Collapsed;
+                DataGridTemplateBarber.Visibility = Visibility.Collapsed;
+                DataGridTemplateBarber2.Visibility = Visibility.Collapsed;
+            }
             Refresh_Dgv_Barber();
         }
 
@@ -147,8 +152,7 @@ namespace UberBarber
         public void Refresh_Dgv_Barber()
         {
             // This method refreshes DataGrid.
-            BarberQueries query = new();
-            dgvBarber.ItemsSource = query.Get_barbers();
+            dgvBarber.ItemsSource = new BarberQueries().Get_barbers();
         }
 
         private void ButtonAddBarber_Click(object sender, RoutedEventArgs e)
@@ -167,7 +171,6 @@ namespace UberBarber
             // This method shows EditServicesToBarber window.
             Barber.Barber barber = (Barber.Barber)dgvBarber.SelectedItem;
             new EditServiceToBarber(false, barber.BarberId).Show();
-
         }
 
         //SERVICE SECTION
@@ -183,6 +186,11 @@ namespace UberBarber
             UserContent.Visibility = Visibility.Collapsed;
             ServiceContent.Visibility = Visibility.Visible;
             BarberContent.Visibility = Visibility.Collapsed;
+            if (!user_permissions)
+            {
+                ButtonAddService.Visibility = Visibility.Collapsed;
+                DataGridTemplateService.Visibility = Visibility.Collapsed;
+            }
             Refresh_Dgv_Service();
         }
         private void ButtonAddService_Click(object sender, RoutedEventArgs e)
