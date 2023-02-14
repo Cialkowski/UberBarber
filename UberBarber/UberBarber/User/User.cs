@@ -17,5 +17,9 @@ namespace UberBarber.User
         public string Password { get; set; }
         public bool Is_worker { get; set; }
         public string Email { get; set;}
+        public override string ToString()
+        {
+            return Username;
+        }
     }
 }

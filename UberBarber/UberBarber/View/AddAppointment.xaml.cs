@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Google.Protobuf;
 using UberBarber.database;
 using UberBarber.database.AppointmentQueries;
+using UberBarber.database.BarberQueries;
 
 namespace UberBarber.View
 {
@@ -27,18 +28,20 @@ namespace UberBarber.View
         public AddAppointment()
         {
             InitializeComponent();
-            ComboBoxBarber.Items.Add(3);
-            ComboBox_Services.Items.Add(3);
+            ComboBoxBarber.ItemsSource = GetBarbersNames();
+            ComboBoxBarber.SelectedIndex = 0;
 
         }
 
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
         {
+            // This method minimizes the window.
             WindowState = WindowState.Minimized;
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
+            // This method closes the window.
             Close();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -51,6 +54,7 @@ namespace UberBarber.View
 
         private void BtnAddApointment_Click(object sender, RoutedEventArgs e)
         {
+            // This method adds appointment to database.
             int barber = (int)ComboBoxBarber.SelectedItem;
             int service = (int)ComboBox_Services.SelectionBoxItem;
             string first_name = text_name.Text;
@@ -65,6 +69,40 @@ namespace UberBarber.View
         private void CalendarAppointments_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CalendarAppointments.SelectedDate != null) Selected_date = CalendarAppointments.SelectedDate.Value;
+        }
+
+        private static List<string> GetBarbersNames()
+        {
+            // This method retruns barber names as list.
+            BarberQueries query = new();
+            List<string> barbers = new();
+            foreach (Barber.Barber barber in query.Get_barbers())
+            {
+                barbers.Add(barber.Name);
+            }
+            return barbers;
+        }
+
+        private void ComboBoxBarber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // This method shows services for current barber.
+            BarberQueries query = new();
+            List<string> barbers = new();
+            List<string> services = new();
+            int barber_id = -1;
+            foreach (Barber.Barber barber in query.Get_barbers())
+            {
+                if (barber.Name == ComboBoxBarber.SelectedItem.ToString())
+                {
+                    barber_id = barber.BarberId;
+                }
+            }
+            foreach (string service in query.Get_all_services_for_barber(barber_id))
+            {
+                services.Add(service);
+            }
+            ComboBox_Services.ItemsSource = services;
+            ComboBox_Services.SelectedIndex= 0;
         }
     }
 }

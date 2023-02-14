@@ -465,7 +465,7 @@
                                FontFamily="Montserrat"                             
                                Margin="0,15,0,0"/>
                     <ComboBox x:Name="ComboBoxBarber"
-                              Tag="{StaticResource color5}"
+                              Tag="{StaticResource color5}" SelectionChanged="ComboBoxBarber_SelectionChanged"
                              >
                     </ComboBox>
                     <TextBlock Text="Services"
