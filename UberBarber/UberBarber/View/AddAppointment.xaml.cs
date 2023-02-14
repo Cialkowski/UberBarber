@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Google.Protobuf;
 using UberBarber.database;
+using UberBarber.database.AppointmentQueries;
 
 namespace UberBarber.View
 {
@@ -56,7 +57,7 @@ namespace UberBarber.View
             string surrname = text_Surrname.Text;
             string phone_number = text_PhoneNumber.Text;
             string description = text_Description.Text;
-            DatabaseQueries query = new();
+            AppointmentQueries query = new();
             query.Add_customer(first_name, surrname, phone_number, Selected_date, service, barber, description);
             query.Add_appointments(barber.ToString(), service.ToString(), Selected_date);
         }

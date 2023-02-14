@@ -13,8 +13,9 @@ namespace UberBarber.database
     class DatabaseQueries : DbConnection
     {
         public bool Logging(string user_name, string user_password)
+        /// <summary> This function opens connection to server and databse and executes logging query. </summary>>
         {
-            /// <summary> This function opens connection to server and databse and executes logging query. </summary>>
+
             Open_connection();
             MySqlCommand query = new($"call serwer165956_projektstudia.login_pswd_is_worker('{user_name}', '{user_password}');", _connection);
             string message = "failed";
@@ -159,8 +160,8 @@ namespace UberBarber.database
         }
 
         public string Edit_user(string password, string confirm_password, string email, int user_id, bool is_worker)
+        // This method edits password and email of selected user.
         {
-            // This method edits password and email of selected user.
             string message = "Something went wrong :(";
 
             if (User_validation("edituser", password, confirm_password, email) != "valid")
@@ -182,36 +183,6 @@ namespace UberBarber.database
                 return message;
             }
 
-        }
-
-        public List<Appointments.Appointments> Get_Appointments_for_current_user()
-        {
-            List<Appointments.Appointments> appointments = new();
-            Open_connection();
-            try
-            {
-                MySqlCommand query =
-                    new($"CALL serwer165956_projektstudia.show_appointments_for_user({CurrentUser.Get_user_id()});",
-                        _connection);
-                _reader = query.ExecuteReader();
-
-                //Add records to list
-                while (_reader.Read())
-                {
-                    appointments.Add(new Appointments.Appointments(_reader));
-                }
-
-            }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                Close_connection();
-            }
-
-            return appointments;
         }
 
         public int Get_current_user_id(string user_name)
@@ -243,117 +214,6 @@ namespace UberBarber.database
             {
                 Close_connection();
             }
-        }
-
-        public void Remove_appointment(int user_id)
-        {
-            Open_connection();
-            try
-            {
-
-                MySqlCommand query = new($"DELETE FROM `serwer165956_projektstudia`.`customer` WHERE (`user_id` = '{user_id}');", _connection);
-                _reader = query.ExecuteReader();
-                MessageBox.Show("Done");
-            }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                Close_connection();
-            }
-        }
-
-        public void Add_appointments(string barber, string service, DateTime date)
-        {
-            //This method creates a new record of appointment for current user in database.
-
-            // add appointment to database
-            List<Appointments.Appointments> appointments = new();
-            MySqlCommand query =
-                new($"INSERT INTO `serwer165956_projektstudia`.`appointments` (`customer_id`,`barber_id`, `service_id`, `start_time`) VALUES ('{Get_lat_customer_id()}', '{barber}', '{service}', '{date}');", _connection);
-            Open_connection();
-            try
-            {
-                _reader = query.ExecuteReader();
-
-                while (_reader.Read())
-                {
-                    appointments.Add(new Appointments.Appointments(_reader));
-                }
-                MessageBox.Show("appointment registered");
-            }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                Close_connection();
-            }
-
-        }
-
-        public void Add_customer(string name, string surrname, string phone_number, DateTime date, int service_id,
-            int barber_id, string description)
-        {
-            //This method creates a new records of customer.
-
-            //add customer to database
-            List<Customer.Customer> customers = new();
-            Open_connection();
-            try
-            {
-                MySqlCommand query =
-                    new(
-                        $"INSERT INTO `serwer165956_projektstudia`.`customer` (`name`, `surrname`, `phone_number`, `date`, `service_id`, `barber_id`, `description`, `user_id`) VALUES ('{name}', '{surrname}', '{phone_number}', '{date}', '{service_id}', '{barber_id}', '{description}', '{CurrentUser.User_id}');",
-                        _connection);
-                _reader = query.ExecuteReader();
-
-                while (_reader.Read())
-                {
-                    customers.Add(new Customer.Customer(_reader));
-                }
-
-                MessageBox.Show("Customer registered");
-            }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                Close_connection();
-            }
-        }
-
-        public int Get_lat_customer_id()
-        {
-            int id = 0;
-            Open_connection();
-            try
-            {
-                MySqlCommand query =
-                    new("SELECT customer_id FROM serwer165956_projektstudia.customer ORDER BY customer_id DESC LIMIT 1;", _connection);
-                _reader = query.ExecuteReader();
-
-                while (_reader.Read())
-                {
-                    id = (int)_reader[0];
-                }
-
-            }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                Close_connection();
-            }
-
-            return id;
         }
     }
 }

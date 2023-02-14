@@ -7,6 +7,8 @@ using UberBarber.database;
 using static UberBarber.User.CurrentUser;
 using UberBarber.User;
 using UberBarber.View;
+using static UberBarber.database.AppointmentQueries.AppointmentQueries;
+using UberBarber.database.AppointmentQueries;
 
 namespace UberBarber
 {
@@ -108,7 +110,7 @@ namespace UberBarber
 
         public void Refresh_Dgv_Appointments()
         {
-            DatabaseQueries query = new();
+            AppointmentQueries query = new();
             dgvAppointments.ItemsSource = query.Get_Appointments_for_current_user();
         }
 
@@ -135,7 +137,7 @@ namespace UberBarber
                     MessageBoxButton.OKCancel,
                     MessageBoxImage.Question) == MessageBoxResult.OK)
             {
-                DatabaseQueries query = new();
+                AppointmentQueries query = new();
                 query.Remove_appointment(appointments.User_id);
             }
             Refresh_Dgv_Appointments();
