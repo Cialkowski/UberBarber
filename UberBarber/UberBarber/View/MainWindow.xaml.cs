@@ -6,6 +6,9 @@ using System.Windows.Interop;
 using UberBarber.database;
 using static UberBarber.User.CurrentUser;
 using UberBarber.User;
+using UberBarber.database.BarberQueries;
+using UberBarber.View;
+using UberBarber.database.ServiceQueries;
 
 namespace UberBarber
 {
@@ -22,6 +25,8 @@ namespace UberBarber
             Draft1Content.Visibility = Visibility.Collapsed;
             Draft2Content.Visibility = Visibility.Collapsed;
             UserContent.Visibility = Visibility.Collapsed;
+            BarberContent.Visibility = Visibility.Collapsed;
+            ServiceContent.Visibility = Visibility.Collapsed;
             UsernameTextblock.Text = CurrentUser.Get_username();
             if (user_permissions)
             {
@@ -64,6 +69,8 @@ namespace UberBarber
         private void buttonUser_Click(object sender, RoutedEventArgs e)
         {
             // This method shows DataGrid with user records.
+            BarberContent.Visibility = Visibility.Collapsed;
+            ServiceContent.Visibility = Visibility.Collapsed;
             UserContent.Visibility = Visibility.Visible;
             Refresh_Dgv_User();
         }
@@ -101,6 +108,117 @@ namespace UberBarber
         {
             // This method shows UserRegistration window.
             new UserRegistration().Show();
+        }
+
+        //BARBER SECTION
+        private void ButtonBarber_Click(object sender, RoutedEventArgs e)
+        {
+            // This method shows DataGrid with barber records.
+            UserContent.Visibility = Visibility.Collapsed;
+            ServiceContent.Visibility = Visibility.Collapsed;
+            BarberContent.Visibility = Visibility.Visible;
+            if (!user_permissions)
+            {
+                ButtonAddBarber.Visibility = Visibility.Collapsed;
+                DataGridTemplateBarber.Visibility = Visibility.Collapsed;
+                DataGridTemplateBarber2.Visibility = Visibility.Collapsed;
+            }
+            Refresh_Dgv_Barber();
+        }
+
+        private void BtnEditBarber_Click(object sender, RoutedEventArgs e)
+        {
+            // This method edits selected user.
+            Barber.Barber barber = (Barber.Barber)dgvBarber.SelectedItem;
+            new BarberEditWindow(barber).Show();
+            Refresh_Dgv_Barber();
+        }
+
+        private void BtnRemoveBarber_Click(object sender, RoutedEventArgs e)
+        {
+            // This method removes selected user after confirmation.
+            Barber.Barber barber = (Barber.Barber)dgvBarber.SelectedItem;
+            if (MessageBox.Show("Are you sure that you want delete this barber?",
+                                "Delete barber",
+                                MessageBoxButton.OKCancel,
+                                MessageBoxImage.Question) == MessageBoxResult.OK)
+            {
+                BarberQueries query = new();
+                query.Remove_barber(barber.BarberId);
+            }
+            Refresh_Dgv_Barber();
+        }
+
+        public void Refresh_Dgv_Barber()
+        {
+            // This method refreshes DataGrid.
+            dgvBarber.ItemsSource = new BarberQueries().Get_barbers();
+        }
+
+        private void ButtonAddBarber_Click(object sender, RoutedEventArgs e)
+        {
+            // This method shows UserRegistration window.
+            new BarberEditWindow().Show();
+        }
+        private void BtnAddService_Click(object sender, RoutedEventArgs e)
+        {
+            // This method shows EditServicesToBarber window.
+            Barber.Barber barber = (Barber.Barber)dgvBarber.SelectedItem;
+            new EditServiceToBarber(true,barber.BarberId).Show();
+        }
+        private void BtnDeleteService_Click(object sender, RoutedEventArgs e)
+        {
+            // This method shows EditServicesToBarber window.
+            Barber.Barber barber = (Barber.Barber)dgvBarber.SelectedItem;
+            new EditServiceToBarber(false, barber.BarberId).Show();
+        }
+
+        //SERVICE SECTION
+        public void Refresh_Dgv_Service()
+        {
+            // This method refreshes DataGrid.
+            ServiceQueries query = new();
+            dgvService.ItemsSource = query.Get_all_services();
+        }
+        private void buttonService_Click(object sender, RoutedEventArgs e)
+        {
+            // This method shows DataGrid with service records.
+            UserContent.Visibility = Visibility.Collapsed;
+            ServiceContent.Visibility = Visibility.Visible;
+            BarberContent.Visibility = Visibility.Collapsed;
+            if (!user_permissions)
+            {
+                ButtonAddService.Visibility = Visibility.Collapsed;
+                DataGridTemplateService.Visibility = Visibility.Collapsed;
+            }
+            Refresh_Dgv_Service();
+        }
+        private void ButtonAddService_Click(object sender, RoutedEventArgs e)
+        {
+            // This method shows UserRegistration window.
+            new ServiceWindow().Show();
+            Refresh_Dgv_Service();
+        }
+        private void BtnEditService_Click(object sender, RoutedEventArgs e)
+        {
+            // This method edits selected user.
+            Service.Service service = (Service.Service)dgvService.SelectedItem;
+            new ServiceWindow(service).Show();
+            Refresh_Dgv_Service();
+        }
+        private void BtnRemoveService_Click(object sender, RoutedEventArgs e)
+        {
+            // This method removes selected user after confirmation.
+            Service.Service service = (Service.Service)dgvService.SelectedItem;
+            if (MessageBox.Show("Are you sure that you want delete this service?",
+                                "Delete service",
+                                MessageBoxButton.OKCancel,
+                                MessageBoxImage.Question) == MessageBoxResult.OK)
+            {
+                ServiceQueries query = new();
+                query.Delete_Service(service.ServiceId);
+            }
+            Refresh_Dgv_Barber();
         }
     }
 }
