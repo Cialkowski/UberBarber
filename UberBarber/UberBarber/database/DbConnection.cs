@@ -18,8 +18,7 @@ namespace UberBarber
             string _database = "serwer165956_projektstudia";
             string _uid = "serwer165956_projektstudia";
             string _password = "Abcd123!";
-            string connection_string =
-                $"server={_server};port={_port};uid={_uid};pwd={_password};database={_database};convert zero datetime=True;";
+            string connection_string = $"server={_server};port={_port};uid={_uid};pwd={_password};database={_database};convert zero datetime=True;";
 
             MySqlConnection connection = new(connection_string);
             return connection;
@@ -29,25 +28,16 @@ namespace UberBarber
         {
             // This method opens MySqlConnection and informs about server problems if they appear.
 
-            try
-            {
-                _connection.Open();
-            }
-            catch (MySqlException e)
-            {
-                MessageBox.Show(e.Message, "Cannot connect to server. Contact administrator", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            try { _connection.Open(); }
+            catch (MySqlException e) { MessageBox.Show(e.Message, "Cannot connect to server. Contact administrator", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         public void Close_connection()
         {
             // This method closes MySqlConnection.
 
-            try
-            {
-                _connection.Close();
-            }
-            catch(MySqlException e) { MessageBox.Show(e.Message, "Cannoct disconnect from server", MessageBoxButton.OK, MessageBoxImage.Error); }
+            try { _connection.Close(); }
+            catch (MySqlException e) { MessageBox.Show(e.Message, "Cannoct disconnect from server", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
     }
