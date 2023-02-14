@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
-using Google.Protobuf.WellKnownTypes;
 using UberBarber.User;
-using static UberBarber.User.CurrentUser;
-using UberBarber.Appointments;
 
 namespace UberBarber.database
 {
@@ -185,12 +182,12 @@ namespace UberBarber.database
 
         }
 
-        public int Set_current_user_id(string user_name)
+        public void Set_current_user_id(string user_name)
+        //Get user_id from given username and set it to current user.
         {
-            //This function opens connection to server and gets user_id from given username
+            int id = -1;
             Open_connection();
             MySqlCommand query = new($"SELECT user_id from serwer165956_projektstudia.user where username = '{user_name}';", _connection);
-            int id = -1;
             try
             {
                 _reader = query.ExecuteReader();
@@ -199,12 +196,10 @@ namespace UberBarber.database
                 {
                     id = (int)_reader[0];
                 }
-
                 CurrentUser.Set_user_id(id);
-                return id;
             }
             catch (MySqlException e)
-            { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); return id; }
+            { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
             finally { Close_connection(); }
         }
     }
