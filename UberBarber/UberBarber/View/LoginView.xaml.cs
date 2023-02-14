@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using UberBarber.database;
+using UberBarber.database.UserQueries;
 
 namespace UberBarber.View
 {
@@ -39,7 +40,7 @@ namespace UberBarber.View
         {
             // TODO: correct doctring
             //open new window if given credentials are correct
-            DatabaseQueries query = new();
+            UserQueries query = new();
 
             try
             {

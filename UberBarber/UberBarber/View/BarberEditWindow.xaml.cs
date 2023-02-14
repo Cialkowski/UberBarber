@@ -16,6 +16,7 @@ using UberBarber.Barber;
 using UberBarber.database;
 using UberBarber.database.BarberQueries;
 using UberBarber.database.ServiceQueries;
+using UberBarber.database.UserQueries;
 using UberBarber.User;
 
 namespace UberBarber.View
@@ -27,7 +28,7 @@ namespace UberBarber.View
     {
         public Barber.Barber Barber;
         public bool Is_constructor_edit = false;
-        DatabaseQueries query = new DatabaseQueries();
+        UserQueries query = new();
         
         public BarberEditWindow()
         {

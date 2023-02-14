@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using UberBarber.database;
+using UberBarber.database.UserQueries;
 using UberBarber.User;
 
 namespace UberBarber
@@ -79,7 +80,7 @@ namespace UberBarber
             }
 
             MailSender mailSender = new MailSender();
-            DatabaseQueries query = new();
+            UserQueries query = new(); query = new();
             // Check if edit conctructor was used
             if (!Is_constructor_edit)
             {
