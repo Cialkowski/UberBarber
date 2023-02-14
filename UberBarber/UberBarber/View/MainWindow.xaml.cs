@@ -4,10 +4,8 @@ using System.Windows.Input;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using UberBarber.database;
-using static UberBarber.User.CurrentUser;
 using UberBarber.User;
 using UberBarber.View;
-using static UberBarber.database.AppointmentQueries.AppointmentQueries;
 using UberBarber.database.AppointmentQueries;
 
 namespace UberBarber
