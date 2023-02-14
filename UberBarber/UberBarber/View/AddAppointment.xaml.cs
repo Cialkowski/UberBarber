@@ -26,6 +26,9 @@ namespace UberBarber.View
         public AddAppointment()
         {
             InitializeComponent();
+            ComboBoxBarber.Items.Add(3);
+            ComboBox_Services.Items.Add(3);
+
         }
 
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
@@ -55,7 +58,12 @@ namespace UberBarber.View
             string description = text_Description.Text;
             DatabaseQueries query = new();
             query.Add_customer(first_name, surrname, phone_number, Selected_date, service, barber, description);
-            //query.Add_appointments(barber.ToString(), service.ToString(), Selected_date);
+            query.Add_appointments(barber.ToString(), service.ToString(), Selected_date);
+        }
+
+        private void CalendarAppointments_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CalendarAppointments.SelectedDate != null) Selected_date = CalendarAppointments.SelectedDate.Value;
         }
     }
 }

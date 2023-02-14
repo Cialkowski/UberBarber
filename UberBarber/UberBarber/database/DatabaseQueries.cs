@@ -53,36 +53,39 @@ namespace UberBarber.database
             }
         }
 
-            public string Add_user(string username, string password, string confirm_password, string email, bool is_worker)
+        public string Add_user(string username, string password, string confirm_password, string email, bool is_worker)
             // This method use validation function, after passing it - adds User to database.
+        {
+            string message = "Something went wrong :(";
+            if (User_validation(username, password, confirm_password, email) != "valid")
             {
-                string message = "Something went wrong :(";
-                if (User_validation(username, password, confirm_password, email) != "valid")
+                message = User_validation(username, password, confirm_password, email);
+                return message;
+            }
+            else
+            {
+                // add user to database
+                Open_connection();
+                MySqlCommand query =
+                    new(
+                        $"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`, `is_worker`) VALUES ('{username}', md5('{password}'), '{email}', '{Convert.ToInt32(is_worker)}');",
+                        _connection);
+                try
                 {
-                    message = User_validation(username, password, confirm_password, email);
-                    return message;
+                    _reader = query.ExecuteReader();
+                    message = "Done";
                 }
-                else
+                catch (MySqlException e)
                 {
-                    // add user to database
-                    Open_connection();
-                    MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`, `is_worker`) VALUES ('{username}', md5('{password}'), '{email}', '{Convert.ToInt32(is_worker)}');", _connection);
-                    try
-                    {
-                        _reader = query.ExecuteReader();
-                        message = "Done";
-                    }
-                    catch (MySqlException e)
-                    {
-                        MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    finally
-                    {
-                        Close_connection();
-                    }
+                    MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    Close_connection();
+                }
 
-                    return message;
-                }
+                return message;
+            }
         }
 
         public string User_validation(string username, string password, string confirm_password, string email)
@@ -236,7 +239,9 @@ namespace UberBarber.database
             Open_connection();
             try
             {
-                MySqlCommand query = new($"CALL serwer165956_projektstudia.show_appointments_for_user({CurrentUser.Get_user_id()});", _connection);
+                MySqlCommand query =
+                    new($"CALL serwer165956_projektstudia.show_appointments_for_user({CurrentUser.Get_user_id()});",
+                        _connection);
                 _reader = query.ExecuteReader();
 
                 //Add records to list
@@ -274,6 +279,7 @@ namespace UberBarber.database
                 {
                     id = _reader.GetInt32(0);
                 }
+
                 CurrentUser.Set_user_id(id);
                 return id;
             }
@@ -288,9 +294,24 @@ namespace UberBarber.database
             }
         }
 
-        public void Remove_appointment()
+        public void Remove_appointment(int user_id)
         {
-            //TODO
+            Open_connection();
+            try
+            {
+
+                MySqlCommand query = new($"DELETE FROM `serwer165956_projektstudia`.`customer` WHERE (`user_id` = '{user_id}');", _connection);
+                _reader = query.ExecuteReader();
+                MessageBox.Show("Done");
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                Close_connection();
+            }
         }
 
         public void Add_appointments(string barber, string service, DateTime date)
@@ -299,17 +320,18 @@ namespace UberBarber.database
 
             // add appointment to database
             List<Appointments.Appointments> appointments = new();
+            MySqlCommand query =
+                new($"INSERT INTO `serwer165956_projektstudia`.`appointments` (`customer_id`,`barber_id`, `service_id`, `start_time`) VALUES ('{Get_lat_customer_id()}', '{barber}', '{service}', '{date}');", _connection);
             Open_connection();
             try
             {
-                MySqlCommand query =
-                    new($"INSERT INTO `serwer165956_projektstudia`.`appointments` (`barber_id`, `service_id`, `start_time`) VALUES ('{barber}', '{service}', '{date}');", _connection);
                 _reader = query.ExecuteReader();
 
                 while (_reader.Read())
                 {
                     appointments.Add(new Appointments.Appointments(_reader));
                 }
+                MessageBox.Show("appointment registered");
             }
             catch (MySqlException e)
             {
@@ -322,7 +344,8 @@ namespace UberBarber.database
 
         }
 
-        public void Add_customer(string name, string surrname, string phone_number, DateTime date, int service_id, int barber_id, string description)
+        public void Add_customer(string name, string surrname, string phone_number, DateTime date, int service_id,
+            int barber_id, string description)
         {
             //This method creates a new records of customer.
 
@@ -332,7 +355,9 @@ namespace UberBarber.database
             try
             {
                 MySqlCommand query =
-                    new($"INSERT INTO `serwer165956_projektstudia`.`customer` (`name`, `surrname`, `phone_number`, `date`, `service_id`, `barber_id`, `description`, `user_id`) VALUES ('{name}', '{surrname}', '{phone_number}', '{date}', '{service_id}', '{barber_id}', '{description}', '{CurrentUser.User_id}');", _connection);
+                    new(
+                        $"INSERT INTO `serwer165956_projektstudia`.`customer` (`name`, `surrname`, `phone_number`, `date`, `service_id`, `barber_id`, `description`, `user_id`) VALUES ('{name}', '{surrname}', '{phone_number}', '{date}', '{service_id}', '{barber_id}', '{description}', '{CurrentUser.User_id}');",
+                        _connection);
                 _reader = query.ExecuteReader();
 
                 while (_reader.Read())
@@ -350,6 +375,34 @@ namespace UberBarber.database
             {
                 Close_connection();
             }
+        }
+
+        public int Get_lat_customer_id()
+        {
+            int id = 0;
+            Open_connection();
+            try
+            {
+                MySqlCommand query =
+                    new("SELECT customer_id FROM serwer165956_projektstudia.customer ORDER BY customer_id DESC LIMIT 1;", _connection);
+                _reader = query.ExecuteReader();
+
+                while (_reader.Read())
+                {
+                    id = (int)_reader[0];
+                }
+
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                Close_connection();
+            }
+
+            return id;
         }
     }
 }

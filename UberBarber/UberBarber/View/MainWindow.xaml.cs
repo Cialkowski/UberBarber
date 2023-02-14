@@ -105,25 +105,6 @@ namespace UberBarber
             new UserRegistration().Show();
         }
 
-        private void BtnAppointmentRemove_Click(object sender, RoutedEventArgs e)
-        {
-            // This method removes selected appointment after confirmation.
-           // Appointments.Appointments appointment = (Appointments.Appointments)dgvAppointments.SelectedItem;
-            if (MessageBox.Show("Are you sure that you want delete this appointment?",
-                    "Delete Appointment",
-                    MessageBoxButton.OKCancel,
-                    MessageBoxImage.Question) == MessageBoxResult.OK)
-            {
-                DatabaseQueries query = new();
-                query.Remove_appointment();
-            }
-            Refresh_Dgv_Appointments();
-        }
-
-        private void BtnAppointmentEdit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         public void Refresh_Dgv_Appointments()
         {
@@ -142,6 +123,22 @@ namespace UberBarber
         private void ButtonAdd_Appointment_Click(object sender, RoutedEventArgs e)
         {
             new AddAppointment().Show();
+        }
+
+        private void Button_remove_appointment(object sender, RoutedEventArgs e)
+        {
+            // This method removes selected appointment after confirmation.
+            // Appointments.Appointments appointment = (Appointments.Appointments)dgvAppointments.SelectedItem;
+            Appointments.Appointments appointments = (Appointments.Appointments)dgvAppointments.SelectedItem;
+            if (MessageBox.Show("Are you sure that you want delete this appointment?",
+                    "Delete Appointment",
+                    MessageBoxButton.OKCancel,
+                    MessageBoxImage.Question) == MessageBoxResult.OK)
+            {
+                DatabaseQueries query = new();
+                query.Remove_appointment(appointments.User_id);
+            }
+            Refresh_Dgv_Appointments();
         }
     }
 }

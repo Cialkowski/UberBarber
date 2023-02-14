@@ -101,7 +101,7 @@ namespace UberBarber
             else
             {
                 // Edit constructor
-                message = query.Edit_user(password, confirm_password, email, Selected_user.User_id, is_worker);
+                message = query.Edit_user(password, confirm_password, email, Selected_user.User_id);
 
                 if (message != "Done")
                 {

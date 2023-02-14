@@ -415,9 +415,7 @@
                             Margin="30,10,329,137">
 
                     <Viewbox>
-                        <Calendar Style="{DynamicResource CalendarStyle1}">
-
-                        </Calendar>
+                        <Calendar x:Name="CalendarAppointments" Style="{DynamicResource CalendarStyle1}" SelectedDatesChanged="CalendarAppointments_SelectedDatesChanged"/>
                     </Viewbox>
 
                 </StackPanel>
@@ -432,7 +430,7 @@
                             FontFamily="Montserrat"
                             Cursor="Hand"
                             Click="BtnAddApointment_Click"
-                            IsEnabled="False" Height="178">
+                            Height="178">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="#808080"/>
@@ -466,7 +464,7 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="0,15,0,0"/>
-                    <ComboBox x:Name="ComboBoxBarber" Style="{StaticResource Combo}"
+                    <ComboBox x:Name="ComboBoxBarber"
                               Tag="{StaticResource color5}"
                              >
                     </ComboBox>
@@ -476,8 +474,9 @@
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="0,15,0,0"/>
-                    <ComboBox x:Name="ComboBox_Services" Style="{StaticResource Combo}"
+                    <ComboBox x:Name="ComboBox_Services" 
                               Tag="{StaticResource color5}"
+                              IsEnabled="True"
                              >
                     </ComboBox>
                 </StackPanel>
