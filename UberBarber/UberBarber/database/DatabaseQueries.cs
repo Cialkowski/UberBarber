@@ -16,7 +16,7 @@ namespace UberBarber.database
         {
             /// <summary> This function opens connection to server and databse and executes logging query. </summary>>
             Open_connection();
-            MySqlCommand query = new($"call serwer165956_projektstudia.login_pswd_is_worker('{user_name}', '{user_password}');",_connection);
+            MySqlCommand query = new($"call serwer165956_projektstudia.login_pswd_is_worker('{user_name}', '{user_password}');", _connection);
             string message = "failed";
             bool is_worker = false;
             try
@@ -27,7 +27,6 @@ namespace UberBarber.database
                 {
                     message = (string)_reader[0];
                 }
-
                 if (message == "failed")
                 {
                     return false;
@@ -48,7 +47,7 @@ namespace UberBarber.database
         }
 
         public string Add_user(string username, string password, string confirm_password, string email, bool is_worker)
-            // This method use validation function, after passing it - adds User to database.
+        // This method use validation function, after passing it - adds User to database.
         {
             string message = "Something went wrong :(";
             if (User_validation(username, password, confirm_password, email) != "valid")
