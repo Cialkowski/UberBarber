@@ -42,7 +42,7 @@ namespace UberBarber.View
             DatabaseQueries query = new();
             try
             {
-                query.Get_current_user_id(txtUser.Text);
+                query.Set_current_user_id(txtUser.Text);
                 if (!query.Logging(txtUser.Text, txtPassword.Password))
                 {
                     label_info.Content = "Wrong credentials!";

@@ -185,35 +185,27 @@ namespace UberBarber.database
 
         }
 
-        public int Get_current_user_id(string user_name)
+        public int Set_current_user_id(string user_name)
         {
             //This function opens connection to server and gets user_id from given username
             Open_connection();
-            MySqlCommand query =
-                new($"SELECT user_id from serwer165956_projektstudia.user where username = '{user_name}';",
-                    _connection);
-            int id = 0;
+            MySqlCommand query = new($"SELECT user_id from serwer165956_projektstudia.user where username = '{user_name}';", _connection);
+            int id = -1;
             try
             {
                 _reader = query.ExecuteReader();
 
                 while (_reader.Read())
                 {
-                    id = _reader.GetInt32(0);
+                    id = (int)_reader[0];
                 }
 
                 CurrentUser.Set_user_id(id);
                 return id;
             }
             catch (MySqlException e)
-            {
-                MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return id;
-            }
-            finally
-            {
-                Close_connection();
-            }
+            { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); return id; }
+            finally { Close_connection(); }
         }
     }
 }
