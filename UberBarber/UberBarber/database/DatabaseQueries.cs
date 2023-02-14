@@ -16,9 +16,7 @@ namespace UberBarber.database
         {
             /// <summary> This function opens connection to server and databse and executes logging query. </summary>>
             Open_connection();
-            MySqlCommand query =
-                new($"call serwer165956_projektstudia.login_pswd_is_worker('{user_name}', '{user_password}');",
-                    _connection);
+            MySqlCommand query = new($"call serwer165956_projektstudia.login_pswd_is_worker('{user_name}', '{user_password}');",_connection);
             string message = "failed";
             bool is_worker = false;
             try
@@ -38,7 +36,6 @@ namespace UberBarber.database
                 {
                     is_worker = true;
                 }
-
                 CurrentUser.Set_username_permissions(user_name, is_worker);
                 return true;
             }
@@ -47,10 +44,7 @@ namespace UberBarber.database
                 MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            finally
-            {
-                Close_connection();
-            }
+            finally { Close_connection(); }
         }
 
         public string Add_user(string username, string password, string confirm_password, string email, bool is_worker)
@@ -66,24 +60,14 @@ namespace UberBarber.database
             {
                 // add user to database
                 Open_connection();
-                MySqlCommand query =
-                    new(
-                        $"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`, `is_worker`) VALUES ('{username}', md5('{password}'), '{email}', '{Convert.ToInt32(is_worker)}');",
-                        _connection);
+                MySqlCommand query = new($"INSERT INTO `serwer165956_projektstudia`.`user` (`username`, `password`, `email`, `is_worker`) VALUES ('{username}', md5('{password}'), '{email}', '{Convert.ToInt32(is_worker)}');", _connection);
                 try
                 {
                     _reader = query.ExecuteReader();
                     message = "Done";
                 }
-                catch (MySqlException e)
-                {
-                    MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                finally
-                {
-                    Close_connection();
-                }
-
+                catch (MySqlException e) { MessageBox.Show(e.Message, "MySQL error", MessageBoxButton.OK, MessageBoxImage.Error); }
+                finally { Close_connection(); }
                 return message;
             }
         }
