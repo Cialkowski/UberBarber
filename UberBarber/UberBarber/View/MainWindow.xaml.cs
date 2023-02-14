@@ -4,10 +4,10 @@ using System.Windows.Input;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using UberBarber.database;
-using static UberBarber.User.CurrentUser;
 using UberBarber.User;
-using UberBarber.database.BarberQueries;
 using UberBarber.View;
+using UberBarber.database.AppointmentQueries;
+using UberBarber.database.BarberQueries;
 using UberBarber.database.ServiceQueries;
 
 namespace UberBarber
@@ -23,7 +23,7 @@ namespace UberBarber
             InitializeComponent();
             // Set contents to non visible.
             Draft1Content.Visibility = Visibility.Collapsed;
-            Draft2Content.Visibility = Visibility.Collapsed;
+            AppointmentsContent.Visibility = Visibility.Collapsed;
             UserContent.Visibility = Visibility.Collapsed;
             BarberContent.Visibility = Visibility.Collapsed;
             ServiceContent.Visibility = Visibility.Collapsed;
@@ -36,6 +36,8 @@ namespace UberBarber
 
         //full screen funcitonality and drag move
         [DllImport("user32.dll")]
+        
+        // WINDOW SETTINGS
         public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -51,27 +53,32 @@ namespace UberBarber
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
+            // This method closes application
             Application.Current.Shutdown();
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
+            // This method minimizes the window
             this.WindowState = WindowState.Minimized;
         }
 
         private void btnMaximize_Click(object sender, RoutedEventArgs e)
         {
-            if(this.WindowState== WindowState.Normal)
+            // This method maximizes the window
+            if (this.WindowState== WindowState.Normal)
                 this.WindowState= WindowState.Maximized;
             else this.WindowState=WindowState.Normal;
         }
 
+        // USER SECTION
         private void buttonUser_Click(object sender, RoutedEventArgs e)
         {
             // This method shows DataGrid with user records.
             BarberContent.Visibility = Visibility.Collapsed;
             ServiceContent.Visibility = Visibility.Collapsed;
             UserContent.Visibility = Visibility.Visible;
+            AppointmentsContent.Visibility = Visibility.Collapsed;
             Refresh_Dgv_User();
         }
 
@@ -99,7 +106,7 @@ namespace UberBarber
 
         public void Refresh_Dgv_User()
         {
-            // This method refreshes DataGrid.
+            // This method refreshes User DataGrid.
             DatabaseQueries query = new();
             dgvUser.ItemsSource = query.Get_users();
         }
@@ -110,7 +117,48 @@ namespace UberBarber
             new UserRegistration().Show();
         }
 
-        //BARBER SECTION
+        // APPOINTMENT SECTION
+        public void Refresh_Dgv_Appointments()
+        {
+            // This method refreshes Appointment DataGrid.
+            AppointmentQueries query = new();
+            dgvAppointments.ItemsSource = query.Get_Appointments_for_current_user();
+        }
+
+
+        private void buttonAppointments_Click(object sender, RoutedEventArgs e)
+        {
+            // This method show appointments content
+            AppointmentsContent.Visibility = Visibility.Visible;
+            UserContent.Visibility = Visibility.Collapsed;
+            ServiceContent.Visibility = Visibility.Collapsed;
+            BarberContent.Visibility = Visibility.Collapsed;
+            Refresh_Dgv_Appointments();
+        }
+
+        private void ButtonAdd_Appointment_Click(object sender, RoutedEventArgs e)
+        {
+            // This method shows new appointment window.
+            new AddAppointment().Show();
+        }
+
+        private void Button_remove_appointment(object sender, RoutedEventArgs e)
+        {
+            // This method removes selected appointment after confirmation.
+            // Appointments.Appointments appointment = (Appointments.Appointments)dgvAppointments.SelectedItem;
+            Appointments.Appointments appointments = (Appointments.Appointments)dgvAppointments.SelectedItem;
+            if (MessageBox.Show("Are you sure that you want delete this appointment?",
+                    "Delete Appointment",
+                    MessageBoxButton.OKCancel,
+                    MessageBoxImage.Question) == MessageBoxResult.OK)
+            {
+                AppointmentQueries query = new();
+                query.Remove_appointment(appointments.User_id);
+            }
+            Refresh_Dgv_Appointments();
+        }
+
+        // BARBER SECTION
         private void ButtonBarber_Click(object sender, RoutedEventArgs e)
         {
             // This method shows DataGrid with barber records.
@@ -183,9 +231,10 @@ namespace UberBarber
         private void buttonService_Click(object sender, RoutedEventArgs e)
         {
             // This method shows DataGrid with service records.
-            UserContent.Visibility = Visibility.Collapsed;
             ServiceContent.Visibility = Visibility.Visible;
             BarberContent.Visibility = Visibility.Collapsed;
+            UserContent.Visibility = Visibility.Collapsed;
+            AppointmentsContent.Visibility = Visibility.Collapsed;
             if (!user_permissions)
             {
                 ButtonAddService.Visibility = Visibility.Collapsed;
@@ -222,3 +271,4 @@ namespace UberBarber
         }
     }
 }
+    

@@ -100,6 +100,17 @@
                         </StackPanel>
                     </Button>
 
+                    <Button x:Name="buttonAppointments"
+                            Click="buttonAppointments_Click"
+                            Style="{StaticResource menuButtonn}"
+                            Tag="{StaticResource color5}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="User"
+                                          Style="{StaticResource menuButtonIconn}"/>
+                            <TextBlock Text="Appointments"
+                                       Style="{StaticResource menuButtonTextt}"/>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
 
             </Border>
@@ -137,10 +148,94 @@
                         <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}"
                                   x:Name="dgvDraft1"/>
                     </ContentControl>
-                    <!--Draft content2-->
-                    <ContentControl x:Name="Draft2Content"
+                    <!--Appointments content-->
+                    <ContentControl x:Name="AppointmentsContent"
                                     Grid.Row="2"
                                     Margin="25">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!--1 column-->
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <!--2 rows-->
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!--Appointments datagrid-->
+                            <DataGrid Grid.Row="1"
+                                      Grid.Column="1"
+                                      x:Name="dgvAppointments"
+                                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                                      CellStyle="{DynamicResource DataGridCellStyle1}"
+                                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                                      Style="{DynamicResource DataGridStyle1}">
+                                <DataGrid.Columns>
+                                    <!--Regular columns-->
+                                    <DataGridTextColumn Header="Barber"
+                                                        Width="auto"
+                                                        Binding="{Binding Barber_name}"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Service"
+                                                        Width="auto"
+                                                        Binding="{Binding Service_name}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Time"
+                                                        Width="auto"
+                                                        Binding="{Binding Visit_date}"
+                                                        CanUserSort="False"
+                                                        IsReadOnly="True"/>
+                                    <!--Buttons Operations column-->
+                                    <DataGridTemplateColumn Header="Operations" Width="auto" >
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button x:Name="Button_remove_appointment" Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}"
+                                                            Click="Button_remove_appointment">
+                                                        <Icon:PackIconMaterial Kind="DeleteOutline" 
+                                                                               Style="{StaticResource gridButtonIcon}"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Grid.Row="1"
+                                    x:Name="ButtonAdd_Appointment"
+                                    Content="Add Appointment"
+                                    Height="50"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Width="200"
+                                    Margin="376,530,0,0"
+                                    Foreground="#708090"
+                                    FontSize="20"
+                                    FontWeight="Bold" Click="ButtonAdd_Appointment_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#36454F"/>
+                                                <Setter Property="Foreground" Value="#8A9A5B"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border 
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
                     </ContentControl>
                     <!--User content-->
                     <ContentControl x:Name="UserContent"

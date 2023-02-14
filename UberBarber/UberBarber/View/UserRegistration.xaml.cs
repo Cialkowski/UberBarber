@@ -16,18 +16,18 @@ namespace UberBarber
         public bool Is_constructor_edit = false;
         public User.User Selected_user { get; set; }
         public UserRegistration()
-            // default constructor
+        // default constructor
         {
             InitializeComponent();
             if (user_permissions)
-                // if user has external permissions Checkbox is visible
+            // if user has external permissions Checkbox is visible
             {
                 CheckBoxPremissions.Visibility = Visibility.Visible;
-                CheckBoxPremissions.IsEnabled= true;
+                CheckBoxPremissions.IsEnabled = true;
             }
         }
         public UserRegistration(User.User user)
-            // constructor for user editing
+        // constructor for user editing
         {
             InitializeComponent();
             Selected_user = user;
@@ -73,7 +73,7 @@ namespace UberBarber
             {
                 is_worker = true;
             }
-            if (is_worker== true)
+            if (is_worker == true)
             {
                 permission = "barber";
             }
@@ -130,7 +130,7 @@ namespace UberBarber
             // This method enable or disable confirm registration button.
             // If the passwords do not match, then the button is disabled, otherwise the button is enabled 
 
-            if (string.Equals(pswd_box.Password, pswd_box_confirm.Password,StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(pswd_box.Password, pswd_box_confirm.Password, StringComparison.OrdinalIgnoreCase))
             {
                 Confirm.IsEnabled = true;
             }

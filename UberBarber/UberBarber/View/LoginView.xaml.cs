@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Windows;
 using System.Windows.Input;
 using UberBarber.database;
@@ -48,6 +49,7 @@ namespace UberBarber.View
                 }
                 else
                 {
+                    query.Set_current_user_id(txtUser.Text);
                     new MainWindow().Show();
                     Close();
                 }
@@ -57,7 +59,7 @@ namespace UberBarber.View
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void OnUsernameOrPasswordChanged(object sender,RoutedEventArgs e)
+        private void OnUsernameOrPasswordChanged(object sender, RoutedEventArgs e)
         {
             enableOrDisableLoginButton();
         }
@@ -80,4 +82,4 @@ namespace UberBarber.View
             new UserRegistration().Show();
         }
     }
-} 
+}
